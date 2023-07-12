@@ -1,0 +1,52 @@
+:root {
+    --background-transparent: #000000d0;
+    --primary: #fff;
+}
+
+.sign-in-container {
+    background: var(--background-transparent);
+    padding: 8rem 16rem;
+    border-radius: 10px;
+}
+
+.sign-in-header {
+    color: var(--primary);
+    font-weight: 400;
+}
+
+.sign-in-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in-email,
+.sign-in-password {
+    background-color: transparent;
+    padding: 8px 20px 8px 0;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-bottom: 5px solid var(--primary);
+    color: var(--primary);
+}
+
+.sign-in-email::placeholder,
+.sign-in-password::placeholder {
+    color: var(--primary);
+    margin-left: none;
+}
+
+.sign-in-error {
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.sign-in-temp-login-msg {
+    color: var(--primary);
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+}
