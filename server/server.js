@@ -1,17 +1,21 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-// TODO: add authmiddleware import
+const { authMiddleware } = require('./utils/auth');
 
 require('dotenv').config();
 
-// TODO: add typeDef and resolvers from shemas
+// TODO: add typeDefs and resolvers from shemas
 
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const server = new ApolloServer({});
+
+// TODO: add typeDefs and resolvers
+const server = new ApolloServer({
+    context: authMiddleware,
+});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
