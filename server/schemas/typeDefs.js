@@ -13,6 +13,7 @@ const typeDefs = gql`
         name: String!
         longitude: String!
         latitude: String!
+        hiker: String
     }
 
     type Auth {
@@ -28,7 +29,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addHike(name: String!, longitude: String!, latitude: String!): Hike
+        addHike(name: String!, longitude: String!, latitude: String!, hiker: String): Hike
         updateHike(_id: ID!, name: String!, longitude: String!, latitude: String!): Hike
         removeHike(name: String!): Hike
     }
