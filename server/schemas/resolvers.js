@@ -43,7 +43,7 @@ const resolvers = {
 
         addHike: async(parent, { name, longitude, latitude }, context ) => {
             if(context.user) {
-                const hike = await Hike.create({ name, longitude, latitude });
+                const hike = await Hike.create({ name, longitude, latitude, hiker: context.user.username });
 
                 await User.findByIdAndUpdate(
                     { _id: context.user._id},
