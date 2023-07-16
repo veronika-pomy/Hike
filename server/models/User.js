@@ -13,7 +13,7 @@ const userSchema = new Schema(
         type: String,
         required: true,
         unique: true,
-        match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Must use a valid email address'],
+        match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Must use a valid email address.'],
     },
 
         password: {
@@ -33,7 +33,7 @@ const userSchema = new Schema(
 // hash user pwd
 userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
-      const saltRounds = process.env.SALT;
+      const saltRounds = 10;
       this.password = await bcrypt.hash(this.password, saltRounds);
     }
 
