@@ -12,7 +12,7 @@ const resolvers = {
         },
 
         hike: async (parent, { id }) => {
-            return Pet.findById(id);
+            return Hike.findById(id);
         }
     },
 
@@ -56,14 +56,18 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        updateHike: async (parent, { _id, name, longitude, latitude }) => {
-            return await Hike.findOneAndUpdate(
-                { _id: _id }, 
-                { name },
-                { longitude },
-                { latitude },
-                { new: true }
-              );
+        updateHike: async (parent, { _id, name, longitude, latitude }, context) => {
+            if (context.user) {
+                return await Hike.findOneAndUpdate(
+                    { _id: _id }, 
+                    { name },
+                    { longitude },
+                    { latitude },
+                    { new: true }
+                );
+            }
+
+            throw new AuthenticationError('Please log in.');
         },
 
         removeHike: async (parent, { name }, context) => {
