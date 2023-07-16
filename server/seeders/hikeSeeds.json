@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Grand Canyon National Park",
+        "latitude": "36.31002",
+        "longitude": "-112.12101",
+        "hiker": "MountainExplorer23"
+    },
+    {
+        "name": "Appalachian Trail Museum",
+        "latitude": "40.12009",
+        "longitude": "-77.31992",
+        "hiker": "TrailSeeker85"
+    },
+    {
+        "name": "Panther Point Trail",
+        "latitude": "28.04668",
+        "longitude": "-81.67047",
+        "hiker": "TrailSeeker85"
+    },
+    {
+        "name": "Rocky Mountain National Park",
+        "latitude": "40.43110",
+        "longitude": "-105.68688",
+        "hiker": "MountainExplorer23"
+    },
+    {
+        "name": "Circle Park Trailhead",
+        "latitude": "44.45731",
+        "longitude": "-106.97282",
+        "hiker": "NatureAdventurer99"
+    },
+    {
+        "name": "Rio Grande Gorge Trail South",
+        "latitude": "36.44642",
+        "longitude": "-105.71733",
+        "hiker": "NatureAdventurer99"
+    }
+]

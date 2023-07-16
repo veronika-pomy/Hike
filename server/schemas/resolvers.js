@@ -2,17 +2,18 @@ const { User, Hike } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
-// TODO: Add authentication after verifying that queries and mutations work
-
 const resolvers = {
 
     Query: {
         user: async (parent, args, context) => {
-            return User.findById(context.user._id).populate('hike');
+            if(context.user) {
+                return User.findById(context.user._id).populate('hike');
+            }
+            throw new AuthenticationError('Please log in.');
         },
 
         hike: async (parent, { id }) => {
-            return Pet.findById(id);
+            return Hike.findById(id);
         }
     },
 
@@ -56,14 +57,18 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        updateHike: async (parent, { _id, name, longitude, latitude }) => {
-            return await Hike.findOneAndUpdate(
-                { _id: _id }, 
-                { name },
-                { longitude },
-                { latitude },
-                { new: true }
-              );
+        updateHike: async (parent, { _id, name, longitude, latitude }, context) => {
+            if (context.user) {
+                return await Hike.findOneAndUpdate(
+                    { _id: _id }, 
+                    { name },
+                    { longitude },
+                    { latitude },
+                    { new: true }
+                );
+            }
+
+            throw new AuthenticationError('Please log in.');
         },
 
         removeHike: async (parent, { name }, context) => {
