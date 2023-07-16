@@ -34,6 +34,4 @@ const typeDefs = gql`
     }
 `;
 
-// TODO: Update user
-
 module.exports = typeDefs;

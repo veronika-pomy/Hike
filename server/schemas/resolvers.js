@@ -57,7 +57,13 @@ const resolvers = {
         },
 
         updateHike: async (parent, { _id, name, longitude, latitude }) => {
-            // TODO: Add resolver for updating hike name, lon and lat
+            return await Hike.findOneAndUpdate(
+                { _id: _id }, 
+                { name },
+                { longitude },
+                { latitude },
+                { new: true }
+              );
         },
 
         removeHike: async (parent, { name }, context) => {
@@ -77,7 +83,6 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
     },
-    
 };
 
 module.exports = resolvers;
