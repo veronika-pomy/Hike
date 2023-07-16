@@ -8,13 +8,18 @@ const hikeSchema = new Schema(
       },
 
       longitude: {
-        type: Number,
+        type: String,
         required: true,
       },
 
       latitude: {
-        type:  Number,
+        type:  String,
         required: true,
+      },
+
+      hiker: {
+        type:  String,
+        required: false,
       },
     },
   );

@@ -19,6 +19,7 @@ const userSchema = new Schema(
         password: {
         type: String,
         required: true,
+        match: [/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'Password must be at least eight characters long and include one lowercase letter, uppercase, number, and symbol.'],
     },
 
     hike: [

@@ -13,6 +13,7 @@ const typeDefs = gql`
         name: String!
         longitude: String!
         latitude: String!
+        hiker: String
     }
 
     type Auth {
