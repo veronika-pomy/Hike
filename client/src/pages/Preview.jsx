@@ -4,9 +4,10 @@ import { searchVideoYT } from '../utils/youTubeAPI';
 
 const backUpUrlId = 'heH-qCBCWZU';
 
-const result = await searchVideoYT();
+// const result = await searchVideoYT();
 
-const videoId = result.items[0].id.videoId;
+// const videoId = result.items[0].id.videoId;
+// console.log(result);
 
 const Preview = () => {
   return (
@@ -16,7 +17,8 @@ const Preview = () => {
           width="560" 
           height="315" 
           // if YT search using API key not possible, will default to using video id directly
-          src={`https://www.youtube.com/embed/${result ? videoId : backUpUrlId}`}
+          src={`https://www.youtube.com/embed/${backUpUrlId}`}
+          // src={`https://www.youtube.com/embed/${result ? videoId : backUpUrlId}`}
           title="YouTube video player" 
           allow="accelerometer; 
                 autoplay; 

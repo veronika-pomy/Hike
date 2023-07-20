@@ -1,8 +1,11 @@
 import AppContainer from "./pages/AppContainer";
+import DashContext from "./context/useDashboardContext";
 
 function App() {
   return (
-    <AppContainer />
+    <DashContext>
+      <AppContainer />
+    </DashContext>
   );
 }
 

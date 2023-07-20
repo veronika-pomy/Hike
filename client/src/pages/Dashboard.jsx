@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+import { useDashContext } from '../context/useDashboardContext';
 
 import {
     Box,
@@ -26,6 +28,12 @@ const center = {
   };
 
 const Dashboard = () => {
+
+    const { setDash } = useDashContext();
+
+    useEffect(() => {
+        setDash(true);
+    },[]);
 
     // loading google maps script
     const { isLoaded } = useJsApiLoader({

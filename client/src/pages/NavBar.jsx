@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/NavBar.css';
 
+import { useDashContext } from '../context/useDashboardContext';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -9,10 +11,11 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../components/Button';
 
-
 // TODO: Need to find better logic for not showing sign up button, it's noticable when re-rendering before it goes away
 
 function NavBar() {
+
+  const { dash } = useDashContext();
 
   // state to switch between open and closed menu icon
   const [ click, setClick ] = useState(false);
@@ -44,7 +47,7 @@ function NavBar() {
 
   return (
     <>
-      <nav className='navbar'>
+      <nav className='navbar' hidden={(!dash ? '' : 'hidden')} >
         <div className="navbar-container">
             {/* use link to replace a tag */}
             <Link
