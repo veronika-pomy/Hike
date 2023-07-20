@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../style/AppContainer.css';
 
 import NavBar from './NavBar';
+import Footer from '../components/Footer';
 import Home from './Home';
 import About from './About';
 import Services from './Services';
@@ -12,7 +13,7 @@ import Testimonials from './Testimonials';
 import Terms from './Terms';
 import Error from './Error';
 import Preview from './Preview';
-import Footer from '../components/Footer';
+import Dashboard from '../pages/Dashboard';
 
 // TODO: Add a reset Password page
 // TODO: Add Dashboard page for a user who signed in
@@ -26,15 +27,16 @@ const AppContainer = () => {
         <Router>
             <NavBar />
             <Routes>
-                <Route path='/Hike-App' exact element={<Home />} />
-                <Route path='/Hike-App/about' exact element={<About />} />
-                <Route path='/Hike-App/services' exact element={<Services />} />
-                <Route path='/Hike-App/sign-up' exact element={<SignUp />} />
-                <Route path='/Hike-App/sign-in' exact element={<SignIn />} />
-                <Route path='/Hike-App/preview' exact element={<Preview />} />
-                <Route path='/Hike-App/testimonials' exact element={<Testimonials />} />
-                <Route path='/Hike-App/terms' exact element={<Terms />} />
-                <Route path='/Hike-App/error' exact element={<Error />} />
+                <Route path='/' exact element={<Home />} />
+                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/about' exact element={<About />} />
+                <Route path='/services' exact element={<Services />} />
+                <Route path='/sign-up' exact element={<SignUp />} />
+                <Route path='/sign-in' exact element={<SignIn />} />
+                <Route path='/preview' exact element={<Preview />} />
+                <Route path='/testimonials' exact element={<Testimonials />} />
+                <Route path='/terms' exact element={<Terms />} />
+                <Route path='/error' exact element={<Error />} />
             </Routes>
             <Footer />
         </Router>

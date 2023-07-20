@@ -2,9 +2,11 @@ import React from 'react';
 
 const Testimonials = () => {
   return (
-    <div className='testimonials'>
-        Testimonials
-    </div>
+    <>
+      <div className='testimonials'>
+          Testimonials
+      </div>
+    </>
   )
 };
 

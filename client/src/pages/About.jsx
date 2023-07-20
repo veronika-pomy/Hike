@@ -5,9 +5,11 @@ import '../style/AppContainer.css';
 
 const About = () => {
   return (
-    <h1 className='about'>
-        Our Story
-    </h1>
+    <>
+        <h1 className='about'>
+            Our Story
+        </h1>
+    </>
   )
 }
 

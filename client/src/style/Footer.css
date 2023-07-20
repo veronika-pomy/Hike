@@ -37,6 +37,7 @@
 
 .sub-input {
     padding: 8px 20px;
+    color: var(--primary-main);
     border-radius: 2px;
     margin-right: 10px;
     outline: none;

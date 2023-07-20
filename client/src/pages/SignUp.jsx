@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../style/AppContainer.css';
 import '../style/SignUp.css';
 
-import { useRef } from 'react';
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
@@ -27,6 +26,7 @@ const SignUp = () => {
   // TODO: When user is signed up, redirect to the Dashboard page
 
   return (
+    <>
     <section className='sign-up'>
       
       <div
@@ -141,6 +141,7 @@ const SignUp = () => {
         </form>
       </div>
     </section>
+    </>
   )
 };
 

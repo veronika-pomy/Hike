@@ -2,9 +2,11 @@ import React from 'react';
 
 const Terms = () => {
   return (
-    <div className='terms'>
-        Terms Of Service
-    </div>
+    <>
+      <div className='terms'>
+          Terms Of Service
+      </div>
+    </>
   )
 }
 

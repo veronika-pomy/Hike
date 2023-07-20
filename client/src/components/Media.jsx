@@ -24,7 +24,7 @@ const Media = () => {
               className='btns' 
               btnStyle='btn--outline' 
               btnSize='btn--large'
-              link='/Hike-App/sign-up'
+              link='/sign-up'
             >
                 GET STARTED
             </Button>
@@ -32,7 +32,7 @@ const Media = () => {
               className='btns' 
               btnStyle='btn--primary' 
               btnSize='btn--large'
-              link='/Hike-App/preview'
+              link='/preview'
             >
                 WATCH PREVIEW <FontAwesomeIcon icon={faPlay} className='media-icon'/>
             </Button>

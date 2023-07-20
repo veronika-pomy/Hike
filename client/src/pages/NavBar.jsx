@@ -48,7 +48,7 @@ function NavBar() {
         <div className="navbar-container">
             {/* use link to replace a tag */}
             <Link
-                to='/Hike-App'
+                to='/'
                 className='navbar-logo'
                 onClick={closeMobileMenu}
             >
@@ -63,27 +63,27 @@ function NavBar() {
             </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
               <li className='nav-item'>
-                <Link to='/Hike-App' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/Hike-App/about' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
                   About
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/Hike-App/services' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
                   Services
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/Hike-App/sign-in' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/sign-in' className='nav-links' onClick={closeMobileMenu}>
                   Sign In
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/Hike-App/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
+                <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
                   Sign Up
                 </Link>
               </li>
@@ -91,7 +91,7 @@ function NavBar() {
             {button && 
               <Button
                 btnStyle='btn--outline' 
-                link='/Hike-App/sign-up'
+                link='/sign-up'
               >
                 SIGN UP
               </Button>}
