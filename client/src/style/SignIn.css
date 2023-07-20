@@ -50,3 +50,15 @@
     margin-top: 5px;
     text-align: center;
 }
+
+@media screen and (max-width: 820px){
+    .sign-in-container {
+        padding: 4rem 2rem;
+    }
+}
+
+@media screen and (max-width: 520px){
+    .sign-in-container {
+        padding: 2rem 0rem;
+    }
+}

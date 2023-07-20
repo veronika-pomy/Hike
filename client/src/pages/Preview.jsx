@@ -14,8 +14,8 @@ const Preview = () => {
     <>
       <div className='preview'>
         <iframe 
-          width="560" 
-          height="315" 
+          width="820" 
+          height="515" 
           // if YT search using API key not possible, will default to using video id directly
           src={`https://www.youtube.com/embed/${backUpUrlId}`}
           // src={`https://www.youtube.com/embed/${result ? videoId : backUpUrlId}`}
