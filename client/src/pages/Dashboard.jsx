@@ -15,8 +15,9 @@ import {
     Text,
   } from '@chakra-ui/react';
 
+  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // check if map is loaded
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
@@ -163,7 +164,13 @@ const Dashboard = () => {
                     </Button>
                     <IconButton
                     aria-label='clear'
-                    icon={faXmark}
+                    icon={
+                        <FontAwesomeIcon
+                                    icon={
+                                        faTimes
+                                    }
+                        />
+                    }
                     onClick={clearRoute}
                     />
                 </ButtonGroup>
@@ -173,7 +180,11 @@ const Dashboard = () => {
                 <Text>Duration: {duration} </Text>
                 <IconButton
                     aria-label='center back'
-                    icon={faLocationArrow}
+                    icon={<FontAwesomeIcon
+                                        icon={
+                                            faLocationArrow   
+                                        }
+                    />}
                     isRound
                     onClick={() =>map.panTo(center)}
                 />
