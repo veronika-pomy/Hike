@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-
-import { useDashContext } from '../context/useDashboardContext';
+import React, { useState, useRef } from 'react';
 
 import {
     Box,
@@ -151,7 +149,13 @@ function Map() {
                 </Box>
 
                 <ButtonGroup>
-                    <Button colorScheme='blue' type='submit' onClick={calculateRoute}>
+                    <Button 
+                        bg='primary.main' 
+                        color='primary.txt'
+                        _hover={{bg: 'primary.hover'}}
+                        type='submit' 
+                        onClick={calculateRoute}
+                    >
                     Calculate Route
                     </Button>
                     <IconButton
