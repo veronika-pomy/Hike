@@ -7,33 +7,97 @@
 }
 
 .dashboard {
-    display: grid;
-    height: 100vh;
+    display: flex;
+    height: 100%;
     width: 100%;
-    grid-template-columns: 0.7fr 1.3fr 1fr 1fr;
-    grid-template-rows: 0.2fr 1.5fr 1fr 1fr;
-    grid-template-areas: 
-    "sidebar map map map"
-    "sidebar map map map"
-    "sidebar map map map"
-    "sidebar weather weather weather";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.map-container {
+    height: 100vh;
+    width: 100vw;
 }
 
 .sidebar-container {
     background-color: var(--primary-main);
     color: var(--primary);
-    grid-area: sidebar;
+    height: 100vh;
+    overflow: hidden;
+    /* width: 300px; */
+    /* transition: 0.5s; */
 }
 
-.map-container {
-    grid-area: map;
+.sidebar-container:hover {
+   /* width: 60px; */
 }
 
-.weather-container {
-    background-image: url(../assets/imgs/image-forest.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.sidebar-container ul {
+    position: relative;
+    height: 100vh;
+}
+
+.sidebar-container ul li {
+    list-style: none;
+}
+
+.sidebar-container ul li:hover {
+    color: var(--hover);
+}
+
+.sidebar-container ul li a {
+    position: relative;
+    display: flex;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sidebar-container ul li a .icon,
+.sidebar-container ul li .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+} 
+
+.sidebar-container ul li a .text,
+.sidebar-container ul li .text {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sidebar-container ul li.logo {
+    margin-bottom: 50px;
+}
+
+.sidebar-container ul li.logo:hover {
+    color: var(--primary);
+}
+
+.sidebar-container ul li.logo .text {
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* .weather-container {
+    background-color: #898888;
     color: var(--primary);
     font-size: 24px;
     font-weight: bold;
@@ -46,25 +110,5 @@
     padding-right: 1vw;
     width: fit-content;
     border-bottom-right-radius: 5px;
-}
+} */
 
-@media only screen and (max-width: 550px){
-    .dashboard {
-        grid-template-columns: 1fr;
-        grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1fr 1fr;
-        grid-template-areas: 
-        "sidebar"
-        "sidebar"
-        "map"
-        "map"
-        "map"
-        "weather"
-        "weather";
-    }
-    .weather-container {
-        background-image: url(../assets/imgs/image-tree.jpg);
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-}

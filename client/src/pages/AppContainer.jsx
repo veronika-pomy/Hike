@@ -16,10 +16,7 @@ import Preview from './Preview';
 import Dashboard from '../pages/Dashboard';
 
 // TODO: Add a reset Password page
-// TODO: Add Dashboard page for a user who signed in
-// TODO: Add Preview component - maybe YouTube API can be used to play a video here?
 // TODO: Add conditional to an error page
-// TODO: Add reset password componenet
 
 const AppContainer = () => {
   return (

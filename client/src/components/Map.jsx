@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Sidebar from '../components/Sidebar';
 
 import {
     Box,
@@ -93,6 +94,9 @@ function Map() {
     };
 
   return (
+    <>
+    <Sidebar />
+    
     <div className='map-container'>
         <Flex
                 position='relative'
@@ -188,6 +192,7 @@ function Map() {
             </Box>
         </Flex>    
     </div>
+    </>
   )
 }
 

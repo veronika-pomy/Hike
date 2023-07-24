@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Map from '../components/Map';
 import Weather from '../components/Weather';
-import Sidebar from '../components/Sidebar';
 
 import '../style/Dashboard.css';
 
@@ -17,9 +16,8 @@ const Dashboard = () => {
 
     return (
         <div className='dashboard'>
-            <Sidebar />
             <Map />
-            <Weather />
+            {/* <Weather /> */}
         </div>
     )
 }
