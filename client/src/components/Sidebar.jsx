@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
+
+import HikeList from './sidebar/HikeList';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
@@ -9,12 +11,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-// add state for changing sidebar width on click
-
-const changeStyle = () => {
-  console.log('hello');
-};
-
+// sidebar width to change on click
 const sidebarOpen = `
   300px
 `;
@@ -24,8 +21,28 @@ const sidebarClosed = `
 `;
 
 function Sidebar() {
+
+  const [sidebarView, setSidebarView] = useState(sidebarOpen);
+
+  const changeStyle = () => {
+    if (hikeList && sidebarView === sidebarOpen) {
+      setHikeList(false);
+    } else if (!hikeList && sidebarView === sidebarClosed) {
+      setHikeList(true);
+    };
+
+    return sidebarView === sidebarOpen ? setSidebarView(sidebarClosed) : setSidebarView(sidebarOpen);    
+  };
+
+  const [hikeList, setHikeList] = useState(true);
+
+  const showList = () => {
+    console.log(hikeList);
+    return setHikeList((prev)=> !prev);
+  };
+
   return (
-    <div className='sidebar-container' style={{width: `${sidebarOpen}`}}>
+    <div className='sidebar-container' style={{width: `${sidebarView}`}}>
       <ul> 
         <li className='logo'>
           <Link
@@ -42,16 +59,23 @@ function Sidebar() {
         </Link>
         </li>
         <li>
-          <Link>
-          <span className="icon">
-            <FontAwesomeIcon icon={faPersonHiking} className='hiking-sidebar'/>
-          </span>
-          <span
-            className='text'
-          >
-            Hikes
-          </span>
-          </Link>
+            <div className='hike-list-container'>
+              <div className='hike-title'>
+                <Link
+                  onClick={showList}
+                >
+                    <span className="icon">
+                      <FontAwesomeIcon icon={faPersonHiking} className='hiking-sidebar'/>
+                    </span>
+                    <span
+                      className='text'
+                    >
+                      My Hikes
+                    </span>
+                  </Link>
+              </div>
+              {hikeList ? <HikeList /> : ''}
+            </div>
         </li>
         <div className='bottom'>
           <li>

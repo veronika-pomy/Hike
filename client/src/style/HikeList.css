@@ -1,0 +1,49 @@
+:root {
+    --primary: #fff;
+    --hover: #d2cfcf;
+    --primary-main: #242424;
+    --placeholder: #898888;
+    --background-transparent: #000000d0;
+}
+
+.hike-list {
+    margin-left: 1.5em;
+    transition-delay: 250ms;
+    align-items: center;
+}
+
+.hike-list ul li {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #fff;
+    width: 210px;
+}
+
+.hike-list ul li:hover {
+    color: var(--primary) !important;
+}
+
+.hike-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hike-list ul li p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 170px;
+    font-size: 14px;
+}
+
+.hike-list ul li p:hover {
+    color: var(--hover) !important;
+}
+
+.hike-icon {
+    margin-right: 0.2em;
+}
+
+.hike-icon:hover {
+    color: var(--hover) !important;
+}

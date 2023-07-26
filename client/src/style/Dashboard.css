@@ -26,12 +26,7 @@
     color: var(--primary);
     height: 100vh;
     overflow: hidden;
-    /* width: 300px; */
-    /* transition: 0.5s; */
-}
-
-.sidebar-container:hover {
-   /* width: 60px; */
+    transition: 0.5s;
 }
 
 .sidebar-container ul {
@@ -89,12 +84,23 @@
     font-weight: 800;
 }
 
+.hike-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.hike-list-container:hover {
+ color: var(--primary) !important;
+}
+.hike-title {
+    display: flex;
+    flex-direction: row;
+}
 .bottom {
     position: absolute;
     bottom: 0;
     width: 100%;
 }
-
 
 /* .weather-container {
     background-color: #898888;
