@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import HikeList from './sidebar/HikeList';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMountain } from '@fortawesome/free-solid-svg-icons';
-import { faPersonHiking } from '@fortawesome/free-solid-svg-icons';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faMountain, 
+  faPersonHiking,
+  faHouse,
+  faUser,
+  faGear
+ } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
 
 // sidebar width to change on click
 const sidebarOpen = `
@@ -34,6 +36,8 @@ function Sidebar() {
     return sidebarView === sidebarOpen ? setSidebarView(sidebarClosed) : setSidebarView(sidebarOpen);    
   };
 
+  // TODO: add a state for checking if a user wants the list closed or open on moving sidebar to 300px
+  
   const [hikeList, setHikeList] = useState(true);
 
   const showList = () => {

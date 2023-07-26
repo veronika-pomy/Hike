@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Map from '../components/Map';
-import Weather from '../components/Weather';
+
 
 import '../style/Dashboard.css';
 

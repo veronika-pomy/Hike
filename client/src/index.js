@@ -8,7 +8,8 @@ const colors = {
   primary: {
     main: '#242424',
     hover: '#898888',
-    txt: '#fff'
+    txt: '#fff',
+    transparent: '#000000d0',
   }
 }
 

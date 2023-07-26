@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Sidebar from '../components/Sidebar';
+import Weather from '../components/Weather';
 
 import {
     Box,
@@ -15,8 +16,7 @@ import {
   } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faLocationArrow, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // check if map is loaded
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
@@ -94,105 +94,109 @@ function Map() {
     };
 
   return (
-    <>
-    <Sidebar />
-    
-    <div className='map-container'>
-        <Flex
-                position='relative'
-                flexDirection='column'
-                alignItems='center'
-                // bgImage='https://source.unsplash.com/random/2000x1100/?travel'
-                // bgPos='bottom'
-                h='100%'
-                w='100%'
-            >
-            <Box position='absolute' left={0} top={0} h='100%' w='100%'>
-                {/* Display Google Maps Box */}
-                {/* Style of the map box is 100% of the parent */}
-                <GoogleMap 
-                    center={center} 
-                    zoom={15} 
-                    mapContainerStyle={{ width:'100%', height:'100%'}}
-                    onLoad={(map) => setMap(map)}
-                >
-                {/* Display markers and directions */}
-                    <Marker position={center}/>
-                    {/* When we get response from google maps, display directions on map */}
-                    {directions && <DirectionsRenderer directions={directions} />}
-                </GoogleMap>
-            </Box>
-            <Box
-                p={4}
-                borderRadius='lg'
-                mt={4}
-                bgColor='white'
-                shadow='base'
-                minW='container.md'
-                zIndex='1'
-            >
-                <HStack spacing={2} justifyContent='space-between'>
-                {/* Get google suggestions when entering locations */}
-                <Box flexGrow={1}>
-                    <Autocomplete>
-                    <Input 
-                        type='text' 
-                        placeholder='Origin' 
-                        ref={originRef}
-                    />
-                    </Autocomplete>
-                </Box>
-                <Box flexGrow={1}>
-                    <Autocomplete>
-                    <Input
-                        type='text'
-                        placeholder='Destination' 
-                        ref={destinationRef}
-                    />
-                    </Autocomplete>
-                </Box>
-
-                <ButtonGroup>
-                    <Button 
-                        bg='primary.main' 
-                        color='primary.txt'
-                        _hover={{bg: 'primary.hover'}}
-                        type='submit' 
-                        onClick={calculateRoute}
+    <div className='map-wrapper-main'>
+        <div className='sidebar-wrapper'>
+            <Sidebar />  
+        </div>
+        <div className='map-weather-wrapper'>
+            <div className='map-container'>
+                <Flex
+                        position='relative'
+                        flexDirection='column'
+                        alignItems='center'
+                        // bgImage='https://source.unsplash.com/random/2000x1100/?travel'
+                        // bgPos='bottom'
+                        h='100%'
+                        w='100%'
                     >
-                    Calculate Route
-                    </Button>
-                    <IconButton
-                    aria-label='clear'
-                    icon={
-                        <FontAwesomeIcon
-                                    icon={
-                                        faTimes
-                                    }
+                    <Box position='absolute' left={0} top={0} h='100%' w='100%'>
+                        {/* Display Google Maps Box */}
+                        {/* Style of the map box is 100% of the parent */}
+                        <GoogleMap 
+                            center={center} 
+                            zoom={15} 
+                            mapContainerStyle={{ width:'100%', height:'100%'}}
+                            onLoad={(map) => setMap(map)}
+                        >
+                        {/* Display markers and directions */}
+                            <Marker position={center}/>
+                            {/* When we get response from google maps, display directions on map */}
+                            {directions && <DirectionsRenderer directions={directions} />}
+                        </GoogleMap>
+                    </Box>
+                    <Box
+                        p={4}
+                        borderRadius='lg'
+                        mt={4}
+                        bgColor='white'
+                        shadow='base'
+                        minW='container.md'
+                        zIndex='1'
+                    >
+                        <HStack spacing={2} justifyContent='space-between'>
+                        {/* Get google suggestions when entering locations */}
+                        <Box flexGrow={1}>
+                            <Autocomplete>
+                            <Input 
+                                type='text' 
+                                placeholder='Origin' 
+                                ref={originRef}
+                            />
+                            </Autocomplete>
+                        </Box>
+                        <Box flexGrow={1}>
+                            <Autocomplete>
+                            <Input
+                                type='text'
+                                placeholder='Destination' 
+                                ref={destinationRef}
+                            />
+                            </Autocomplete>
+                        </Box>
+
+                        <ButtonGroup>
+                            <Button 
+                                bg='primary.main' 
+                                color='primary.txt'
+                                _hover={{bg: 'primary.hover', color: 'primary.main'}}
+                                type='submit' 
+                                onClick={calculateRoute}
+                            >
+                            Calculate Route
+                            </Button>
+                            <IconButton
+                            aria-label='clear'
+                            icon={
+                                <FontAwesomeIcon
+                                            icon={
+                                                faTimes
+                                            }
+                                />
+                            }
+                            onClick={clearRoute}
+                            />
+                        </ButtonGroup>
+                        </HStack>
+                        <HStack spacing={4} mt={4} justifyContent='space-between'>
+                        <Text>Distance: {distance} </Text>
+                        <Text>Duration: {duration} </Text>
+                        <IconButton
+                            aria-label='center back'
+                            icon={<FontAwesomeIcon
+                                                icon={
+                                                    faLocationArrow   
+                                                }
+                            />}
+                            isRound
+                            onClick={() =>map.panTo(center)}
                         />
-                    }
-                    onClick={clearRoute}
-                    />
-                </ButtonGroup>
-                </HStack>
-                <HStack spacing={4} mt={4} justifyContent='space-between'>
-                <Text>Distance: {distance} </Text>
-                <Text>Duration: {duration} </Text>
-                <IconButton
-                    aria-label='center back'
-                    icon={<FontAwesomeIcon
-                                        icon={
-                                            faLocationArrow   
-                                        }
-                    />}
-                    isRound
-                    onClick={() =>map.panTo(center)}
-                />
-                </HStack>
-            </Box>
-        </Flex>    
+                        </HStack>
+                    </Box>
+                </Flex>    
+            </div>
+            <Weather />
+        </div>
     </div>
-    </>
   )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -36,7 +35,7 @@ function HikeList() {
         </li>
         <li className='hike-item'>
           <p>
-          Yosemite National Park
+            Yosemite National Park
           </p> 
           <div className='hike-icons'>
               <FontAwesomeIcon
