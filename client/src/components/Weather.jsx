@@ -50,10 +50,10 @@ function Weather() {
   // weather data for now - changes on load once, after will need to change based on the geo location of user's choosing
   const [ weatherData, setWeatherData] = useState('new');
   
-  // useEffect(() => {
-  //   setWeatherData(fetchWeather());
-  //   console.log(weatherData);
-  // }, []);
+  useEffect(() => {
+    setWeatherData(fetchWeather());
+    console.log(weatherData);
+  }, []);
 
   return (
     <div className='weather-container'>
