@@ -15,6 +15,7 @@ function Weather() {
 
   let time;
   let hour;
+  let minutes;
 
   const [ timeData, setTimeData ] = useState('');
 
@@ -28,9 +29,10 @@ function Weather() {
         date: time.getDate(),
         day: time.getDay(),
         hour: time.getHours(),
-        min: time.getMinutes(),
+        minutes: time.getMinutes(),
         hour12: hour >= 13 ? hour%12: hour,
         ampm: hour >= 12 ? 'pm' : 'am',
+        min: minutes < 10? '0' : '' + minutes,
       });
     }, 1000);
   }, []);
@@ -43,13 +45,13 @@ function Weather() {
           <Card className='weather-item-today' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
               <CardHeader>
                 <Heading size='md' color='primary.txt'>
-                  Today
+                  {weekDays[timeData.day - 1] + ', ' + timeData.date + ' ' + months[timeData.month]}
                 </Heading>
               </CardHeader>
                 <CardBody color='primary.txt'>
                   <Container align='center'pb={5} >
                   <Text color='primary.txt' pb={5} fontSize='md'>
-                    {timeData.hour12}
+                    {timeData.hour12 + ':' + timeData.minutes + ' ' +timeData.ampm}
                   </Text>
                   <Icon boxSize='30px' >
                     <FontAwesomeIcon icon={faSun} />
