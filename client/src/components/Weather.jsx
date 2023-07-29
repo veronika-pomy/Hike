@@ -17,7 +17,16 @@ function Weather() {
   let hour;
   let minutes;
 
-  const [ timeData, setTimeData ] = useState('');
+  const [ timeData, setTimeData ] = useState({
+    month: '',
+    date: '',
+    day: '',
+    hour: '',
+    minutes: '',
+    hour12: '',
+    ampm: '',
+    min: '',
+  });
 
   useEffect(() => {
     setInterval(() => {
@@ -34,7 +43,7 @@ function Weather() {
         ampm: hour >= 12 ? 'pm' : 'am',
         min: minutes < 10? '0' : '' + minutes,
       });
-    }, 1000);
+    }, 500);
   }, []);
 
   return (
