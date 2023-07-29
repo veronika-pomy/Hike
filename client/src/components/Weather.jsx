@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@chakra-ui/react';
 
@@ -13,11 +13,27 @@ function Weather() {
   const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun' ];
   const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
 
-  // execute date and time search every 5 seconds 
-  setInterval (() => {
-    let dataDateTime = getTime();
-    console.log(dataDateTime);
-  }, 5000);
+  let time;
+  let hour;
+
+  const [ timeData, setTimeData ] = useState('');
+
+  useEffect(() => {
+    setInterval(() => {
+      time = new Date();
+      hour =  time.getHours();
+
+      setTimeData({
+        month: time.getMonth(),
+        date: time.getDate(),
+        day: time.getDay(),
+        hour: time.getHours(),
+        min: time.getMinutes(),
+        hour12: hour >= 13 ? hour%12: hour,
+        ampm: hour >= 12 ? 'pm' : 'am',
+      });
+    }, 1000);
+  }, []);
 
   return (
     <div className='weather-container'>
@@ -33,7 +49,7 @@ function Weather() {
                 <CardBody color='primary.txt'>
                   <Container align='center'pb={5} >
                   <Text color='primary.txt' pb={5} fontSize='md'>
-                    
+                    {timeData.hour12}
                   </Text>
                   <Icon boxSize='30px' >
                     <FontAwesomeIcon icon={faSun} />
