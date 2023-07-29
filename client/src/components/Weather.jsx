@@ -5,7 +5,20 @@ import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@cha
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
+import { getTime } from '../utils//weatherAPI';
+
 function Weather() {
+
+  // get date and time data
+  const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun' ];
+  const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
+
+  // execute date and time search every 5 seconds 
+  setInterval (() => {
+    let dataDateTime = getTime();
+    console.log(dataDateTime);
+  }, 5000);
+
   return (
     <div className='weather-container'>
       <div className='weather-content-wrapper'>
@@ -18,8 +31,11 @@ function Weather() {
                 </Heading>
               </CardHeader>
                 <CardBody color='primary.txt'>
-                  <Container align='center' pb={5}>
-                  <Icon boxSize='30px'>
+                  <Container align='center'pb={5} >
+                  <Text color='primary.txt' pb={5} fontSize='md'>
+                    
+                  </Text>
+                  <Icon boxSize='30px' >
                     <FontAwesomeIcon icon={faSun} />
                   </Icon>
                   </Container>

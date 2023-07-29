@@ -159,6 +159,7 @@
 .weather-items-wrapper {
     display: flex;
     justify-content: center;  
+    /* margin-left: 12em; */
 }
 
 .weather-items {
