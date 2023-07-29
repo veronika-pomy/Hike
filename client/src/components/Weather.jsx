@@ -5,11 +5,11 @@ import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@cha
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
-import { getTime } from '../utils//weatherAPI';
+import { fetchWeather } from '../utils//weatherAPI';
 
 function Weather() {
 
-  // get date and time data
+  // date and time data
   const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun' ];
   const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
 
@@ -30,6 +30,7 @@ function Weather() {
 
   useEffect(() => {
     setInterval(() => {
+
       time = new Date();
       hour =  time.getHours();
 
@@ -43,8 +44,16 @@ function Weather() {
         ampm: hour >= 12 ? 'pm' : 'am',
         min: minutes < 10? '0' : '' + minutes,
       });
-    }, 500);
+    }, 1000);
   }, []);
+
+  // weather data for now - changes on load once, after will need to change based on the geo location of user's choosing
+  const [ weatherData, setWeatherData] = useState('new');
+  
+  // useEffect(() => {
+  //   setWeatherData(fetchWeather());
+  //   console.log(weatherData);
+  // }, []);
 
   return (
     <div className='weather-container'>
