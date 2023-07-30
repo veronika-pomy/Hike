@@ -7,10 +7,22 @@ import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShower
 
 import { fetchWeather } from '../utils//weatherAPI';
 
+async function getWeatherData () {
+  try {
+    const resultWeather = await fetchWeather();
+    console.log(resultWeather);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+getWeatherData();
+
 function Weather() {
 
   // date and time data
-  const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun' ];
+    // TODO: fix bug with displaying weekday for Sunday
+  const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
   const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
 
   let time;
@@ -47,13 +59,7 @@ function Weather() {
     }, 1000);
   }, []);
 
-  // weather data for now - changes on load once, after will need to change based on the geo location of user's choosing
-  const [ weatherData, setWeatherData] = useState('new');
-  
-  useEffect(() => {
-    setWeatherData(fetchWeather());
-    console.log(weatherData);
-  }, []);
+  // change weather based on users choice 
 
   return (
     <div className='weather-container'>
@@ -63,7 +69,7 @@ function Weather() {
           <Card className='weather-item-today' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
               <CardHeader>
                 <Heading size='md' color='primary.txt'>
-                  {weekDays[timeData.day - 1] + ', ' + timeData.date + ' ' + months[timeData.month]}
+                  {weekDays[timeData.day] + ', ' + timeData.date + ' ' + months[timeData.month]}
                 </Heading>
               </CardHeader>
                 <CardBody color='primary.txt'>
