@@ -7,22 +7,11 @@ import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShower
 
 import { fetchWeather } from '../utils//weatherAPI';
 
-async function getWeatherData () {
-  try {
-    const resultWeather = await fetchWeather();
-    console.log(resultWeather);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-getWeatherData();
-
 function Weather() {
 
   // date and time data
     // TODO: fix bug with displaying weekday for Sunday
-  const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+  const weekDays = [ '', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
   const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
 
   let time;
@@ -60,6 +49,32 @@ function Weather() {
   }, []);
 
   // change weather based on users choice 
+    // state for holding returned api data
+  const [ weatherData, setWeatherData ] = useState({});
+
+    // create method to search for weather and set state
+    const searchWeather = async () => {
+      try {
+        const response = await fetchWeather();
+        console.log(response);
+
+        if (!response.ok) {
+          throw new Error('Something went wrong with fetching weather data.');
+        }
+
+        const weatherResponse = await response.json();
+
+        searchWeather(weatherResponse);
+        // console.log(weatherResponse);
+      } catch (err) {
+        console.error(err);
+      };
+    };
+
+    useEffect(() => {
+      searchWeather();
+      console.log(weatherData);
+    }, []);
 
   return (
     <div className='weather-container'>
@@ -83,13 +98,13 @@ function Weather() {
                   </Container>
                   <Container fontSize='lg'>
                     <Text>
-                      Temp
+                      Temp: 
                     </Text>
                     <Text>
-                      Wind
+                      Wind: 
                     </Text>
                     <Text>
-                      Humidity
+                      Humidity: 
                     </Text>
                   </Container>
               </CardBody>
