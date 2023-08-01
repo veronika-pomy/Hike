@@ -11,5 +11,5 @@ export default function DashProvider ({children}) {
         <DashContext.Provider value={{ dash, setDash }}>
             {children}
         </DashContext.Provider>
-    )
+    );
 };

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+import { useWeatherContext } from '../context/useWeatherContext';
+
 import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
-import { fetchWeather } from '../utils//weatherAPI';
+// import { fetchWeather } from '../utils//weatherAPI';
 
 function Weather() {
 
   // date and time data
-    // TODO: fix bug with displaying weekday for Sunday
   const weekDays = [ '', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
   const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec' ];
 
@@ -49,197 +50,206 @@ function Weather() {
   }, []);
 
   // change weather based on users choice 
+
+  const { weather, setWeather } = useWeatherContext();
+
     // state for holding returned api data
   const [ weatherData, setWeatherData ] = useState({});
 
-    // create method to search for weather and set state
-    const searchWeather = async () => {
-      try {
-        const response = await fetchWeather();
-        console.log(response);
+    // // create method to search for weather and set state
+    // const searchWeather = async () => {
+    //   try {
+    //     const response = await fetchWeather();
+    //     console.log(response);
 
-        if (!response.ok) {
-          throw new Error('Something went wrong with fetching weather data.');
-        }
+    //     if (!response.ok) {
+    //       throw new Error('Something went wrong with fetching weather data.');
+    //     }
 
-        const weatherResponse = await response.json();
+    //     const weatherResponse = await response.json();
 
-        searchWeather(weatherResponse);
-        // console.log(weatherResponse);
-      } catch (err) {
-        console.error(err);
-      };
-    };
+    //     searchWeather(weatherResponse);
+    //     // console.log(weatherResponse);
+    //   } catch (err) {
+    //     console.error(err);
+    //   };
+    // };
 
-    useEffect(() => {
-      searchWeather();
-      console.log(weatherData);
-    }, []);
+    // useEffect(() => {
+    //   searchWeather();
+    //   console.log(weatherData);
+    // }, []);
+
+// TODO: add an X component to close the weather popup from the component, not sidebar
 
   return (
-    <div className='weather-container'>
-      <div className='weather-content-wrapper'>
-        <p className='weather-title'>Weather Forecast</p>
-        <div className='weather-items-wrapper'>
-          <Card className='weather-item-today' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
-              <CardHeader>
-                <Heading size='md' color='primary.txt'>
-                  {weekDays[timeData.day] + ', ' + timeData.date + ' ' + months[timeData.month]}
-                </Heading>
-              </CardHeader>
-                <CardBody color='primary.txt'>
-                  <Container align='center'pb={5} >
-                  <Text color='primary.txt' pb={5} fontSize='md'>
-                    {timeData.hour12 + ':' + timeData.minutes + ' ' +timeData.ampm}
-                  </Text>
-                  <Icon boxSize='30px' >
-                    <FontAwesomeIcon icon={faSun} />
-                  </Icon>
-                  </Container>
-                  <Container fontSize='lg'>
-                    <Text>
-                      Temp: 
-                    </Text>
-                    <Text>
-                      Wind: 
-                    </Text>
-                    <Text>
-                      Humidity: 
-                    </Text>
-                  </Container>
-              </CardBody>
-          </Card>
-          <div className='weather-items'>
-            <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
-                <CardHeader>
-                  <Heading size='md' color='primary.txt'>
-                    Weekday, Date
-                  </Heading>
-                </CardHeader>
-                  <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
-                    <Icon boxSize='30px'>
-                      <FontAwesomeIcon icon={faSun} />
-                    </Icon>
-                    </Container>
-                    <Container fontSize='lg'>
-                      <Text>
-                        Temp
+    weather ? 
+      <>
+        <div className='weather-container'>
+          <div className='weather-content-wrapper'>
+            <p className='weather-title'>Weather Forecast</p>
+            <div className='weather-items-wrapper'>
+              <Card className='weather-item-today' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                  <CardHeader>
+                    <Heading size='md' color='primary.txt'>
+                      {weekDays[timeData.day] + ', ' + timeData.date + ' ' + months[timeData.month]}
+                    </Heading>
+                  </CardHeader>
+                    <CardBody color='primary.txt'>
+                      <Container align='center'pb={5} >
+                      <Text color='primary.txt' pb={5} fontSize='md'>
+                        {timeData.hour12 + ':' + timeData.minutes + ' ' +timeData.ampm}
                       </Text>
-                      <Text>
-                        Wind
-                      </Text>
-                      <Text>
-                        Humidity
-                      </Text>
-                    </Container>
-                </CardBody>
-            </Card>
-            <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
-                <CardHeader>
-                  <Heading size='md' color='primary.txt'>
-                    Weekday, Date
-                  </Heading>
-                </CardHeader>
-                  <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
-                    <Icon boxSize='30px'>
-                      <FontAwesomeIcon icon={faSun} />
-                    </Icon>
-                    </Container>
-                    <Container fontSize='lg'>
-                      <Text>
-                        Temp
-                      </Text>
-                      <Text>
-                        Wind
-                      </Text>
-                      <Text>
-                        Humidity
-                      </Text>
-                    </Container>
-                </CardBody>
-            </Card>
-            <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
-                <CardHeader>
-                  <Heading size='md' color='primary.txt'>
-                    Weekday, Date
-                  </Heading>
-                </CardHeader>
-                  <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
-                    <Icon boxSize='30px'>
-                      <FontAwesomeIcon icon={faSun} />
-                    </Icon>
-                    </Container>
-                    <Container fontSize='lg'>
-                      <Text>
-                        Temp
-                      </Text>
-                      <Text>
-                        Wind
-                      </Text>
-                      <Text>
-                        Humidity
-                      </Text>
-                    </Container>
-                </CardBody>
-            </Card>
-            <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
-                <CardHeader>
-                  <Heading size='md' color='primary.txt'>
-                    Weekday, Date
-                  </Heading>
-                </CardHeader>
-                  <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
-                    <Icon boxSize='30px'>
-                      <FontAwesomeIcon icon={faSun} />
-                    </Icon>
-                    </Container>
-                    <Container fontSize='lg'>
-                      <Text>
-                        Temp
-                      </Text>
-                      <Text>
-                        Wind
-                      </Text>
-                      <Text>
-                        Humidity
-                      </Text>
-                    </Container>
-                </CardBody>
-            </Card>
-            <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
-                <CardHeader>
-                  <Heading size='md' color='primary.txt'>
-                    Weekday, Date
-                  </Heading>
-                </CardHeader>
-                  <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
-                    <Icon boxSize='30px'>
-                      <FontAwesomeIcon icon={faSun} />
-                    </Icon>
-                    </Container>
-                    <Container fontSize='lg'>
-                      <Text>
-                        Temp
-                      </Text>
-                      <Text>
-                        Wind
-                      </Text>
-                      <Text>
-                        Humidity
-                      </Text>
-                    </Container>
-                </CardBody>
-            </Card>
-          </div>
+                      <Icon boxSize='30px' >
+                        <FontAwesomeIcon icon={faSun} />
+                      </Icon>
+                      </Container>
+                      <Container fontSize='lg'>
+                        <Text>
+                          Temp: 
+                        </Text>
+                        <Text>
+                          Wind: 
+                        </Text>
+                        <Text>
+                          Humidity: 
+                        </Text>
+                      </Container>
+                  </CardBody>
+              </Card>
+              <div className='weather-items'>
+                <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                    <CardHeader>
+                      <Heading size='md' color='primary.txt'>
+                        Weekday, Date
+                      </Heading>
+                    </CardHeader>
+                      <CardBody color='primary.txt'>
+                        <Container align='center' pb={5}>
+                        <Icon boxSize='30px'>
+                          <FontAwesomeIcon icon={faSun} />
+                        </Icon>
+                        </Container>
+                        <Container fontSize='lg'>
+                          <Text>
+                            Temp
+                          </Text>
+                          <Text>
+                            Wind
+                          </Text>
+                          <Text>
+                            Humidity
+                          </Text>
+                        </Container>
+                    </CardBody>
+                </Card>
+                <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                    <CardHeader>
+                      <Heading size='md' color='primary.txt'>
+                        Weekday, Date
+                      </Heading>
+                    </CardHeader>
+                      <CardBody color='primary.txt'>
+                        <Container align='center' pb={5}>
+                        <Icon boxSize='30px'>
+                          <FontAwesomeIcon icon={faSun} />
+                        </Icon>
+                        </Container>
+                        <Container fontSize='lg'>
+                          <Text>
+                            Temp
+                          </Text>
+                          <Text>
+                            Wind
+                          </Text>
+                          <Text>
+                            Humidity
+                          </Text>
+                        </Container>
+                    </CardBody>
+                </Card>
+                <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                    <CardHeader>
+                      <Heading size='md' color='primary.txt'>
+                        Weekday, Date
+                      </Heading>
+                    </CardHeader>
+                      <CardBody color='primary.txt'>
+                        <Container align='center' pb={5}>
+                        <Icon boxSize='30px'>
+                          <FontAwesomeIcon icon={faSun} />
+                        </Icon>
+                        </Container>
+                        <Container fontSize='lg'>
+                          <Text>
+                            Temp
+                          </Text>
+                          <Text>
+                            Wind
+                          </Text>
+                          <Text>
+                            Humidity
+                          </Text>
+                        </Container>
+                    </CardBody>
+                </Card>
+                <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                    <CardHeader>
+                      <Heading size='md' color='primary.txt'>
+                        Weekday, Date
+                      </Heading>
+                    </CardHeader>
+                      <CardBody color='primary.txt'>
+                        <Container align='center' pb={5}>
+                        <Icon boxSize='30px'>
+                          <FontAwesomeIcon icon={faSun} />
+                        </Icon>
+                        </Container>
+                        <Container fontSize='lg'>
+                          <Text>
+                            Temp
+                          </Text>
+                          <Text>
+                            Wind
+                          </Text>
+                          <Text>
+                            Humidity
+                          </Text>
+                        </Container>
+                    </CardBody>
+                </Card>
+                <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                    <CardHeader>
+                      <Heading size='md' color='primary.txt'>
+                        Weekday, Date
+                      </Heading>
+                    </CardHeader>
+                      <CardBody color='primary.txt'>
+                        <Container align='center' pb={5}>
+                        <Icon boxSize='30px'>
+                          <FontAwesomeIcon icon={faSun} />
+                        </Icon>
+                        </Container>
+                        <Container fontSize='lg'>
+                          <Text>
+                            Temp
+                          </Text>
+                          <Text>
+                            Wind
+                          </Text>
+                          <Text>
+                            Humidity
+                          </Text>
+                        </Container>
+                    </CardBody>
+                </Card>
+              </div>
+            </div>
         </div>
       </div>
-    </div>
-  )
+      </> : 
+      <> 
+      </>)
 }
 
 export default Weather;

@@ -35,7 +35,7 @@ function Map() {
     });
 
     // state to control map
-    const [map, setMap ] = useState(/** @type google.maps.Map */ (null));
+    const [ map, setMap ] = useState(/** @type google.maps.Map */ (null));
 
     // states for map responses 
     const [ directions, setDirections ] = useState(null);

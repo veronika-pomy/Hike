@@ -1,6 +1,8 @@
 import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
 
+import { useWeatherContext } from '../context/useWeatherContext';
+
 import HikeList from './sidebar/HikeList';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +11,8 @@ import {
   faPersonHiking,
   faHouse,
   faUser,
-  faGear
+  faGear,
+  faCloudSun
  } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
@@ -38,13 +41,16 @@ function Sidebar() {
 
   // TODO: add a state for checking if a user wants the list closed or open on moving sidebar to 300px
   
-  const [hikeList, setHikeList] = useState(true);
+  const [ hikeList, setHikeList ] = useState(true);
 
   const showList = () => {
     console.log(hikeList);
     return setHikeList((prev)=> !prev);
   };
 
+  // render weather componenet on clicking weather report link
+  const { toggleWeather } = useWeatherContext();
+  
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>
       <ul> 
@@ -82,6 +88,20 @@ function Sidebar() {
             </div>
         </li>
         <div className='bottom'>
+        <li>
+            <Link
+              onClick={toggleWeather}
+            >
+              <span className="icon">
+                <FontAwesomeIcon icon={faCloudSun} className='user-icon-sidebar'/>
+              </span>
+              <span
+                className='text'
+              >
+                Weather Report
+              </span>
+            </Link>
+          </li>
           <li>
             <Link
               to='#'
@@ -92,7 +112,7 @@ function Sidebar() {
               <span
                 className='text'
               >
-              User Account
+                User Account
               </span>
             </Link>
           </li>
