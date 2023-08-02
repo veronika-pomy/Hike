@@ -7,7 +7,7 @@ import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@cha
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
-// import { fetchWeather } from '../utils//weatherAPI';
+import { fetchWeather } from '../utils//weatherAPI';
 
 function Weather() {
 
@@ -50,35 +50,41 @@ function Weather() {
   }, []);
 
   // change weather based on users choice 
-
-  const { weather, setWeather } = useWeatherContext();
+  const { weather } = useWeatherContext();
 
     // state for holding returned api data
   const [ weatherData, setWeatherData ] = useState({});
 
-    // // create method to search for weather and set state
-    // const searchWeather = async () => {
-    //   try {
-    //     const response = await fetchWeather();
-    //     console.log(response);
+    //method to call weather api to render data in the weather component on 
+  const getWeatherData = async ( ) => {
+    try {
+        const response = await fetchWeather();
+        console.log(response);
 
-    //     if (!response.ok) {
-    //       throw new Error('Something went wrong with fetching weather data.');
-    //     }
+        if (!response.ok) {
+            throw new Error('Something went wrong with fetching weather data.');
+        };
 
-    //     const weatherResponse = await response.json();
+        const weatherResponse = await response.json();
+        console.log(weatherResponse);
+        return weatherResponse;
+    } catch (err) {
+        console.error(err);
+    };
+  };
 
-    //     searchWeather(weatherResponse);
-    //     // console.log(weatherResponse);
-    //   } catch (err) {
-    //     console.error(err);
-    //   };
-    // };
-
-    // useEffect(() => {
-    //   searchWeather();
-    //   console.log(weatherData);
-    // }, []);
+  useEffect(() => {
+    async function resolveWeatherPromise () {
+      try {
+        const weatherSetData = await getWeatherData();
+        setWeatherData(weatherSetData);
+        console.log(weatherData);
+      } catch (err) {
+        console.error(err);
+      };
+    };
+    resolveWeatherPromise();
+  }, []);
 
 // TODO: add an X component to close the weather popup from the component, not sidebar
 
@@ -106,13 +112,13 @@ function Weather() {
                       </Container>
                       <Container fontSize='lg'>
                         <Text>
-                          Temp: 
+                          Temp: {weatherData.current.temp} °F
                         </Text>
                         <Text>
-                          Wind: 
+                          Wind: {weatherData.current.wind_speed} mph
                         </Text>
                         <Text>
-                          Humidity: 
+                          Humidity: {weatherData.current.humidity} % rh
                         </Text>
                       </Container>
                   </CardBody>
