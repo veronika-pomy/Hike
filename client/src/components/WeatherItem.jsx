@@ -1,15 +1,16 @@
 import React from 'react';
+import moment from 'moment';
 
 import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function WeatherItem({ icon, temp, wind, humidity }) {
+function WeatherItem({ date, icon, temp, wind, humidity }) {
   return (
     <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
         <CardHeader>
         <Heading size='md' color='primary.txt'>
-            Weekday, Date
+            {moment(date*1000).format('ddd, D MMM')}
         </Heading>
         </CardHeader>
         <CardBody color='primary.txt'>
