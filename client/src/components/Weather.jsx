@@ -37,7 +37,7 @@ function Weather() {
   // change weather based on users choice 
   const { weather } = useWeatherContext();
 
-    // state for holding returned api data
+  // state for holding returned api data
   const [ weatherData, setWeatherData ] = useState({});
 
   //method to call weather api to render data in the weather component on 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Weather from '../components/Weather';
 
@@ -21,13 +21,49 @@ import { faLocationArrow, faTimes } from '@fortawesome/free-solid-svg-icons';
 // check if map is loaded
 import { useJsApiLoader, GoogleMap, MarkerF, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 
-// where to center the map, default: Empire State Building 
-const center = {
-    lat: 40.748817,
-    lng: -73.985428
-  };
-
 function Map() {
+
+    // where to center the map, default to the Empire State Building 
+    const [ mapCenter, setMapCenter ] = useState({
+        lat: 40.748817,
+        lng: -73.985428
+    });
+
+    const getUserLocation = () => {
+
+        let result = {lat: 40.748817, lng: -73.985428};
+
+        navigator.geolocation.getCurrentPosition((success)=> {
+            let { latitude, longitude } = success.coords;
+
+            result = {
+                lat: latitude,
+                lng: longitude
+            };
+            // console.log(result);
+            // return result;
+        });
+        console.log(result);
+        return result;
+    };
+
+    useEffect(() => {
+        console.log(mapCenter);
+        async function resolveUserLocationPromise () {
+            try {
+                const userLocationSetData = getUserLocation();
+                console.log(userLocationSetData);
+                setMapCenter(userLocationSetData); 
+            } catch (err) {
+                console.error(err);
+                setMapCenter({lat: 40.748817, lng: -73.985428}); // in case of error return default location 
+                console.log(mapCenter);
+            };
+        };
+        resolveUserLocationPromise();
+        console.log(mapCenter);
+    },[]);
+
     // loading google maps script
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
@@ -93,6 +129,9 @@ function Map() {
         destinationRef.current.value = '';
     };
 
+    // TODO: Add state to manage lat and lng coordinates for the origin to destination 
+    // TODP: Rework card componenet to seach based on origin first, then to add a possibility to add destination and save if needed
+
   return (
     <div className='map-wrapper-main'>
         <div className='sidebar-wrapper'>
@@ -113,14 +152,14 @@ function Map() {
                         {/* Display Google Maps Box */}
                         {/* Style of the map box is 100% of the parent */}
                         <GoogleMap 
-                            center={center} 
+                            center={mapCenter} 
                             zoom={15} 
                             mapContainerStyle={{ width:'100%', height:'100%'}}
                             onLoad={(map) => setMap(map)}
                         >
                         {/* Display markers and directions */}
                             <MarkerF 
-                                position={center}
+                                position={mapCenter}
                                 draggable={true}
                             />
                             {/* When we get response from google maps, display directions on map */}
@@ -191,7 +230,7 @@ function Map() {
                                                 }
                             />}
                             isRound
-                            onClick={() =>map.panTo(center)}
+                            onClick={() =>map.panTo(mapCenter)}
                         />
                         </HStack>
                     </Box>

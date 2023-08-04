@@ -5,6 +5,7 @@ export const WeatherContext = React.createContext();
 export const useWeatherContext = () => useContext(WeatherContext);
 
 export default function WeatherProvider ({children}) {
+    
     const [ weather, setWeather] = useState(false);
 
     //method to update weather component state 
