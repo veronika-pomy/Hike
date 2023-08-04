@@ -41,34 +41,34 @@ function Weather() {
   const [ weatherData, setWeatherData ] = useState({});
 
   //method to call weather api to render data in the weather component on 
-  const getWeatherData = async (weather) => {
-    try {
-      const response = await fetchWeather();
-      // console.log(response);
+  // const getWeatherData = async (weather) => {
+  //   try {
+  //     const response = await fetchWeather();
+  //     // console.log(response);
 
-      if (!response.ok) {
-          throw new Error('Something went wrong with fetching weather data.');
-      };
+  //     if (!response.ok) {
+  //         throw new Error('Something went wrong with fetching weather data.');
+  //     };
 
-      const weatherResponse = await response.json();
-      console.log(weatherResponse.daily[0].weather);
-      return weatherResponse;
-    } catch (err) {
-        console.error(err);
-    };
-  };
+  //     const weatherResponse = await response.json();
+  //     console.log(weatherResponse.daily[0].weather);
+  //     return weatherResponse;
+  //   } catch (err) {
+  //       console.error(err);
+  //   };
+  // };
 
-  useEffect(() => {
-    async function resolveWeatherPromise () {
-      try {
-        const weatherSetData = await getWeatherData(weather);
-        setWeatherData(weatherSetData);
-      } catch (err) {
-        console.error(err);
-      };
-    };
-    resolveWeatherPromise();
-  }, []);
+  // useEffect(() => {
+  //   async function resolveWeatherPromise () {
+  //     try {
+  //       const weatherSetData = await getWeatherData(weather);
+  //       setWeatherData(weatherSetData);
+  //     } catch (err) {
+  //       console.error(err);
+  //     };
+  //   };
+  //   resolveWeatherPromise();
+  // }, []);
 
 // TODO: add an X component to close the weather popup from the component, not sidebar
 //TODO: render weather icon conditionaly

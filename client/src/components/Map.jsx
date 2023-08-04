@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // check if map is loaded
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
+import { useJsApiLoader, GoogleMap, MarkerF, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 
 // where to center the map, default: Empire State Building 
 const center = {
@@ -33,7 +33,7 @@ function Map() {
         googleMapsApiKey: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
         libraries: ['places'],
     });
-
+    
     // state to control map
     const [ map, setMap ] = useState(/** @type google.maps.Map */ (null));
 
@@ -86,11 +86,11 @@ function Map() {
 
     // clear result of search
     function clearRoute () {
-    setDirections(null);
-    setDistance('');
-    setDuration(''); 
-    originRef.current.value = '';
-    destinationRef.current.value = '';
+        setDirections(null);
+        setDistance('');
+        setDuration(''); 
+        originRef.current.value = '';
+        destinationRef.current.value = '';
     };
 
   return (
@@ -119,9 +119,12 @@ function Map() {
                             onLoad={(map) => setMap(map)}
                         >
                         {/* Display markers and directions */}
-                            <Marker position={center}/>
+                            <MarkerF 
+                                position={center}
+                                draggable={true}
+                            />
                             {/* When we get response from google maps, display directions on map */}
-                            {directions && <DirectionsRenderer directions={directions} />}
+                            {directions && <DirectionsRenderer directions={directions} options={{draggable:true}} />}
                         </GoogleMap>
                     </Box>
                     <Box
@@ -158,11 +161,11 @@ function Map() {
                             <Button 
                                 bg='primary.main' 
                                 color='primary.txt'
-                                _hover={{bg: 'primary.hover', color: 'primary.main'}}
+                                _hover={{bg: 'primary.main', color: 'primary.txt'}}
                                 type='submit' 
                                 onClick={calculateRoute}
                             >
-                            Calculate Route
+                             Calculate Route
                             </Button>
                             <IconButton
                             aria-label='clear'
