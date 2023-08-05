@@ -224,13 +224,13 @@ function Map() {
                                                 }
                             />}
                             isRound
-                            onClick={() =>map.panTo(mapCenter)}
+                            onClick={() => map.panTo(mapCenter)}
                         />
                         </HStack>
                     </Box>
                 </Flex>    
             </div>
-            <Weather />
+            <Weather lat={mapCenter.lat} lng={mapCenter.lng} />
         </div>
     </div>
   )
