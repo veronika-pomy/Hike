@@ -29,39 +29,32 @@ function Map() {
         lng: -73.985428
     });
 
+    // need to work on the default location settings - it switched between default and user location on render - should always try to get user location first
     const getUserLocation = () => {
 
-        let result = {lat: 40.748817, lng: -73.985428};
+        let result = { lat: 40.748817, lng: -73.985428 };
 
         navigator.geolocation.getCurrentPosition((success)=> {
             let { latitude, longitude } = success.coords;
 
-            result = {
-                lat: latitude,
-                lng: longitude
-            };
-            // console.log(result);
-            // return result;
+            result.lat = latitude;
+            result.lng = longitude;
+
         });
-        console.log(result);
         return result;
     };
 
     useEffect(() => {
-        console.log(mapCenter);
         async function resolveUserLocationPromise () {
             try {
-                const userLocationSetData = getUserLocation();
-                console.log(userLocationSetData);
+                const userLocationSetData = await getUserLocation();
                 setMapCenter(userLocationSetData); 
             } catch (err) {
                 console.error(err);
-                setMapCenter({lat: 40.748817, lng: -73.985428}); // in case of error return default location 
-                console.log(mapCenter);
+                setMapCenter({ lat: 40.748817, lng: -73.985428 }); // in case of error return default location 
             };
         };
         resolveUserLocationPromise();
-        console.log(mapCenter);
     },[]);
 
     // loading google maps script
@@ -109,6 +102,7 @@ function Map() {
 
         // when result is returned, set it as directions response 
         setDirections(result);
+        console.log(directions);
 
         // log results in console
         console.log(result);
@@ -130,7 +124,7 @@ function Map() {
     };
 
     // TODO: Add state to manage lat and lng coordinates for the origin to destination 
-    // TODP: Rework card componenet to seach based on origin first, then to add a possibility to add destination and save if needed
+    // TODO: Rework card componenet to seach based on origin first, then to add a possibility to add destination and save if needed
 
   return (
     <div className='map-wrapper-main'>
