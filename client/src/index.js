@@ -7,6 +7,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 const colors = {
   primary: {
     main: '#242424',
+    save: '#154406',
     hover: '#898888',
     txt: '#fff',
     transparent: '#000000d0',

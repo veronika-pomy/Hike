@@ -50,6 +50,9 @@ function Sidebar() {
 
   // render weather componenet on clicking weather report link
   const { toggleWeather } = useWeatherContext();
+
+  // TODO: Function to delete saved hike
+  // TODO: Function to rename saved hike
   
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>
