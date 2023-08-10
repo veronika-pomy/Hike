@@ -113,6 +113,19 @@ function Map() {
         setLocationName('');
     };
 
+    // TODO: detect address location of marker after it was dragged 
+    const detectLocation = (e) => {
+
+        // convert event to string and then parse to json obj
+        const locationObject = JSON.parse(JSON.stringify(e));
+        console.log(locationObject);
+        console.log(locationObject.latLng);
+
+        // reset map center to the location dragged
+        setMapCenter(locationObject.latLng);
+        setLocationName(`lat: ${locationObject.latLng.lat}, lon: ${locationObject.latLng.lng}`)
+    };
+
     // TODO: Function to save coordinates when user is logged in
     // TODO: Function to retrive and set coordinates when user is logged in and clicks on saved hike
 
@@ -143,6 +156,7 @@ function Map() {
                             <MarkerF 
                                 position={mapCenter}
                                 draggable={true}
+                                onMouseUp={detectLocation}
                             />
                         </GoogleMap>
                     </Box>
