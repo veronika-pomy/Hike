@@ -1,8 +1,9 @@
 const db = require('../config/connection');
-const { User, Hike } = require('../models');
+const { User, Hike, SubscriberList } = require('../models');
 
 const userSeeds = require('./userSeeds.json');
 const hikeSeeds = require('./hikeSeeds.json');
+const SubscriberListSeeds = require('./subscriberListSeeds.json');
 
 db.once('open', async () => {
 

@@ -1,4 +1,4 @@
-const { User, Hike } = require('../models');
+const { User, Hike, SubscriberList } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -57,6 +57,13 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
+        addSubscriberList: async(parent, subscriberEmail) => {
+
+                const newSubscriberEmail = await SubscriberList.create({ subscriberEmail });
+                
+                return newSubscriberEmail;
+        },
+
         updateHike: async (parent, { _id, name, lng, lat }, context) => {
             if (context.user) {
                 return await Hike.findOneAndUpdate(
@@ -86,6 +93,15 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Please log in.');
+        },
+
+        removeSubscriberList: async(parent, subscriberEmail) => {
+
+            const subscriberEmailToDelete = await SubscriberList.findOneAndDelete({
+                subscriberEmail: subscriberEmail
+            });
+
+            return subscriberEmailToDelete;
         },
     },
 };
