@@ -3,14 +3,11 @@ import WeatherItem from '../components/WeatherItem';
 
 import { useWeatherContext } from '../context/useWeatherContext';
 
-import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@chakra-ui/react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy, faCloudSun } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchWeather } from '../utils//weatherAPI';
 
-function Weather({lat, lng}) {
+function Weather({lat, lng, location}) {
 
   // determine which icon to use based on main weather description 
   const determineIcon = (weatherDescription) => {
@@ -41,44 +38,43 @@ function Weather({lat, lng}) {
   const [ weatherData, setWeatherData ] = useState({});
 
   //method to call weather api to render data in the weather component on 
-  // const getWeatherData = async (lat, lng) => {
-  //   try {
-  //     const response = await fetchWeather(lat, lng);
-  //     // console.log(response);
+  const getWeatherData = async (lat, lng) => {
+    try {
+      const response = await fetchWeather(lat, lng);
+      // console.log(response);
 
-  //     if (!response.ok) {
-  //         throw new Error('Something went wrong with fetching weather data.');
-  //     };
+      if (!response.ok) {
+          throw new Error('Something went wrong with fetching weather data.');
+      };
 
-  //     const weatherResponse = await response.json();
-  //     // console.log(weatherResponse.daily[0].weather);
-  //     return weatherResponse;
-  //   } catch (err) {
-  //       console.error(err);
-  //   };
-  // };
+      const weatherResponse = await response.json();
+      // console.log(weatherResponse.daily[0].weather);
+      return weatherResponse;
+    } catch (err) {
+        console.error(err);
+    };
+  };
 
-  // useEffect(() => {
-  //   async function resolveWeatherPromise () {
-  //     try {
-  //       const weatherSetData = await getWeatherData(lat, lng);
-  //       setWeatherData(weatherSetData);
-  //     } catch (err) {
-  //       console.error(err);
-  //     };
-  //   };
-  //   resolveWeatherPromise();
-  // }, []);
+  useEffect(() => {
+    async function resolveWeatherPromise () {
+      try {
+        const weatherSetData = await getWeatherData(lat, lng);
+        setWeatherData(weatherSetData);
+      } catch (err) {
+        console.error(err);
+      };
+    };
+    resolveWeatherPromise();
+  }, []);
 
 // TODO: add an X component to close the weather popup from the component, not sidebar
-//TODO: render weather icon conditionaly
 
   return (
     weather ? 
       <>
         <div className='weather-container'>
           <div className='weather-content-wrapper'>
-            <p className='weather-title'>Weather Forecast</p>
+            <p className='weather-title'>Weather Forecast for {location} </p>
             <div className='weather-items-wrapper'>
               <div className='weather-items'>
                   {weatherData.daily.map((item) => {
@@ -101,7 +97,8 @@ function Weather({lat, lng}) {
       </div>
       </> : 
       <> 
-      </>)
-}
+      </>
+    );
+};
 
 export default Weather;
