@@ -25,19 +25,26 @@ import { useJsApiLoader,
         Autocomplete
 } from '@react-google-maps/api';
 
+import {
+    geocodeByAddress,
+    geocodeByPlaceId,
+    getLatLng,
+  } from 'react-places-autocomplete';
+
 function Map() {
 
     // TODO: Satellite and terrain view need to move because they are blocked by the aidebar right now
 
     // TODO: display info view over a marker on click 
 
-    // default center location
-    const [locationName, setLocationName ] = useState('Lost Twin Lakes Hiking Trail head, MI');
-
+    const defaultLocationName = 'Lost Twin Lakes Hiking Trail Head, MI';
     const defaultLocation = {
         lat: 44.21623,
         lng: -84.68945
     };
+
+    // default center location
+    const [ locationName, setLocationName ] = useState(defaultLocationName);
 
     // center map 
     const [ mapCenter, setMapCenter ] = useState(defaultLocation);
@@ -53,13 +60,59 @@ function Map() {
     // state to control map
      const [ map, setMap ] = useState(/** @type google.maps.Map */ (null));
 
+    /** @type React.MutableObject<HTMLInputElement> */
+    const destinationRef = useRef();
+
+
     // if not loaded display a chakra ui component demonstrating loading
     if(!isLoaded) {
         return <SkeletonText />
     };
 
-    // TODO: Function to search based on user imput
-    // TODO: Function to clear route
+    // search destination based on user imput
+    const searchLocation = async () => {
+
+        // TODO: handle a case if geoLocation data is not found
+
+        try {
+        // only call function when destination input has value
+         if (destinationRef.current.value === ''){
+            return;
+        };
+
+        const geoLocationData = await geocodeByAddress(destinationRef.current.value);
+        console.log(geoLocationData);
+        console.log(geoLocationData[0].results);
+
+        const result = await getLatLng(geoLocationData[0]);
+        const formattedAddress = geoLocationData[0].formatted_address;
+        console.log(result);
+        console.log(result.lat);
+        console.log(result.lng);
+        console.log(formattedAddress);
+
+        // when result is returned, set marker to new coordinates   
+        setMapCenter(result);
+        setLocationName(formattedAddress);
+
+        } catch (err) {
+            console.log(err);
+        };   
+    };
+
+    // seach destination by pressing enter
+    const keyPress = (e) => {
+        if(e.key === 'Enter') {
+            searchLocation();
+        };
+    };
+
+    // clear route
+    function clearRoute() {
+        destinationRef.current.value = '';
+        setLocationName('');
+    };
+
     // TODO: Function to save coordinates when user is logged in
     // TODO: Function to retrive and set coordinates when user is logged in and clicks on saved hike
 
@@ -82,7 +135,7 @@ function Map() {
                 >
                     <Box position='absolute' left={0} top={0} h='100%' w='100%'>
                         <GoogleMap
-                            zoom={10}
+                            zoom={15}
                             center={mapCenter}
                             mapContainerStyle={{ width:'100%', height:'100%'}}
                             onLoad={(map) => setMap(map)}
@@ -108,10 +161,12 @@ function Map() {
                         {/* Get google suggestions when entering location */}
                         <Box flexGrow={1}>
                             <Autocomplete>
-                            <Input 
-                                type='text' 
-                                placeholder='Destination' 
-                            />
+                                <Input 
+                                    type='text' 
+                                    placeholder='Search Your Destination' 
+                                    ref={destinationRef}
+                                    onKeyUp={keyPress}
+                                />
                             </Autocomplete>
                         </Box> 
                         <ButtonGroup>
@@ -120,6 +175,7 @@ function Map() {
                                 color='primary.txt'
                                 _hover={{bg: 'primary.main', color: 'primary.txt'}}
                                 type='submit' 
+                                onClick={searchLocation}
                             >
                                 Search
                             </Button>
@@ -128,6 +184,7 @@ function Map() {
                                 color='primary.txt'
                                 _hover={{bg: 'primary.main', color: 'primary.txt'}}
                                 type='submit' 
+                                onClick={() => {console.log("Save Button Clicked")}}
                             >
                                 Save Hike
                             </Button>
@@ -135,7 +192,7 @@ function Map() {
                         </HStack>
                         <HStack justifyContent='space-between'>
                         <Text mt={4} ml={1}>
-                            Current Location:
+                            Current Address:
                             <Text  as='i'> {locationName}</Text>
                         </Text>
                             <HStack spacing={4} mt={4} justifyContent='right'>
@@ -158,6 +215,7 @@ function Map() {
                                                 }
                                     />
                                 }
+                                onClick={clearRoute}
                                 />
                             </HStack>
                         </HStack>
