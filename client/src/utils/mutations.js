@@ -33,18 +33,18 @@ export const ADD_USER = gql`
 export const ADD_HIKE = gql`
     mutation addHike(
         $name: String!
-        $longitude: String!
-        $latitude: String!
+        $lng: Decimal!
+        $lat: Decimal!
     ) {
         addHike(
             name: $name
-            longitude: $longitude
-            latitude: $latitude
+            lng: $lng
+            lat: $lat
         ) {
             _id
             name
-            longitude
-            latitude
+            lng
+            lat
         }
     }
 `;
@@ -53,15 +53,15 @@ export const UPDATE_HIKE = gql`
     mutation updateHike(
         $_id: ID!
         $name: String!
-        $longitude: String!
-        $latitude: String!
+        $lng: Decimal!
+        $lat: Decimal!
     ) {
         updateHike(
             where: {_id: {_eq: $_id}},
             _set: {
                 name: $name
-                longitude: $longitude
-                latitude: $latitude
+                lng: $lng
+                lat: $lat
             }
         )
         {
@@ -69,8 +69,8 @@ export const UPDATE_HIKE = gql`
             returning {
                 _id
                 name
-                longitude
-                latitude
+                lng
+                lat
             }
         }
     }
@@ -80,8 +80,8 @@ export const REMOVE_HIKE = gql`
     mutation removeHike($name: String) {
         removeHike(name: $name) {
             name
-            longitude
-            latitude
+            lng
+            lat
             hiker
         }
     }

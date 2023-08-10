@@ -42,9 +42,9 @@ const resolvers = {
             return { token, user };
         },
 
-        addHike: async(parent, { name, longitude, latitude }, context ) => {
+        addHike: async(parent, { name, lng, lat }, context ) => {
             if(context.user) {
-                const hike = await Hike.create({ name, longitude, latitude, hiker: context.user.username });
+                const hike = await Hike.create({ name, lng, lat, hiker: context.user.username });
 
                 await User.findByIdAndUpdate(
                     { _id: context.user._id},
@@ -57,13 +57,13 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        updateHike: async (parent, { _id, name, longitude, latitude }, context) => {
+        updateHike: async (parent, { _id, name, lng, lat }, context) => {
             if (context.user) {
                 return await Hike.findOneAndUpdate(
                     { _id: _id }, 
                     { name },
-                    { longitude },
-                    { latitude },
+                    { lng },
+                    { lat },
                     { new: true }
                 );
             }

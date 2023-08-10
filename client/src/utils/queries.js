@@ -8,8 +8,8 @@ export const QUERY_USER = gql`
             hike {
                 _id
                 name
-                longitude
-                latitude
+                lng
+                lat
             }
         }
     }
@@ -20,8 +20,8 @@ export const QUERY_HIKE = gql`
         hike {
             _id
             name
-            longitude
-            latitude
+            lng
+            lat
             hiker
         }
     }

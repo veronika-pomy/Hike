@@ -7,13 +7,13 @@ const hikeSchema = new Schema(
         required: true,
       },
 
-      longitude: {
-        type: String,
+      lng: {
+        type: Number,
         required: true,
       },
 
-      latitude: {
-        type:  String,
+      lat: {
+        type:  Number,
         required: true,
       },
 
