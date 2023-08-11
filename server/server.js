@@ -25,13 +25,13 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 };
 
-// TODO): before building on heroku catch all for all server-side get routes to route to index file in build directory
+// TODO: before building on heroku catch all for all server-side get routes to route to index file in build directory
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-// An Apollo server with the GraphQL schema
-const startApollo = async(typeDefs, resolvers) => {
+// an Apollo server with the GraphQL schema
+const startApollo = async (typeDefs, resolvers) => {
     await server.start();
     server.applyMiddleware({ app });
 
@@ -43,5 +43,5 @@ const startApollo = async(typeDefs, resolvers) => {
     })
 };
 
-// Start server
+// start server
 startApollo(typeDefs, resolvers);

@@ -33,8 +33,8 @@ export const ADD_USER = gql`
 export const ADD_HIKE = gql`
     mutation addHike(
         $name: String!
-        $lng: Decimal!
-        $lat: Decimal!
+        $lng: Float!
+        $lat: Float!
     ) {
         addHike(
             name: $name
@@ -66,8 +66,8 @@ export const UPDATE_HIKE = gql`
     mutation updateHike(
         $_id: ID!
         $name: String!
-        $lng: Decimal!
-        $lat: Decimal!
+        $lng: Float!
+        $lat: Float!
     ) {
         updateHike(
             where: {_id: {_eq: $_id}},

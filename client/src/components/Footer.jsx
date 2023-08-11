@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import Button from './Button';
 import '../style/Footer.css';
 
 import { useDashContext } from '../context/useDashboardContext';
+import { Link } from 'react-router-dom';
+
+import { ADD_SUBSCRIBER_LIST } from '../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
@@ -13,9 +17,6 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
-import { Link } from 'react-router-dom';
-
-// TODO: set up email notification and backend to keep track of subscribed user's contact information.
 // TODO: add terms of service page
 // TODO: add testimonials page
 // TODO: fix code - ensure the links scroll to the top when opening a new page
@@ -23,6 +24,34 @@ import { Link } from 'react-router-dom';
 function Footer() {
 
     const { dash } = useDashContext();
+
+    // mutation to add a new email to the db
+    const [ addSubscriber ] = useMutation(ADD_SUBSCRIBER_LIST);
+
+    // init input state with empty value for a new subscriber email
+    const [ subscriberEmailState, setSubscriberEmail ] = useState('');
+
+    // update input state as user types
+    const handleInputChange = (e) => {
+        const email = e.target.value;
+        setSubscriberEmail(email);
+        // console.log(subscriberEmailState);
+    };
+
+    // save user's email into a db after subscribe button is clicked 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            
+            console.log(typeof subscriberEmailState);
+            await addSubscriber({subscriberEmail: { subscriberEmailState }});
+
+            // clear input state afer email is added
+            setSubscriberEmail('');
+        } catch (err) {
+            console.error(err);
+        };
+    };
 
     return (
         <div
@@ -49,9 +78,13 @@ function Footer() {
                         name='email'
                         placeholder='Email'
                         className='sub-input'
+                        value={subscriberEmailState}
+                        onChange={handleInputChange}
                     />
                     <Button
                         btnStyle='btn-outline'
+                        type='submit'
+                        onClick={handleSubmit}
                     >
                         Subscribe
                     </ Button>
