@@ -3,7 +3,7 @@ const { User, Hike, SubscriberList } = require('../models');
 
 const userSeeds = require('./userSeeds.json');
 const hikeSeeds = require('./hikeSeeds.json');
-const SubscriberListSeeds = require('./subscriberListSeeds.json');
+const subscriberListSeeds = require('./subscriberListSeeds.json');
 
 db.once('open', async () => {
 
@@ -12,7 +12,9 @@ db.once('open', async () => {
         // drop all data before seeding 
         await User.deleteMany({});
         await Hike.deleteMany({});
+        await SubscriberList.deleteMany({});
 
+        await SubscriberList.create(subscriberListSeeds);
         await User.create(userSeeds);
         
         for (hikeSeed of hikeSeeds) {
