@@ -49,6 +49,19 @@ export const ADD_HIKE = gql`
     }
 `;
 
+export const ADD_SUBSCRIBER_LIST = gql`
+    mutation addSubscriberList(
+        $subscriberEmail: String!
+    ) {
+        addSubscriberList(
+            subscriberEmail: $subscriberEmail
+        ) {
+            _id
+            subscriberEmail
+        }
+    }
+`;
+
 export const UPDATE_HIKE = gql`
     mutation updateHike(
         $_id: ID!
@@ -83,6 +96,14 @@ export const REMOVE_HIKE = gql`
             lng
             lat
             hiker
+        }
+    }
+`;
+
+export const REMOVE_SUBSCRIBER_LIST = gql`
+    mutation removeSubscriberList($subscriberEmail: String!) {
+        removeSubscriberList(subscriberEmail: $subscriberEmail) {
+            subscriberEmail
         }
     }
 `;

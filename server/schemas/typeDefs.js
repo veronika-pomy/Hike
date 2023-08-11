@@ -35,10 +35,10 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addHike(name: String!, lng: Decimal!, lat: Decimal!): Hike
-        addSubscriberList(subscriberEmai: String!): subscriberList
+        addSubscriberList(subscriberEmail: String!): subscriberList
         updateHike(_id: ID!, name: String!, lng: Decimal!, lat: Decimal!): Hike
         removeHike(name: String!): Hike
-        removeSubscriberList(subscriberEmai: String!): subscriberList
+        removeSubscriberList(subscriberEmail: String!): subscriberList
     }
 `;
 
