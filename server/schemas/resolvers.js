@@ -95,7 +95,7 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        removeSubscriberList: async(parent, subscriberEmail) => {
+        removeSubscriberList: async(parent, { subscriberEmail }) => {
 
             const subscriberEmailToDelete = await SubscriberList.findOneAndDelete({
                 subscriberEmail: subscriberEmail

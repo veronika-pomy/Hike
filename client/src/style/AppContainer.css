@@ -91,12 +91,11 @@
 }
 
 .error {
-    background-image: url(../assets/imgs/image-error.jpg);
+    background:linear-gradient(#00000074, #000000d0), url(../assets/imgs/image-error.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
+    font-size: 28px;
     font-weight: bold;
-    color: #242424;
+    color: #fff;
 }

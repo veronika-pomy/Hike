@@ -15,7 +15,6 @@ import Error from './Error';
 import Preview from './Preview';
 import Dashboard from '../pages/Dashboard';
 
-// TODO: Add a reset Password page
 // TODO: Add conditional to an error page
 
 const AppContainer = () => {
@@ -33,7 +32,7 @@ const AppContainer = () => {
                 <Route path='/preview' exact element={<Preview />} />
                 <Route path='/testimonials' exact element={<Testimonials />} />
                 <Route path='/terms' exact element={<Terms />} />
-                <Route path='/error' exact element={<Error />} />
+                <Route path='/*' exact element={<Error />} />
             </Routes>
             <Footer />
         </Router>

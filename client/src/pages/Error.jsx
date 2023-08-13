@@ -7,7 +7,7 @@ const Error = () => {
   return (
     <>
       <div className='error'>
-          Error Page
+          The page your requested doesn't exist. Please try again.
       </div>
     </>
   )
