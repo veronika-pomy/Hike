@@ -19,7 +19,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 // TODO: add terms of service page
 // TODO: add testimonials page
-// TODO: fix code - ensure the links scroll to the top when opening a new page
+// TODO: mske the links scroll to the top when opening a new page
 
 function Footer() {
 
@@ -29,13 +29,15 @@ function Footer() {
     const [ addSubscriber ] = useMutation(ADD_SUBSCRIBER_LIST);
 
     // init input state with empty value for a new subscriber email
-    const [ subscriberEmailState, setSubscriberEmail ] = useState('');
+    const [ subscriberEmail, setSubscriberEmail ] = useState('');
+
+    // state to indicate when email subscription does through correctly
+    const [ emailSubSuccess, setEmailSubSuccess ] = useState(false);
 
     // update input state as user types
     const handleInputChange = (e) => {
         const email = e.target.value;
         setSubscriberEmail(email);
-        // console.log(subscriberEmailState);
     };
 
     // save user's email into a db after subscribe button is clicked 
@@ -43,11 +45,13 @@ function Footer() {
         e.preventDefault();
         try {
             
-            console.log(typeof subscriberEmailState);
-            await addSubscriber({subscriberEmail: { subscriberEmailState }});
+            await addSubscriber({ variables: { subscriberEmail } });
 
             // clear input state afer email is added
             setSubscriberEmail('');
+
+            // set email sub success to true
+            setEmailSubSuccess(true);
         } catch (err) {
             console.error(err);
         };
@@ -64,11 +68,20 @@ function Footer() {
             >
                 Join the Hike newsletter to receive incredible destinations curated for you by our amazing team!
             </p>
-            <p
-                className='footer-sub-text'
-            >
-                You can unsubscribe at any time.
-            </p>
+
+            {emailSubSuccess ? 
+                <p
+                    className='footer-sub-text'
+                >
+                    Thank you for joing our newsletter! You can unsubscribe at any time.
+                </p> 
+            :
+                <p
+                    className='footer-sub-text'
+                >
+                    You can unsubscribe at any time.
+                 </p>
+            }
             <div
                 className='sub-input-form'
             >
@@ -78,7 +91,7 @@ function Footer() {
                         name='email'
                         placeholder='Email'
                         className='sub-input'
-                        value={subscriberEmailState}
+                        value={subscriberEmail}
                         onChange={handleInputChange}
                     />
                     <Button

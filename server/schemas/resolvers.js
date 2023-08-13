@@ -57,7 +57,7 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        addSubscriberList: async(parent, subscriberEmail) => {
+        addSubscriberList: async(parent, { subscriberEmail }) => {
 
                 const newSubscriberEmail = await SubscriberList.create({ subscriberEmail });
                 
