@@ -53,6 +53,8 @@ function Sidebar() {
 
   // TODO: Function to delete saved hike
   // TODO: Function to rename saved hike
+  // TODO: fix logout functionality to redirect to home correctly
+  // TODO: fix home redirect to render home correctly
   
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>

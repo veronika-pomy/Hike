@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { useRef, SyntheticEvent } from 'react';
+import { useForm } from "react-hook-form";
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
+import { LOG_IN } from '../utils/mutations';
+
 import '../style/AppContainer.css';
 import '../style/SignIn.css';
-
-// TODO: Add authentication
-// TODO: When user is signed up, redirect to the Dashboard page
-// TODO: setset password functionality + email js
-
-import { useRef } from 'react';
-import { useForm } from "react-hook-form";
-
-// temp condition to display success login message - for demonstration only
-let logInSuccess = false;
 
 const SignIn = () => {
 
@@ -24,11 +19,28 @@ const SignIn = () => {
 
   const form = useRef();
 
-   // callback to get the values from input boxes and reset values of the input fields
-  const onSubmit = (userdata) => {
-    logInSuccess = true;
-    console.log(userdata);
-    reset();
+  const [ login, { error } ] = useMutation(LOG_IN);
+
+  // TODO: When user is signed up, redirect to the Dashboard page
+
+   // callback to get the values from input boxes, use mutation to auth and login, redirect authenticated user to Dashboard
+  const onSubmit = async (userdata, e) => {
+    e.preventDefault();
+
+    try {
+      const loginUserResponse = await login({
+        variables: {
+          email: userdata.email,
+          password: userdata.password
+        },
+      });
+
+      const token = loginUserResponse.data.login.token;
+      Auth.login(token);
+      // reset();
+    } catch (err) {
+      console.error(err);
+    };
   };
 
   return (
@@ -88,7 +100,6 @@ const SignIn = () => {
                 className="sign-in-error"
               >
                 {errors.password?.type === "required" && "This field is required."}
-              
               </p>
             )}
             <button
@@ -98,11 +109,11 @@ const SignIn = () => {
               Log In
             </button>
           </form>
-          {logInSuccess && (
+          {error && (
               <p
               className="sign-in-temp-login-msg"
               >
-                You are now logged in.
+                Incorrect credentials. Please try again.
               </p>
             
           )}

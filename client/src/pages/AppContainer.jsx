@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import AuthService from '../utils/auth';
+
 import '../style/AppContainer.css';
 
 import NavBar from './NavBar';
@@ -15,7 +17,7 @@ import Error from './Error';
 import Preview from './Preview';
 import Dashboard from '../pages/Dashboard';
 
-// TODO: Add conditional to an error page
+// TODO: Add authentication to the Dashboard componenet when everything else works correctly
 
 const AppContainer = () => {
   return (
@@ -27,8 +29,8 @@ const AppContainer = () => {
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/about' exact element={<About />} />
                 <Route path='/services' exact element={<Services />} />
-                <Route path='/sign-up' exact element={<SignUp />} />
-                <Route path='/sign-in' exact element={<SignIn />} />
+                <Route path='/sign-up' exact element={AuthService.loggedIn() ? <Navigate to='/dashboard' /> : <SignUp />} />
+                <Route path='/sign-in' exact element={AuthService.loggedIn() ? <Navigate to='/dashboard' /> : <SignIn />} />
                 <Route path='/preview' exact element={<Preview />} />
                 <Route path='/testimonials' exact element={<Testimonials />} />
                 <Route path='/terms' exact element={<Terms />} />
