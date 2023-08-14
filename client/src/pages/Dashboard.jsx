@@ -20,7 +20,7 @@ const Dashboard = () => {
                 <Map />
             </div>
         </WeatherContext>
-    )
-}
+    );
+};
 
 export default Dashboard;

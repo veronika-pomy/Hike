@@ -86,10 +86,10 @@ function Map() {
 
         const result = await getLatLng(geoLocationData[0]);
         const formattedAddress = geoLocationData[0].formatted_address;
-        console.log(result);
-        console.log(result.lat);
-        console.log(result.lng);
-        console.log(formattedAddress);
+        // console.log(result);
+        // console.log(result.lat);
+        // console.log(result.lng);
+        // console.log(formattedAddress);
 
         // when result is returned, set marker to new coordinates   
         setMapCenter(result);
@@ -118,9 +118,6 @@ function Map() {
 
         // convert event to string and then parse to json obj
         const locationObject = JSON.parse(JSON.stringify(e));
-
-        // console.log(locationObject);
-        // console.log(locationObject.latLng);
 
         // reset map center to the location dragged
         setMapCenter(locationObject.latLng);

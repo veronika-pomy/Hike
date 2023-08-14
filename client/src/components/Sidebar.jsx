@@ -2,6 +2,8 @@ import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
 
 import { useWeatherContext } from '../context/useWeatherContext';
+import { useDashContext } from '../context/useDashboardContext';
+
 
 import HikeList from './sidebar/HikeList';
 
@@ -27,6 +29,12 @@ const sidebarClosed = `
 
 function Sidebar() {
 
+  // reset dashboard componenets on logging out or clicking home
+  const { setDash } = useDashContext();
+  const dashHandler = () => {
+    setDash(false);
+  };
+
   const [sidebarView, setSidebarView] = useState(sidebarOpen);
 
   const changeStyle = () => {
@@ -39,8 +47,6 @@ function Sidebar() {
     return sidebarView === sidebarOpen ? setSidebarView(sidebarClosed) : setSidebarView(sidebarOpen);    
   };
 
-  // TODO: add a state for checking if a user wants the list closed or open on moving sidebar to 300px
-  
   const [ hikeList, setHikeList ] = useState(true);
 
   const showList = () => {
@@ -53,8 +59,6 @@ function Sidebar() {
 
   // TODO: Function to delete saved hike
   // TODO: Function to rename saved hike
-  // TODO: fix logout functionality to redirect to home correctly
-  // TODO: fix home redirect to render home correctly
   
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>
@@ -89,7 +93,7 @@ function Sidebar() {
                     </span>
                   </Link>
               </div>
-              {hikeList ? <HikeList /> : ''}
+              {hikeList && sidebarView === sidebarOpen ? <HikeList /> : ''}
             </div>
         </li>
         <div className='bottom'>
@@ -124,6 +128,7 @@ function Sidebar() {
           <li>
             <Link
               to='/'
+              onClick={() => dashHandler()}
             >
               <span className="icon">
                 <FontAwesomeIcon icon={faHouse} className='home-icon-sidebar'/>
@@ -152,6 +157,7 @@ function Sidebar() {
           <li>
             <Link
               to='/'
+              onClick={() => dashHandler()}
             >
               <span className="icon">
                 <FontAwesomeIcon icon={faArrowRightFromBracket} className='logout-icon-sidebar'/>
