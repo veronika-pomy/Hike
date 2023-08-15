@@ -33,6 +33,8 @@ import {
 
 function Map() {
 
+    // TODO: Save a new hike
+
     // TODO: Satellite and terrain view need to move because they are blocked by the aidebar right now
 
     // TODO: display info view over a marker on click 
@@ -198,7 +200,7 @@ function Map() {
                                     type='submit' 
                                     onClick={() => {console.log("Save Button Clicked")}}
                                 >
-                                    Save Hike
+                                    Save
                                 </Button>
                             </ButtonGroup>
                             </HStack>

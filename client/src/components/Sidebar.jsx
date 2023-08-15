@@ -1,9 +1,11 @@
 import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
+import AuthService from '../utils/auth';
 
 import { useWeatherContext } from '../context/useWeatherContext';
 import { useDashContext } from '../context/useDashboardContext';
-
 
 import HikeList from './sidebar/HikeList';
 
@@ -28,6 +30,10 @@ const sidebarClosed = `
 `;
 
 function Sidebar() {
+
+  // query user data from server
+  const { loading, data } = useQuery(QUERY_USER);
+  console.log(data);
 
   // reset dashboard componenets on logging out or clicking home
   const { setDash } = useDashContext();
@@ -57,9 +63,18 @@ function Sidebar() {
   // render weather componenet on clicking weather report link
   const { toggleWeather } = useWeatherContext();
 
-  // TODO: Function to delete saved hike
-  // TODO: Function to rename saved hike
+  // TODO: a scrollable menu when the number of lis overflows the elements under
+
+  // check if the user is logged in
+  // const loggedIn = AuthService.loggedIn();
+
+  // prevent deconstructing of data obj before it's loaded
+  if (loading) {
+    return <></>;
+  };
   
+  const { user } = data;
+
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>
       <ul> 
@@ -93,7 +108,15 @@ function Sidebar() {
                     </span>
                   </Link>
               </div>
-              {hikeList && sidebarView === sidebarOpen ? <HikeList /> : ''}
+                <div className='hike-list'>
+                  <ul>
+                    {
+                      loading ? <h2>Loading your hikes...</h2> :
+                      hikeList && sidebarView === sidebarOpen ? <HikeList hike={user.hike}/> : ''
+                    }
+                  </ul>
+                </div>
+              
             </div>
         </li>
         <div className='bottom'>
@@ -121,7 +144,7 @@ function Sidebar() {
               <span
                 className='text'
               >
-                User Account
+                {user.username}
               </span>
             </Link>
           </li>
