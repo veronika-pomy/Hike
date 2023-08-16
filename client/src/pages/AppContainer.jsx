@@ -17,8 +17,6 @@ import Error from './Error';
 import Preview from './Preview';
 import Dashboard from '../pages/Dashboard';
 
-// TODO: Add authentication to the Dashboard componenet when everything else works correctly
-
 const AppContainer = () => {
   return (
     <>
@@ -26,7 +24,7 @@ const AppContainer = () => {
             <NavBar />
             <Routes>
                 <Route path='/' exact element={<Home />} />
-                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/dashboard' element={AuthService.loggedIn() ? <Dashboard /> : <Navigate to='/'/>} />
                 <Route path='/about' exact element={<About />} />
                 <Route path='/services' exact element={<Services />} />
                 <Route path='/sign-up' exact element={AuthService.loggedIn() ? <Navigate to='/dashboard' /> : <SignUp />} />

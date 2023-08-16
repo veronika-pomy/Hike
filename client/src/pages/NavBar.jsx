@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/NavBar.css';
+import AuthService from '../utils/auth';
 
 import { useDashContext } from '../context/useDashboardContext';
 
@@ -12,6 +13,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '../components/Button';
 
 // TODO: Need to find better logic for not showing sign up button, it's noticable when re-rendering before it goes away
+// TODO: work with loggedin style to space the links to the other pages a bit more in the desktop view
 
 function NavBar() {
 
@@ -81,17 +83,30 @@ function NavBar() {
                 </Link>
               </li>
               <li className='nav-item'>
+                {
+                  AuthService.loggedIn() ? 
+                <Link to='/dashboard' className='nav-links'>
+                  My Dashboard
+                </Link>
+                :
                 <Link to='/sign-in' className='nav-links' onClick={closeMobileMenu}>
                   Sign In
                 </Link>
+                }
               </li>
               <li className='nav-item'>
-                <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                  Sign Up
-                </Link>
+                {
+                  AuthService.loggedIn() ?
+                  <>
+                  </>
+                :
+                  <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
+                    Sign Up
+                  </Link>
+                } 
               </li>
             </ul>
-            {button && 
+            {button && !AuthService.loggedIn() &&
               <Button
                 btnStyle='btn--outline' 
                 link='/sign-up'

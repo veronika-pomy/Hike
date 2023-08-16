@@ -1,8 +1,8 @@
 import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
+import AuthService from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
-import AuthService from '../utils/auth';
 
 import { useWeatherContext } from '../context/useWeatherContext';
 import { useDashContext } from '../context/useDashboardContext';
@@ -33,12 +33,17 @@ function Sidebar() {
 
   // query user data from server
   const { loading, data } = useQuery(QUERY_USER);
-  console.log(data);
+  // console.log(data);
 
   // reset dashboard componenets on logging out or clicking home
   const { setDash } = useDashContext();
   const dashHandler = () => {
     setDash(false);
+  };
+
+  const logOut = () => {
+    dashHandler();
+    AuthService.logout()
   };
 
   const [sidebarView, setSidebarView] = useState(sidebarOpen);
@@ -64,9 +69,6 @@ function Sidebar() {
   const { toggleWeather } = useWeatherContext();
 
   // TODO: a scrollable menu when the number of lis overflows the elements under
-
-  // check if the user is logged in
-  // const loggedIn = AuthService.loggedIn();
 
   // prevent deconstructing of data obj before it's loaded
   if (loading) {
@@ -180,7 +182,7 @@ function Sidebar() {
           <li>
             <Link
               to='/'
-              onClick={() => dashHandler()}
+              onClick={logOut}
             >
               <span className="icon">
                 <FontAwesomeIcon icon={faArrowRightFromBracket} className='logout-icon-sidebar'/>
