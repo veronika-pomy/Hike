@@ -90,7 +90,7 @@ export const UPDATE_HIKE = gql`
 `;
 
 export const REMOVE_HIKE = gql`
-    mutation removeHike($name: String) {
+    mutation removeHike($name: String!) {
         removeHike(name: $name) {
             name
             lng

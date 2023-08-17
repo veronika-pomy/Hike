@@ -146,7 +146,9 @@ function Sidebar() {
               <span
                 className='text'
               >
-                {user.username}
+                <p className='username-text'>
+                  {user.username}
+                </p>
               </span>
             </Link>
           </li>

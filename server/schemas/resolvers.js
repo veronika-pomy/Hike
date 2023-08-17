@@ -78,10 +78,10 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        removeHike: async (parent, { name }, context) => {
+        removeHike: async (parent, { _id }, context) => {
             if (context.user) {
                 const hike = await Hike.findOneAndDelete({
-                    name: name
+                    _id: _id
                 });
 
                 await User.findOneAndUpdate(

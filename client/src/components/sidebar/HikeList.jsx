@@ -1,4 +1,7 @@
 import React from 'react';
+import { useMutation } from '@apollo/client';
+import { QUERY_USER } from '../../utils/queries';
+import { REMOVE_HIKE, UPDATE_HIKE } from '../../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -16,19 +19,42 @@ function HikeList({ hike }) {
 
   // convert hike obj to array to iterate
   const hikeArr = Array.from(hike);
-
   console.log(hikeArr[0]);
+
+  // remove hike by name
+  const [ removeHike ] = useMutation(REMOVE_HIKE);
+
+  const handleRemoveHike = async (name) => {
+   
+    try {
+
+      const { data } = await removeHike({
+        variables: { name },
+        refetchQueries: [{ query: QUERY_USER }],
+      });
+
+    } catch (err) {
+      console.error(err);
+    };
+  };
 
   return (
     <>
       {hikeArr.map((hikeItem) => (
-          <li className='hike-item'>
+          <li 
+            className='hike-item'
+            key={hikeItem._id}
+          >
           <div className='text-item'>
             <p>
-            {hikeItem.name}
+              {hikeItem.name}
             </p> 
           </div>
-          <div className='hike-icons'>
+          <div 
+            className='hike-icons'
+            id="remove-icon"
+            onClick={() => handleRemoveHike(hikeItem.name)}
+          >
               <FontAwesomeIcon
                               icon={
                                 faPenToSquare  
@@ -40,6 +66,7 @@ function HikeList({ hike }) {
                                 faTrash
                               }
                               className='hike-icon'
+                              
               />
             </div>
         </li>

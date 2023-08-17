@@ -110,10 +110,19 @@
 .hike-list-container:hover {
  color: var(--primary) !important;
 }
+
 .hike-title {
     display: flex;
     flex-direction: row;
 }
+
+/* 
+.username-text {
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+} */
+
 .bottom {
     position: absolute;
     bottom: 0;
