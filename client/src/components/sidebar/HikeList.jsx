@@ -73,49 +73,56 @@ const hikeArrReMap = hikeArr.map((item) =>
             className='hike-item'
             key={hikeItem._id}
           >
-            <div
+            {updateState ?
+              <div
               className='text-item'
-            >
-              <input 
-                className='hike-input'
-                type='text'
-                id={hikeItem.index}
-                value={hikeName[hikeItem.index].name}
-                onChange={handleHikeNameUpdate}
-              /> 
-          </div>
-          {/* <div className='text-item'>
-            <p>
-              {hikeItem.name}
-            </p>
-          </div> */}
+              >
+                <input 
+                  className='hike-input'
+                  type='text'
+                  id={hikeItem.index}
+                  value={hikeName[hikeItem.index].name}
+                  onChange={handleHikeNameUpdate}
+                /> 
+              </div>
+            :
+              <div className='text-item'>
+                <p>
+                  {hikeItem.name}
+                </p>
+              </div> 
+            }
           <div 
             className='hike-icons'
           >
-              {
-                <FontAwesomeIcon
-                  icon={
-                    faCheck  
-                  }
-                  className='hike-icon'
-                  onClick={()=> setUpdateState(false)}
-                />
-              }
-              {/* <FontAwesomeIcon
-                              icon={
-                                faPenToSquare  
-                              }
-                              className='hike-icon'
-                              onClick={()=> setUpdateState(true)}
-              />
+            {updateState ?
               <FontAwesomeIcon
-                              icon={
-                                faTrash
-                              }
-                              className='hike-icon'
-                              onClick={() => handleRemoveHike(hikeItem.name)}
-                              
-              /> */}
+                icon={
+                  faCheck  
+                }
+                className='hike-icon'
+                onClick={()=> setUpdateState(false)}
+              />
+            :
+              <>
+                  <FontAwesomeIcon
+                                  icon={
+                                    faPenToSquare  
+                                  }
+                                  className='hike-icon'
+                                  onClick={()=> setUpdateState(true)}
+                  />
+                  <FontAwesomeIcon
+                                  icon={
+                                    faTrash
+                                  }
+                                  className='hike-icon'
+                                  onClick={() => handleRemoveHike(hikeItem.name)}
+                                  
+                  />
+                </>
+
+            }
             </div>
         </li>
       ))}  
