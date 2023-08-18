@@ -64,27 +64,13 @@ export const ADD_SUBSCRIBER_LIST = gql`
 
 export const UPDATE_HIKE = gql`
     mutation updateHike(
-        $_id: ID!
         $name: String!
-        $lng: Float!
-        $lat: Float!
     ) {
         updateHike(
-            where: {_id: {_eq: $_id}},
-            _set: {
-                name: $name
-                lng: $lng
-                lat: $lat
-            }
+            name: $name
         )
         {
-            affected_rows
-            returning {
-                _id
-                name
-                lng
-                lat
-            }
+            name
         }
     }
 `;

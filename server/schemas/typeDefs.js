@@ -36,7 +36,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addHike(name: String!, lng: Float!, lat: Float!): Hike
         addSubscriberList(subscriberEmail: String!): subscriberList
-        updateHike(_id: ID!, name: String!, lng: Float!, lat: Float!): Hike
+        updateHike(name: String!): Hike
         removeHike(name: String!): Hike
         removeSubscriberList(subscriberEmail: String!): subscriberList
     }

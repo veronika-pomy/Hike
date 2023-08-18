@@ -12,7 +12,38 @@ import '../../style/HikeList.css';
 // TODO: onclick event that will reset lat and lng based on which hike user is looking at
   // diplay in the Map component
 
+//TODO: update mutation for hike name
+
 function HikeList({ hike }) {
+
+// update hike name
+const [ updateHike ] = useMutation(UPDATE_HIKE);
+
+// handler to turn p containing hike name to an input field
+const handleEditMode = () => {
+  setUpdateState(true);
+};
+
+const handleUpdateHikeMutation = async (name) => {
+   
+  try {
+
+    const { data } = await updateHike({
+      variables: { name },
+      refetchQueries: [{ query: QUERY_USER }],
+    });
+
+  } catch (err) {
+    console.error(err);
+  };
+
+};
+
+// handle update to hike name
+const handleHikeUpdate = (index) => {
+  handleUpdateHikeMutation(hikeName[index].name);
+  setUpdateState(false);
+};
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
@@ -40,7 +71,7 @@ const hikeArrReMap = hikeArr.map((item) =>
   const [ hikeName, setHikeName ] = useState(hikeNames);
 
 // handle update to hike name
- const handleHikeNameUpdate = (e) => {
+ const handleHikeNameState = (e) => {
   const name = e.target.value;
   const id = Number(e.target.id);
   setHikeName(hikeName.map((hike) => 
@@ -82,7 +113,7 @@ const hikeArrReMap = hikeArr.map((item) =>
                   type='text'
                   id={hikeItem.index}
                   value={hikeName[hikeItem.index].name}
-                  onChange={handleHikeNameUpdate}
+                  onChange={handleHikeNameState}
                 /> 
               </div>
             :
@@ -101,7 +132,7 @@ const hikeArrReMap = hikeArr.map((item) =>
                   faCheck  
                 }
                 className='hike-icon'
-                onClick={()=> setUpdateState(false)}
+                onClick={handleHikeUpdate(hikeItem.index)}
               />
             :
               <>
@@ -110,7 +141,7 @@ const hikeArrReMap = hikeArr.map((item) =>
                                     faPenToSquare  
                                   }
                                   className='hike-icon'
-                                  onClick={()=> setUpdateState(true)}
+                                  onClick={handleEditMode}
                   />
                   <FontAwesomeIcon
                                   icon={

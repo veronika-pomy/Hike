@@ -64,14 +64,10 @@ const resolvers = {
                 return newSubscriberEmail;
         },
 
-        updateHike: async (parent, { _id, name, lng, lat }, context) => {
+        updateHike: async (parent, { name }, context) => {
             if (context.user) {
                 return await Hike.findOneAndUpdate(
-                    { _id: _id }, 
                     { name },
-                    { lng },
-                    { lat },
-                    { new: true }
                 );
             }
 
