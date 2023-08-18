@@ -13,16 +13,12 @@ import '../../style/HikeList.css';
   // diplay in the Map component
 
 //TODO: update mutation for hike name
+//TODO: add error handling for mutations in case something goes wrong 
 
 function HikeList({ hike }) {
 
 // update hike name
-const [ updateHike ] = useMutation(UPDATE_HIKE);
-
-// handler to turn p containing hike name to an input field
-const handleEditMode = () => {
-  setUpdateState(true);
-};
+const [ updateHike, { error } ] = useMutation(UPDATE_HIKE);
 
 const handleUpdateHikeMutation = async (name) => {
    
@@ -39,17 +35,24 @@ const handleUpdateHikeMutation = async (name) => {
 
 };
 
-// handle update to hike name
-const handleHikeUpdate = (index) => {
-  handleUpdateHikeMutation(hikeName[index].name);
-  setUpdateState(false);
-};
-
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
 // console.log(hikeArr[0]);
 
 const [ updateState, setUpdateState ] = useState(false);
+
+// handler to turn p containing hike name to an input field
+const handleEditMode = () => {
+  console.log('edit button clicked');
+  setUpdateState(true);
+};
+
+// handle update to hike name
+const handleHikeUpdate = (index) => {
+  console.log('update button clicked');
+  handleUpdateHikeMutation(hikeName[index].name);
+  setUpdateState(false);
+};
 
 // remap to make object extensible
 const hikeArrReMap = hikeArr.map((item) => 
@@ -127,32 +130,43 @@ const hikeArrReMap = hikeArr.map((item) =>
             className='hike-icons'
           >
             {updateState ?
-              <FontAwesomeIcon
-                icon={
-                  faCheck  
-                }
-                className='hike-icon'
+              <button
+                id='save-btn'
                 onClick={handleHikeUpdate(hikeItem.index)}
-              />
+              >
+                <FontAwesomeIcon
+                                icon={
+                                  faCheck  
+                                }
+                                className='hike-icon'
+                                
+                />
+              </button>
             :
               <>
-                  <FontAwesomeIcon
-                                  icon={
-                                    faPenToSquare  
-                                  }
-                                  className='hike-icon'
-                                  onClick={handleEditMode}
-                  />
-                  <FontAwesomeIcon
-                                  icon={
-                                    faTrash
-                                  }
-                                  className='hike-icon'
-                                  onClick={() => handleRemoveHike(hikeItem.name)}
-                                  
-                  />
+                  <button
+                    id='edit-btn'
+                    onClick={handleEditMode}
+                  >
+                      <FontAwesomeIcon
+                                      icon={
+                                        faPenToSquare  
+                                      }
+                                      className='hike-icon'
+                      />
+                  </button>
+                  <button
+                    id='remove-btn'
+                    onClick={() => handleRemoveHike(hikeItem.name)}
+                  >
+                    <FontAwesomeIcon
+                                    icon={
+                                      faTrash
+                                    }
+                                    className='hike-icon'          
+                    />
+                  </button>
                 </>
-
             }
             </div>
         </li>
