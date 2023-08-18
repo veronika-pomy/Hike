@@ -48,3 +48,11 @@
 .hike-icon:hover {
     color: var(--hover) !important;
 }
+
+.hike-input {
+    color: var(--primary);
+    background-color: var(--primary-main);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
