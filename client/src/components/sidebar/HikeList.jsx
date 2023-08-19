@@ -13,12 +13,12 @@ import '../../style/HikeList.css';
   // diplay in the Map component
 
 //TODO: update mutation for hike name
-//TODO: add error handling for mutations in case something goes wrong 
+  // add error handling for mutations in case something goes wrong 
 
 function HikeList({ hike }) {
 
 // update hike name
-const [ updateHike, { error } ] = useMutation(UPDATE_HIKE);
+const [ updateHike ] = useMutation(UPDATE_HIKE);
 
 const handleUpdateHikeMutation = async (name) => {
    
@@ -58,31 +58,47 @@ const hikeArrReMap = hikeArr.map((item) =>
     Object.assign({}, item, {selected:false})
 );
 
-  // var to hold hike names for state changes
-  const hikeNames = [];
-  for (let i = 0; i < hikeArr.length; i++) {
-    hikeNames.push(hikeArr[i]);
-  };
-
   // add index to remapped objs to be able to iterate over in return statement
   for (let i = 0; i < hikeArr.length; i++) {
-      hikeArrReMap[i].index = i;
+    hikeArrReMap[i].index = i;
   };
 
   // init state for hike name
-  const [ hikeName, setHikeName ] = useState(hikeNames);
+  const [ hikeName, setHikeName ] = useState(hikeArrReMap);
 
 // handle update to hike name
  const handleHikeNameState = (e) => {
-  const name = e.target.value;
-  const id = Number(e.target.id);
-  console.log(name);
-  console.log(id);
-  console.log(hikeName[id]);
-  setHikeName(hikeName.map((hike) => 
-    hike.id === id && name 
-  ));
+  console.log(hike);
+      console.log(e.target.name);
+      console.log(e.target.value);
+      console.log(e.target.id);
+      const name = e.target.value;
+      console.log(name);
+  const newHikeArr = hikeName.map((hike, i) => {
+    if (e.target.id === i) {
+      console.log(i);
+      return {...hike, name: name};
+    } else {
+      return hike;
+    };
+  });
+  console.log(newHikeArr);
+ // setHikeName();
  };
+// https://www.youtube.com/watch?v=IkMND33x0qQ
+// https://upmostly.com/tutorials/how-to-update-state-onchange-in-an-array-of-objects-using-react-hooks
+  // const name = e.target.value;
+  // const id = e.target.id;
+  // console.log(name);
+  // console.log(id);
+  // console.log(hikeName[id].index);
+  // console.log(hikeName);
+  // setHikeName(hikeName.map((hike) => 
+  //   hike.index === id
+  //     ? {...hike, name: name}
+  //     : {...hike} 
+  // ));
+ 
 
   // remove hike by name
   const [ removeHike ] = useMutation(REMOVE_HIKE);
