@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useDebugValue, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { REMOVE_HIKE, UPDATE_HIKE } from '../../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faCheck, faSave, faPenAlt } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
@@ -37,21 +37,20 @@ const handleUpdateHikeMutation = async (name) => {
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
-// console.log(hikeArr[0]);
 
 const [ updateState, setUpdateState ] = useState(false);
 
-// handler to turn p containing hike name to an input field
-const handleEditMode = () => {
-  console.log('edit button clicked');
-  setUpdateState(true);
-};
+// handle update and edit mode to input and save update for hike name
+const handleHikeUpdate = (name, update) => {
 
-// handle update to hike name
-const handleHikeUpdate = (index) => {
-  console.log('update button clicked');
-  handleUpdateHikeMutation(hikeName[index].name);
-  setUpdateState(false);
+  if (update === true) {
+    console.log(name);
+    // handleUpdateHikeMutation(name);
+    setUpdateState((prev)=> !prev);
+  } else {
+    setUpdateState((prev)=> !prev);
+  };
+
 };
 
 // remap to make object extensible
@@ -77,6 +76,9 @@ const hikeArrReMap = hikeArr.map((item) =>
  const handleHikeNameState = (e) => {
   const name = e.target.value;
   const id = Number(e.target.id);
+  console.log(name);
+  console.log(id);
+  console.log(hikeName[id]);
   setHikeName(hikeName.map((hike) => 
     hike.id === id && name 
   ));
@@ -129,45 +131,29 @@ const hikeArrReMap = hikeArr.map((item) =>
           <div 
             className='hike-icons'
           >
-            {updateState ?
               <button
-                id='save-btn'
-                onClick={handleHikeUpdate(hikeItem.index)}
+                id={updateState ? 'save-btn': 'edit-btn'}
+                onClick={()=> handleHikeUpdate(hikeName[hikeItem.index], updateState)}
+              >
+                <FontAwesomeIcon
+                                icon={updateState ? faCheck : faPenToSquare}
+                                className='hike-icon'          
+                />
+              </button>
+            {updateState ?
+              <></>
+             :
+             <button
+                id='remove-btn'
+                onClick={() => handleRemoveHike(hikeItem.name)}
               >
                 <FontAwesomeIcon
                                 icon={
-                                  faCheck  
+                                  faTrash
                                 }
-                                className='hike-icon'
-                                
+                                className='hike-icon'          
                 />
-              </button>
-            :
-              <>
-                  <button
-                    id='edit-btn'
-                    onClick={handleEditMode}
-                  >
-                      <FontAwesomeIcon
-                                      icon={
-                                        faPenToSquare  
-                                      }
-                                      className='hike-icon'
-                      />
-                  </button>
-                  <button
-                    id='remove-btn'
-                    onClick={() => handleRemoveHike(hikeItem.name)}
-                  >
-                    <FontAwesomeIcon
-                                    icon={
-                                      faTrash
-                                    }
-                                    className='hike-icon'          
-                    />
-                  </button>
-                </>
-            }
+            </button>}
             </div>
         </li>
       ))}  
