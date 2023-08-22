@@ -1,7 +1,8 @@
 import React, { useDebugValue, useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { QUERY_USER } from '../../utils/queries';
+import { useMutation, useQuery } from '@apollo/client';
+import { QUERY_USER} from '../../utils/queries';
 import { REMOVE_HIKE, UPDATE_HIKE } from '../../utils/mutations';
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCheck, faSave, faPenAlt } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +15,8 @@ import '../../style/HikeList.css';
 
 //TODO: update mutation for hike name
   // add error handling for mutations in case something goes wrong 
+
+
 
 function HikeList({ hike }) {
 
@@ -41,10 +44,10 @@ const hikeArr = Array.from(hike);
 const [ updateState, setUpdateState ] = useState(false);
 
 // handle update and edit mode to input and save update for hike name
-const handleHikeUpdate = (name, update) => {
+const handleHikeUpdate = () => {
 
   if (update === true) {
-    console.log(name);
+
     // handleUpdateHikeMutation(name);
     setUpdateState((prev)=> !prev);
   } else {
@@ -63,30 +66,26 @@ const hikeArrReMap = hikeArr.map((item) =>
     hikeArrReMap[i].index = i;
   };
 
-  // init state for hike name
-  const [ hikeName, setHikeName ] = useState(hikeArrReMap);
+// // handle update to hike name
+//  const handleHikeNameState = (e) => {
+//   console.log(hike);
+//       console.log(e.target.name);
+//       console.log(e.target.value);
+//       console.log(e.target.id);
+//       const name = e.target.value;
+//       console.log(name);
+//   const newHikeArr = hikeName.map((hike, i) => {
+//     if (e.target.id === i) {
+//       console.log(i);
+//       return {...hike, name: name};
+//     } else {
+//       return hike;
+//     };
+//   });
+//   console.log(newHikeArr);
+//  // setHikeName();
+//  };
 
-// handle update to hike name
- const handleHikeNameState = (e) => {
-  console.log(hike);
-      console.log(e.target.name);
-      console.log(e.target.value);
-      console.log(e.target.id);
-      const name = e.target.value;
-      console.log(name);
-  const newHikeArr = hikeName.map((hike, i) => {
-    if (e.target.id === i) {
-      console.log(i);
-      return {...hike, name: name};
-    } else {
-      return hike;
-    };
-  });
-  console.log(newHikeArr);
- // setHikeName();
- };
-// https://www.youtube.com/watch?v=IkMND33x0qQ
-// https://upmostly.com/tutorials/how-to-update-state-onchange-in-an-array-of-objects-using-react-hooks
   // const name = e.target.value;
   // const id = e.target.id;
   // console.log(name);
@@ -118,6 +117,16 @@ const hikeArrReMap = hikeArr.map((item) =>
 
   };
 
+  // state for controlled input value
+  const [ hikeUpdatedName, setHikeUpdatedName ] = useState('');
+
+  // controlled state handler 
+  const hikeNameUpdateHandler = (e) => {
+    const newHikeName = e.target.value;
+    console.log(newHikeName);
+    setHikeUpdatedName(newHikeName);
+  }
+
   return (
     <>
       {hikeArrReMap.map((hikeItem) => (
@@ -132,9 +141,10 @@ const hikeArrReMap = hikeArr.map((item) =>
                 <input 
                   className='hike-input'
                   type='text'
+                  required
                   id={hikeItem.index}
-                  value={hikeName[hikeItem.index].name}
-                  onChange={handleHikeNameState}
+                  value={hikeUpdatedName}
+                  onChange={hikeNameUpdateHandler}
                 /> 
               </div>
             :
@@ -149,7 +159,7 @@ const hikeArrReMap = hikeArr.map((item) =>
           >
               <button
                 id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={()=> handleHikeUpdate(hikeName[hikeItem.index], updateState)}
+                onClick={handleHikeUpdate}
               >
                 <FontAwesomeIcon
                                 icon={updateState ? faCheck : faPenToSquare}

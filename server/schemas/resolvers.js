@@ -12,8 +12,8 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
-        hike: async (parent, { id }) => {
-            return Hike.findById(id);
+        hike: async (parent, {_id }) => {
+            return Hike.findById(_id);
         }
     },
 
