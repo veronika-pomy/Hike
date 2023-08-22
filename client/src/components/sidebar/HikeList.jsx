@@ -1,10 +1,11 @@
-import React, { useDebugValue, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { REMOVE_HIKE, UPDATE_HIKE } from '../../utils/mutations';
 
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faCheck, faSave, faPenAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
@@ -12,16 +13,29 @@ import '../../style/HikeList.css';
 // TODO: onclick event that will reset lat and lng based on which hike user is looking at
   // diplay in the Map component
 
-//TODO: update mutation for hike name
-  // add error handling for mutations in case something goes wrong 
-
 function HikeList({ hike }) {
+
+// convert hike obj to array to iterate
+const hikeArr = Array.from(hike);
+console.log(hikeArr[0]);
+
+// remap to make object extensible
+const hikeArrReMap = hikeArr.map((item) =>
+    Object.assign({}, item, {selected:false})
+);
+
+  // add index to remapped objs to be able to iterate over in return statement
+  for (let i = 0; i < hikeArr.length; i++) {
+    hikeArrReMap[i].index = i;
+  };
+
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
 
+// ISSUE WITH UPDATING QUERY
 const handleUpdateHikeMutation = async (name) => {
-   
+
   try {
 
     const { data } = await updateHike({
@@ -35,76 +49,34 @@ const handleUpdateHikeMutation = async (name) => {
 
 };
 
-// convert hike obj to array to iterate
-const hikeArr = Array.from(hike);
-
 const [ updateState, setUpdateState ] = useState(false);
 
 // handle update and edit mode to input and save update for hike name
-const handleHikeUpdate = (name, update) => {
-
-  if (update === true) {
+const handleHikeUpdate = (name, updateState) => {
+  if (updateState === true) {
     console.log(name);
-    // handleUpdateHikeMutation(name);
+    handleUpdateHikeMutation(name);
     setUpdateState((prev)=> !prev);
   } else {
     setUpdateState((prev)=> !prev);
   };
-
 };
 
-// remap to make object extensible
-const hikeArrReMap = hikeArr.map((item) => 
-    Object.assign({}, item, {selected:false})
-);
+  // state for controlled input value
+  const [ hikeUpdatedName, setHikeUpdatedName ] = useState('');
+  console.log(hikeUpdatedName);
 
-  // add index to remapped objs to be able to iterate over in return statement
-  for (let i = 0; i < hikeArr.length; i++) {
-    hikeArrReMap[i].index = i;
+  // controlled state handler
+  const hikeNameUpdateHandler = (e) => {
+    const newHikeName = e.target.value;
+    setHikeUpdatedName(newHikeName);
   };
-
-  // init state for hike name
-  const [ hikeName, setHikeName ] = useState(hikeArrReMap);
-
-// handle update to hike name
- const handleHikeNameState = (e) => {
-  console.log(hike);
-      console.log(e.target.name);
-      console.log(e.target.value);
-      console.log(e.target.id);
-      const name = e.target.value;
-      console.log(name);
-  const newHikeArr = hikeName.map((hike, i) => {
-    if (e.target.id === i) {
-      console.log(i);
-      return {...hike, name: name};
-    } else {
-      return hike;
-    };
-  });
-  console.log(newHikeArr);
- // setHikeName();
- };
-// https://www.youtube.com/watch?v=IkMND33x0qQ
-// https://upmostly.com/tutorials/how-to-update-state-onchange-in-an-array-of-objects-using-react-hooks
-  // const name = e.target.value;
-  // const id = e.target.id;
-  // console.log(name);
-  // console.log(id);
-  // console.log(hikeName[id].index);
-  // console.log(hikeName);
-  // setHikeName(hikeName.map((hike) => 
-  //   hike.index === id
-  //     ? {...hike, name: name}
-  //     : {...hike} 
-  // ));
- 
 
   // remove hike by name
   const [ removeHike ] = useMutation(REMOVE_HIKE);
 
   const handleRemoveHike = async (name) => {
-   
+
     try {
 
       const { data } = await removeHike({
@@ -121,7 +93,7 @@ const hikeArrReMap = hikeArr.map((item) =>
   return (
     <>
       {hikeArrReMap.map((hikeItem) => (
-          <li 
+          <li
             className='hike-item'
             key={hikeItem._id}
           >
@@ -129,31 +101,33 @@ const hikeArrReMap = hikeArr.map((item) =>
               <div
               className='text-item'
               >
-                <input 
+                <input
                   className='hike-input'
                   type='text'
+                  required
                   id={hikeItem.index}
-                  value={hikeName[hikeItem.index].name}
-                  onChange={handleHikeNameState}
-                /> 
+                  value={hikeUpdatedName}
+                  onChange={hikeNameUpdateHandler}
+                  placeholder='New Hike Name'
+                />
               </div>
             :
               <div className='text-item'>
                 <p>
                   {hikeItem.name}
                 </p>
-              </div> 
+              </div>
             }
-          <div 
+          <div
             className='hike-icons'
           >
               <button
                 id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={()=> handleHikeUpdate(hikeName[hikeItem.index], updateState)}
+                onClick={() => handleHikeUpdate(hikeUpdatedName, updateState)}
               >
                 <FontAwesomeIcon
                                 icon={updateState ? faCheck : faPenToSquare}
-                                className='hike-icon'          
+                                className='hike-icon'
                 />
               </button>
             {updateState ?
@@ -167,12 +141,12 @@ const hikeArrReMap = hikeArr.map((item) =>
                                 icon={
                                   faTrash
                                 }
-                                className='hike-icon'          
+                                className='hike-icon'
                 />
             </button>}
             </div>
         </li>
-      ))}  
+      ))}
     </>
   );
 };
