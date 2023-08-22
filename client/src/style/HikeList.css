@@ -4,6 +4,7 @@
     --primary-main: #242424;
     --placeholder: #898888;
     --background-transparent: #000000d0;
+    --update: #eef1f4;
 }
 
 .hike-list {
@@ -57,4 +58,8 @@
     text-overflow: ellipsis;
     max-width: 170px;
     font-size: 14px;
+}
+
+.hike-input::placeholder {
+    color: var(--update);
 }

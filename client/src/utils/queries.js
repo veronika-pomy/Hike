@@ -23,15 +23,3 @@ export const QUERY_HIKE = gql`
         }
     }
 `;
-
-// export const QUERY_HIKE = gql`
-//     {
-//         hike ($id: ID!) {
-//             _id
-//             name
-//             lng
-//             lat
-//             hiker
-//         }
-//     }
-// `;
