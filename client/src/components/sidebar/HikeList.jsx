@@ -13,11 +13,13 @@ import '../../style/HikeList.css';
 // TODO: onclick event that will reset lat and lng based on which hike user is looking at
   // diplay in the Map component
 
-function HikeList({ hike }) {
+// TODO: fix the update mutation
+
+function HikeList({ hike, setMapCenter, setLocationName }) {
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
-console.log(hikeArr[0]);
+// console.log(hikeArr[0]);
 
 // remap to make object extensible
 const hikeArrReMap = hikeArr.map((item) =>
@@ -29,11 +31,11 @@ const hikeArrReMap = hikeArr.map((item) =>
     hikeArrReMap[i].index = i;
   };
 
+//  console.log(hikeArrReMap[0]);
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
 
-// ISSUE WITH UPDATING QUERY
 const handleUpdateHikeMutation = async (name) => {
 
   try {
@@ -54,7 +56,7 @@ const [ updateState, setUpdateState ] = useState(false);
 // handle update and edit mode to input and save update for hike name
 const handleHikeUpdate = (name, updateState) => {
   if (updateState === true) {
-    console.log(name);
+    // console.log(name);
     handleUpdateHikeMutation(name);
     setUpdateState((prev)=> !prev);
   } else {
@@ -64,7 +66,7 @@ const handleHikeUpdate = (name, updateState) => {
 
   // state for controlled input value
   const [ hikeUpdatedName, setHikeUpdatedName ] = useState('');
-  console.log(hikeUpdatedName);
+  // console.log(hikeUpdatedName);
 
   // controlled state handler
   const hikeNameUpdateHandler = (e) => {
@@ -90,16 +92,32 @@ const handleHikeUpdate = (name, updateState) => {
 
   };
 
+  // handle onClick even to display saved hike in google maps
+  const googleMapHandler = (lat,lng, name) => {
+    // console.log(`Hike lat is ${lat} and lng is ${lng}`);
+    const chosenMapCoordinates = {
+      lat: lat,
+      lng: lng
+    };
+
+    const chosenHikeName = name;
+
+    //reset map pin to a user-chosen hike on click
+    setMapCenter(chosenMapCoordinates);
+    // reset current location name to the name of the saved hike
+    setLocationName(chosenHikeName);
+  };
+
   return (
     <>
-      {hikeArrReMap.map((hikeItem) => (
+      {hikeArrReMap.map((hikeItem) => (              
           <li
             className='hike-item'
             key={hikeItem._id}
           >
             {updateState ?
               <div
-              className='text-item'
+                className='text-item'
               >
                 <input
                   className='hike-input'
@@ -112,11 +130,15 @@ const handleHikeUpdate = (name, updateState) => {
                 />
               </div>
             :
-              <div className='text-item'>
-                <p>
-                  {hikeItem.name}
-                </p>
-              </div>
+              <button
+                onClick={()=> googleMapHandler(hikeItem.lat,hikeItem.lng, hikeItem.name)}
+              >
+                <div className='text-item'>
+                    <p>
+                      {hikeItem.name}
+                    </p>
+                </div>
+              </ button>
             }
           <div
             className='hike-icons'
