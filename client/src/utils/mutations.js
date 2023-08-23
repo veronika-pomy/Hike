@@ -64,9 +64,11 @@ export const ADD_SUBSCRIBER_LIST = gql`
 
 export const UPDATE_HIKE = gql`
     mutation updateHike(
+        $_id: ID!
         $name: String!
     ) {
         updateHike(
+            _id: $_id
             name: $name
         )
         {

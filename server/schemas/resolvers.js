@@ -64,11 +64,14 @@ const resolvers = {
                 return newSubscriberEmail;
         },
 
-        updateHike: async (parent, { name }, context) => {
+        updateHike: async (parent, { _id, name }, context) => {
             if (context.user) {
-                return await Hike.findOneAndUpdate(
-                    { name },
+                const updatedHikeName = await Hike.findOneAndUpdate(
+                    {_id: _id},
+                    {name: name}
                 );
+
+                return updatedHikeName;
             }
 
             throw new AuthenticationError('Please log in.');

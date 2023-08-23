@@ -36,12 +36,15 @@ const hikeArrReMap = hikeArr.map((item) =>
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
 
-const handleUpdateHikeMutation = async (name) => {
+const handleUpdateHikeMutation = async (_id, name) => {
 
   try {
 
     const { data } = await updateHike({
-      variables: { name },
+      variables: { 
+        _id: _id, 
+        name: name 
+      },
       refetchQueries: [{ query: QUERY_USER }],
     });
 
@@ -54,10 +57,11 @@ const handleUpdateHikeMutation = async (name) => {
 const [ updateState, setUpdateState ] = useState(false);
 
 // handle update and edit mode to input and save update for hike name
-const handleHikeUpdate = (name, updateState) => {
+const handleHikeUpdate = (_id, name, updateState) => {
+  console.log(typeof _id)
   if (updateState === true) {
-    // console.log(name);
-    handleUpdateHikeMutation(name);
+    console.log(name);
+    handleUpdateHikeMutation(_id, name);
     setUpdateState((prev)=> !prev);
   } else {
     setUpdateState((prev)=> !prev);
@@ -145,7 +149,7 @@ const handleHikeUpdate = (name, updateState) => {
           >
               <button
                 id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={() => handleHikeUpdate(hikeUpdatedName, updateState)}
+                onClick={() => handleHikeUpdate(hikeItem._id, hikeUpdatedName, updateState)}
               >
                 <FontAwesomeIcon
                                 icon={updateState ? faCheck : faPenToSquare}
