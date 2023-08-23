@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Weather from '../components/Weather';
+import { useMutation } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
+import { ADD_HIKE } from '../utils/mutations';
 
 import {
     Box,
@@ -32,12 +35,31 @@ import {
   } from 'react-places-autocomplete';
 
 function Map() {
-    // TODO: Save a new hike
+    // mutation to save hike to the db for loggedin user
+    const [ addHike, { error } ] = useMutation(ADD_HIKE);
 
+    const saveHikeHandler = async (mapCenter, locationName) => {
+
+        try {
+    
+            await addHike({
+                variables: {
+                    name: locationName,
+                    lng: mapCenter.lng,
+                    lat: mapCenter.lat
+                },
+                refetchQueries: [{ query: QUERY_USER }],
+            });
+
+        } catch (err) {
+            console.error(err);
+        };
+    };  
+                 
     // TODO: Satellite and terrain view need to move because they are blocked by the aidebar right now
 
-    // TODO: display info view over a marker on click 
-
+    // TODO: display info view over a marker on click
+    
     const defaultLocationName = 'Lost Twin Lakes Hiking Trail Head, MI';
     const defaultLocation = {
         lat: 44.21623,
@@ -194,7 +216,7 @@ function Map() {
                                         color='primary.txt'
                                         _hover={{bg: 'primary.main', color: 'primary.txt'}}
                                         type='submit' 
-                                        onClick={() => {console.log("Save Button Clicked")}}
+                                        onClick={() => saveHikeHandler(mapCenter, locationName)}
                                     >
                                         Save
                                     </Button>
@@ -202,7 +224,7 @@ function Map() {
                                 </HStack>
                                 <HStack justifyContent='space-between'>
                                 <Text mt={4} ml={1}>
-                                    Current Address:
+                                    Current Location:
                                     <Text  as='i'> {locationName}</Text>
                                 </Text>
                                     <HStack spacing={4} mt={4} justifyContent='right'>
@@ -227,8 +249,14 @@ function Map() {
                                         }
                                         onClick={clearRoute}
                                         />
+                                        
                                     </HStack>
                                 </HStack>
+                                {error &&
+                                    <Text mt={4} ml={1} color='#cc0000'>
+                                        Unable to save hike, please search your destination first.
+                                    </Text>
+                                }
                             </Box>
                         </Flex>   
                     </div>
