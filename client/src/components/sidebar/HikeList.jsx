@@ -129,12 +129,12 @@ const handleCancelHikeUpdate = () => {
                   id={hikeItem.index}
                   value={hikeUpdatedName}
                   onChange={hikeNameUpdateHandler}
-                  placeholder='New Hike Name'
+                  placeholder='Enter new hike name'
                 />
               </div>
             :
               <button
-                onClick={()=> googleMapHandler(hikeItem.lat,hikeItem.lng, hikeItem.name)}
+                onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name)}
               >
                 <div className='text-item'>
                     <p>

@@ -62,4 +62,5 @@
 
 .hike-input::placeholder {
     color: var(--update);
+    font-style: italic;
 }

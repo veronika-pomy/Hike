@@ -7,8 +7,12 @@ const resolvers = {
     Query: {
         user: async (parent, args, context) => {
             if(context.user) {
-                return User.findById(context.user._id).populate('hike');
-            }
+                return User.findById(context.user._id)
+                .populate({
+                    path: 'hike', 
+                    options: {sort: {name: 1}}
+                });
+            };
             throw new AuthenticationError('Please log in.');
         },
 
