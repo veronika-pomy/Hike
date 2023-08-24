@@ -6,14 +6,9 @@ import { REMOVE_HIKE, UPDATE_HIKE } from '../../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
-
-// TODO: onclick event that will reset lat and lng based on which hike user is looking at
-  // diplay in the Map component
-
-// TODO: fix the update mutation
 
 function HikeList({ hike, setMapCenter, setLocationName }) {
 
@@ -58,14 +53,17 @@ const [ updateState, setUpdateState ] = useState(false);
 
 // handle update and edit mode to input and save update for hike name
 const handleHikeUpdate = (_id, name, updateState) => {
-  console.log(typeof _id)
   if (updateState === true) {
-    console.log(name);
     handleUpdateHikeMutation(_id, name);
     setUpdateState((prev)=> !prev);
   } else {
     setUpdateState((prev)=> !prev);
   };
+};
+
+// exit from edit hike name mode without updating hike name
+const handleCancelHikeUpdate = () => {
+  setUpdateState((prev)=> !prev);
 };
 
   // state for controlled input value
@@ -157,19 +155,30 @@ const handleHikeUpdate = (_id, name, updateState) => {
                 />
               </button>
             {updateState ?
-              <></>
-             :
-             <button
-                id='remove-btn'
-                onClick={() => handleRemoveHike(hikeItem.name)}
+              <button
+                id='cancel-btn'
+                onClick={() => handleCancelHikeUpdate()}
               >
                 <FontAwesomeIcon
                                 icon={
-                                  faTrash
+                                  faTimes
                                 }
                                 className='hike-icon'
                 />
-            </button>}
+             </button>
+              :
+                <button
+                    id='remove-btn'
+                    onClick={() => handleRemoveHike(hikeItem.name)}
+                  >
+                    <FontAwesomeIcon
+                                    icon={
+                                      faTrash
+                                    }
+                                    className='hike-icon'
+                    />
+                </button>
+            }
             </div>
         </li>
       ))}
