@@ -14,19 +14,18 @@ function HikeList({ hike, setMapCenter, setLocationName }) {
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
-// console.log(hikeArr[0]);
 
 // remap to make object extensible
 const hikeArrReMap = hikeArr.map((item) =>
     Object.assign({}, item, {selected:false})
 );
 
-  // add index to remapped objs to be able to iterate over in return statement
-  for (let i = 0; i < hikeArr.length; i++) {
-    hikeArrReMap[i].index = i;
-  };
-
-//  console.log(hikeArrReMap[0]);
+let hikeNames = [];
+// add index to remapped objs to be able to iterate over in return statement
+for (let i = 0; i < hikeArr.length; i++) {
+  hikeArrReMap[i].index = i;
+  hikeNames.push(hikeArrReMap[i].name);
+};
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
@@ -69,13 +68,17 @@ const handleCancelHikeUpdate = () => {
 };
 
   // state for controlled input value
-  const [ hikeUpdatedName, setHikeUpdatedName ] = useState('');
-  // console.log(hikeUpdatedName);
+  const [ hikeUpdatedName, setHikeUpdatedName ] = useState(hikeNames);
 
   // controlled state handler
   const hikeNameUpdateHandler = (e) => {
     const newHikeName = e.target.value;
-    setHikeUpdatedName(newHikeName);
+    const index = Number(e.target.id);
+    setHikeUpdatedName((prevArr) => {
+      const result = [...prevArr]
+      result[index] = newHikeName;
+      return result;
+    });
   };
 
   // remove hike by name
@@ -127,7 +130,7 @@ const handleCancelHikeUpdate = () => {
                   type='text'
                   required
                   id={hikeItem.index}
-                  value={hikeUpdatedName}
+                  value={hikeUpdatedName[Number(hikeItem.index)]}
                   onChange={hikeNameUpdateHandler}
                   placeholder='Enter new hike name'
                 />
@@ -148,7 +151,7 @@ const handleCancelHikeUpdate = () => {
           >
               <button
                 id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName, updateState)}
+                onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName[Number(hikeItem.index)], updateState)}
               >
                 <FontAwesomeIcon
                                 icon={updateState ? faCheck : faPenToSquare}
