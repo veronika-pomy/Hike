@@ -50,9 +50,11 @@ const handleUpdateHikeMutation = async (_id, name) => {
 };
 
 const [ updateState, setUpdateState ] = useState(false);
+const [ updateIndex, setUpdateIndex ] = useState('');
 
 // handle update and edit mode to input and save update for hike name
-const handleHikeUpdate = (_id, name, updateState) => {
+const handleHikeUpdate = (_id, index, name, updateState) => {
+  setUpdateIndex(index);
   if (updateState === true) {
     handleUpdateHikeMutation(_id, name);
     setUpdateState((prev)=> !prev);
@@ -96,7 +98,6 @@ const handleCancelHikeUpdate = () => {
 
   // handle onClick even to display saved hike in google maps
   const googleMapHandler = (lat,lng, name) => {
-    // console.log(`Hike lat is ${lat} and lng is ${lng}`);
     const chosenMapCoordinates = {
       lat: lat,
       lng: lng
@@ -117,7 +118,7 @@ const handleCancelHikeUpdate = () => {
             className='hike-item'
             key={hikeItem._id}
           >
-            {updateState ?
+            {updateState && updateIndex === hikeItem.index ?
               <div
                 className='text-item'
               >
@@ -147,14 +148,14 @@ const handleCancelHikeUpdate = () => {
           >
               <button
                 id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={() => handleHikeUpdate(hikeItem._id, hikeUpdatedName, updateState)}
+                onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName, updateState)}
               >
                 <FontAwesomeIcon
                                 icon={updateState ? faCheck : faPenToSquare}
                                 className='hike-icon'
                 />
               </button>
-            {updateState ?
+            {updateState && updateIndex === hikeItem.index ?
               <button
                 id='cancel-btn'
                 onClick={() => handleCancelHikeUpdate()}
