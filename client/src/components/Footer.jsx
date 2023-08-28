@@ -19,7 +19,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 // TODO: add terms of service page
 // TODO: add testimonials page
-// TODO: mske the links scroll to the top when opening a new page
+// TODO: make the links scroll to the top when opening a new page
 
 function Footer() {
 
@@ -52,6 +52,25 @@ function Footer() {
 
             // set email sub success to true
             setEmailSubSuccess(true);
+
+            
+            // config obj to send confirmation email to newsletter subscriber
+            const config = {
+                Username: process.env.REACT_APP_SMTP_USERNAME,
+                Password: process.env.REACT_APP_SMTP_PASSWORD,
+                Host: process.env.REACT_APP_SMTP_HOST,
+                Port: process.env.REACT_APP_SMTP_PORT,
+                To: subscriberEmail,
+                From: process.env.REACT_APP_SMTP_FROM,
+                Subject: "Welcome to HIKE - Your Trail to Adventure Begins Here!",
+                Body: "Welcome to HIKE! We're thrilled to have you join our hiking community. Get ready to explore breathtaking trails, discover hidden gems, and connect with fellow nature enthusiasts. Happy hiking!"
+            };
+            
+            // send a welcome email to new sub
+            if (window.Email) {
+                window.Email.send(config).then(console.log(config));
+            };
+
         } catch (err) {
             console.error(err);
         };
