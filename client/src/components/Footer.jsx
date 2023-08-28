@@ -68,7 +68,7 @@ function Footer() {
             
             // send a welcome email to new sub
             if (window.Email) {
-                window.Email.send(config).then(console.log(config));
+                window.Email.send(config).then(console.log('Welcome email successfully sent!'));
             };
 
         } catch (err) {
