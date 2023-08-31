@@ -26,7 +26,7 @@ function Footer() {
     const { dash } = useDashContext();
 
     // mutation to add a new email to the db
-    const [ addSubscriber ] = useMutation(ADD_SUBSCRIBER_LIST);
+    const [ addSubscriber, { error } ] = useMutation(ADD_SUBSCRIBER_LIST);
 
     // init input state with empty value for a new subscriber email
     const [ subscriberEmail, setSubscriberEmail ] = useState('');
@@ -94,6 +94,13 @@ function Footer() {
                 >
                     Thank you for joing our newsletter! You can unsubscribe at any time.
                 </p> 
+            :
+            error ? 
+                <p
+                    className='footer-sub-text'
+                >
+                    Something went wrong. Please try again.
+                </p>
             :
                 <p
                     className='footer-sub-text'
