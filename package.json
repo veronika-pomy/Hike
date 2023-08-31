@@ -28,10 +28,8 @@
     "dependencies": {
         "@babel/plugin-transform-classes": "^7.21.0",
         "css-loader": "^6.7.3",
-        "moment": "^2.29.4",
         "postcss-preset-env": "^8.3.2",
         "postcss-pseudo-class-any-link": "^8.0.2",
-        "react-email": "1.9.4",
         "react-icons": "^4.10.1"
     }
 }
