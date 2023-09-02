@@ -103,9 +103,9 @@ You can check out the deployed version 1.0 [here.]()
 
 ## Contributing
 
-We welcome contributions from the community to enhance the Hike app. If you find any bugs, have suggestions, or want to add new features, please feel free to open an issue or submit a pull request.
+We welcome contributions from the community to enhance the Hike application. If you find any bugs, have suggestions, or want to add new features, please feel free to open an issue or submit a pull request.
 
-If you have any questions regarding this project, please don't hesitate to contact Veronika at pomyateevav@gmail.com.
+If you have any questions regarding this project, please don't hesitate to contact Veronika Pomyateeva at pomyateevav@gmail.com.
 
 ## License
 
