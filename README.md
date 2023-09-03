@@ -68,23 +68,23 @@ The Hike application is built using modern technologies to ensure a seamless use
 
 - [Chakra UI](https://chakra-ui.com/): Styling is done elegantly using Chakra UI, giving the app a visually appealing and user-friendly design.
 
-- [Elastic Email](https://elasticemail.com/?gclid=Cj0KCQjwl8anBhCFARIsAKbbpyQu4FcQ4FsIWBd7dlOqbQpxgMVMxq07_HMsNX5r5gH0Us4dx4R7TZUaAtX3EALw_wcB)
+- [Elastic Email](https://elasticemail.com/?gclid=Cj0KCQjwl8anBhCFARIsAKbbpyQu4FcQ4FsIWBd7dlOqbQpxgMVMxq07_HMsNX5r5gH0Us4dx4R7TZUaAtX3EALw_wcB): Seamlessly integrate email functionality for notifications, updates, and user communication, enhancing the overall user experience.
 
-- [React Hook Form](https://www.react-hook-form.com/)
+- [React Hook Form](https://www.react-hook-form.com/): Simplify the process of managing and validating form input, ensuring a smooth user experience when creating or updating routes.
 
-- [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api)
+- [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api): Visualize hiking routes accurately. Explore trails, view terrains, and plan your journey with ease.
 
-- [GraphQL](https://graphql.org/)
+- [GraphQL](https://graphql.org/): Optimize data fetching, reducing over-fetching and under-fetching of data, resulting in efficient communication between the front-end and back-end.
 
-- [Font Awesome](https://fontawesome.com/)
+- [Font Awesome](https://fontawesome.com/): Enhance the user interface with a vast library of icons, making the app more visually appealing and user-friendly.
 
-- [JSON Web Token](https://jwt.io/)
+- [JSON Web Token](https://jwt.io/): Securely manage user authentication and authorization, ensuring data privacy and secure access to user-specific features.
 
-- [Mongoose](https://www.npmjs.com/package/mongoose)
+- [Mongoose](https://www.npmjs.com/package/mongoose): A robust ODM (Object Data Modeling) library for MongoDB, simplifying data validation, storage, and retrieval, ensuring your saved routes are always accessible.
 
-- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [Nodemon](https://www.npmjs.com/package/nodemon): Streamline development with Nodemon's automatic server restarts upon code changes, accelerating the development cycle.
 
-- [concurrently](https://www.npmjs.com/package/concurrently)
+- [concurrently](https://www.npmjs.com/package/concurrently): Simplify the development process by running both the front-end and back-end servers concurrently, ensuring a seamless integration of all app components.
 
 ## Video
 
