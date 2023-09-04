@@ -12,16 +12,16 @@
         <a href="#features">Features</a>
     </li>
     <li>
-        <a href="#apis">APIs</a>
+        <a href="#api-integration">API Integration</a>
     </li>
     <li>
         <a href="#technologies">Technologies</a>
     </li>
     <li>
-      <a href="#video">Video</a>
+      <a href="#video-demo">Video Demo</a>
     </li>
     <li>
-      <a href="#demo">Demo</a>
+      <a href="#website-demo">Website Demo</a>
     </li>
     <li>
         <a href="#get-started">Get Started</a>
@@ -46,7 +46,7 @@ Hike Saving: Found a hike you love? Save it for future reference with just a cli
 
 Weather Check: Planning is made easier with real-time weather information. Check the weather conditions at your chosen hiking destination before you hit the trails.
 
-## APIs
+## API Integration
 
 The Hike integrates the following APIs to provide enhanced functionality:
 
@@ -70,7 +70,7 @@ The Hike application is built using modern technologies to ensure a seamless use
 
 - [Elastic Email](https://elasticemail.com/?gclid=Cj0KCQjwl8anBhCFARIsAKbbpyQu4FcQ4FsIWBd7dlOqbQpxgMVMxq07_HMsNX5r5gH0Us4dx4R7TZUaAtX3EALw_wcB): Seamlessly integrate email functionality for notifications, updates, and user communication, enhancing the overall user experience.
 
-- [React Hook Form](https://www.react-hook-form.com/): Simplify the process of managing and validating form input, ensuring a smooth user experience when creating or updating routes.
+- [React Hook Form](https://www.react-hook-form.com/): Simplify managing and validating form input, ensuring a smooth user experience when creating or updating routes.
 
 - [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api): Visualize hiking routes accurately. Explore trails, view terrains, and plan your journey with ease.
 
@@ -86,13 +86,15 @@ The Hike application is built using modern technologies to ensure a seamless use
 
 - [concurrently](https://www.npmjs.com/package/concurrently): Simplify the development process by running both the front-end and back-end servers concurrently, ensuring a seamless integration of all app components.
 
-## Video
+## Video Demo
 
 Video demo here
 
-## Demo
+## Website Demo
 
-You can check out the deployed version 1.0 [here.]()
+Check out the deployed version 1.0 [here.]()
+
+Incredibly proud of the MVP concept and design, the app is constantly evolving with a focus on expanding its features. Upcoming enhancements include personalized video integration with YouTube and social media apps, enabling users to share their adventures and businesses to connect with clients, fostering brand growth.
 
 ## Get Started
 
@@ -100,6 +102,7 @@ You can check out the deployed version 1.0 [here.]()
 - Navigate to the project directory: `cd hike`
 - Install dependencies: `npm install`
 - Start the development server: `npm start`
+- Set Environment Variables: For security and API access during development, create an .env file and add your API keys and sensitive information as environment variables
 
 ## Contributing
 
@@ -111,7 +114,7 @@ If you have any questions regarding this project, please don't hesitate to conta
 
 This project is licensed under [the MIT License](https://github.com/veronika-pomy/Hike/blob/main/LICENSE), allowing you to modify and distribute the code for personal and commercial purposes.
 
-Get ready to embark on unforgettable hiking adventures with the Hike App. Start exploring and experiencing the great outdoors like never before!
+Get ready to embark on unforgettable hiking adventures with Hike! Start exploring and experiencing the great outdoors like never before!
 
 <p align="right">(<a href="#hike">back to top</a>)</p>
 
