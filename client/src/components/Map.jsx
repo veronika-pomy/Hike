@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState, useRef, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Weather from '../components/Weather';
@@ -20,19 +21,19 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-// check if map is loaded
 import { useJsApiLoader,
         GoogleMap, 
         MarkerF, 
-        InfoWindow, 
-        Autocomplete
+        Autocomplete,
+        DirectionsRenderer,
+        InfoWindowF
 } from '@react-google-maps/api';
 
 import {
     geocodeByAddress,
-    geocodeByPlaceId,
-    getLatLng,
   } from 'react-places-autocomplete';
+
+// TODO: InfoWindow is not showing on marker click
 
 function Map() {
     // mutation to save hike to the db for loggedin user
@@ -76,43 +77,51 @@ function Map() {
 
     // load map
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: libraries,
     });
 
     // state to control map
      const [ map, setMap ] = useState(/** @type google.maps.Map */ (null));
 
+    // state to control directions option
+    const [ directions, setDirections ] = useState(false);
+    const [resultDirectionsService, setResultDirectionsService] = useState('');
+    
+    // variables for directions response  
+    const [ directionsResponse, setDirectionsResponse ] = useState(null);
+    const [ distance, setDistance ] = useState('');
+    const [ duration, setDuration ] = useState('');
+
+    // refs for origin and destination for directions functionality
+    /** @type React.MutableObject<HTMLInputElement> */
+    const originRef = useRef();
     /** @type React.MutableObject<HTMLInputElement> */
     const destinationRef = useRef();
 
+    /** @type React.MutableObject<HTMLInputElement> */
+    const searchRef = useRef();
 
     // if not loaded display a chakra ui component demonstrating loading
     if(!isLoaded) {
         return <SkeletonText />
     };
 
-    // search destination based on user imput
+    // search destination based on user input
     const searchLocation = async () => {
 
         // TODO: handle a case if geoLocation data is not found
 
         try {
         // only call function when destination input has value
-         if (destinationRef.current.value === ''){
+         if (searchRef.current.value === ''){
             return;
         };
 
-        const geoLocationData = await geocodeByAddress(destinationRef.current.value);
-        console.log(geoLocationData);
-        console.log(geoLocationData[0].results);
+        const geoLocationData = await geocodeByAddress(searchRef.current.value);
 
         const result = await getLatLng(geoLocationData[0]);
         const formattedAddress = geoLocationData[0].formatted_address;
-        // console.log(result);
-        // console.log(result.lat);
-        // console.log(result.lng);
-        // console.log(formattedAddress);
 
         // when result is returned, set marker to new coordinates   
         setMapCenter(result);
@@ -130,21 +139,70 @@ function Map() {
         };
     };
 
-    // clear route
+    // clear search 
     function clearRoute() {
-        destinationRef.current.value = '';
+        searchRef.current.value = '';
         setLocationName('');
     };
 
+    // clear directions route
+    function clearDirectionsRoute() {
+        setDirectionsResponse('Not found');
+        setDistance('');
+        setDuration('');
+        originRef.current.value = '';
+        destinationRef.current.value = '';
+        setDirections(false);
+    };
+
     // detect address location of marker after it was dragged 
-    const detectLocation = (e) => {
+    // const detectLocation = (e) => {
 
-        // convert event to string and then parse to json obj
-        const locationObject = JSON.parse(JSON.stringify(e));
+    //     // convert event to string and then parse to json obj
+    //     const locationObject = JSON.parse(JSON.stringify(e));
 
-        // reset map center to the location dragged
-        setMapCenter(locationObject.latLng);
-        setLocationName(`lat: ${locationObject.latLng.lat}, lon: ${locationObject.latLng.lng}`)
+    //     // reset map center to the location dragged
+    //     setMapCenter(locationObject.latLng);
+    //     setLocationName(`lat: ${locationObject.latLng.lat}, lon: ${locationObject.latLng.lng}`)
+    // };
+
+    // function to calculate rroute for directions functionality
+    async function calculateRoute () {
+        // do not proceed to calculate if either origin or destination are not specified
+        if (originRef.current.value === '' || destinationRef.current.value === '') {
+            return;
+        };
+
+        // eslint-disable-next-line no-undef
+        const directionsService = new google.maps.DirectionsService();
+        
+        try {
+            const newRoute = await directionsService.route({
+                origin: originRef.current.value,
+                destination: destinationRef.current.value,
+                // 'walking' mode suits best for hiking
+                travelMode: google.maps.TravelMode.WALKING
+            });
+            setResultDirectionsService(newRoute);
+        } catch (err) {
+            setResultDirectionsService(null);
+            setDirectionsResponse(null);
+            console.error(err);
+        }
+
+        console.log(resultDirectionsService);
+        if(resultDirectionsService){
+            setDirectionsResponse(resultDirectionsService);
+            setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
+            setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
+        } else {
+            return;
+        };
+    };
+
+    // save hike route to db
+    function saveRouteHandler() {
+        console.log('Hike Route Saved');
     };
 
     return (
@@ -166,67 +224,161 @@ function Map() {
                         >
                             <Box position='absolute' left={0} top={0} h='100%' w='100%'>
                                 <GoogleMap
-                                    zoom={15}
+                                    zoom={10}
                                     center={mapCenter}
                                     mapContainerStyle={{ width:'100%', height:'100%'}}
                                     onLoad={(map) => setMap(map)}
                                 >
                                     <MarkerF 
                                         position={mapCenter}
-                                        draggable={true}
-                                        onMouseUp={detectLocation}
-                                    />
+                                        // draggable={true}
+                                        // onMouseUp={detectLocation}
+                                        onClick={InfoWindowF}
+                                    >
+                                        <InfoWindowF
+                                            position={mapCenter}
+                                        >
+                                            <>{locationName}</>
+                                        </InfoWindowF>
+                                    </MarkerF>
+                                    {/* display directions results */}
+                                    {directionsResponse && 
+                                        <DirectionsRenderer 
+                                            directions={directionsResponse}
+                                        />
+                                    }
                                 </GoogleMap>
                             </Box>
                             {/* SEARCH BAR */}
                         <Box
-                                p={4}
-                                borderRadius='lg'
-                                mt={6}
-                                bgColor='white'
-                                shadow='base'
-                                minW='container.md'
-                                zIndex='1'
-                            >
+                            p={4}
+                            borderRadius='lg'
+                            mt={6}
+                            bgColor='white'
+                            shadow='base'
+                            minW='container.md'
+                            zIndex='1'
+                        >
 
                                 <HStack spacing={2} justifyContent='space-between'>
                                 {/* Get google suggestions when entering location */}
                                 <Box flexGrow={1}>
-                                    <Autocomplete>
-                                        <Input 
-                                            type='text' 
-                                            placeholder='Search Your Destination' 
-                                            ref={destinationRef}
-                                            onKeyUp={keyPress}
-                                        />
-                                    </Autocomplete>
+                                    {!directions &&
+                                        <Autocomplete>
+                                            <Input 
+                                                type='text' 
+                                                placeholder='Search Your Destination'
+                                                ref={searchRef}
+                                                onKeyUp={keyPress}
+                                            />
+                                        </Autocomplete>
+                                    }
+                                    {directions &&
+                                        <Autocomplete>
+                                           <Input 
+                                               type='text' 
+                                               placeholder='Origin' 
+                                               ref={originRef}
+                                               onKeyUp={keyPress}
+                                               mt={2}
+                                           />
+                                       </Autocomplete>
+                                    }
+                                    {directions &&
+                                        <Autocomplete>
+                                           <Input 
+                                               type='text' 
+                                               placeholder='Destination' 
+                                               ref={destinationRef}
+                                               onKeyUp={keyPress}
+                                               mt={2}
+                                           />
+                                       </Autocomplete>
+                                    }
                                 </Box> 
                                 <ButtonGroup>
-                                    <Button 
-                                        bg='primary.main' 
-                                        color='primary.txt'
-                                        _hover={{bg: 'primary.main', color: 'primary.txt'}}
-                                        type='submit' 
-                                        onClick={searchLocation}
+                                    <Flex
+                                        flexDirection={directions ? 'column' : 'row'}
+
                                     >
-                                        Search
-                                    </Button>
-                                    <Button 
-                                        bg='primary.save' 
-                                        color='primary.txt'
-                                        _hover={{bg: 'primary.main', color: 'primary.txt'}}
-                                        type='submit' 
-                                        onClick={() => saveHikeHandler(mapCenter, locationName)}
-                                    >
-                                        Save
-                                    </Button>
+                                        {directions ? 
+                                            <Button 
+                                                bg='primary.main' 
+                                                color='primary.txt'
+                                                _hover={{bg: 'primary.save', color: 'primary.txt'}}
+                                                type='submit' 
+                                                onClick={calculateRoute}
+                                            >
+                                                Calculate Route
+                                            </Button>
+                                        :
+                                            <Button 
+                                                bg='primary.main' 
+                                                color='primary.txt'
+                                                _hover={{bg: 'primary.save', color: 'primary.txt'}}
+                                                type='submit' 
+                                                onClick={searchLocation}
+                                            >
+                                                Search
+                                            </Button>
+                                        }
+                                        {!directions && 
+                                            <Button 
+                                                bg='primary.main' 
+                                                color='primary.txt'
+                                                _hover={{bg: 'primary.save', color: 'primary.txt'}}
+                                                type='submit' 
+                                                onClick={() => setDirections(true)}
+                                                ml={2}
+                                            >
+                                                Get Directions
+                                            </Button>
+                                        }
+            
+                                        {directions ?
+                                            <Button 
+                                                bg='primary.main' 
+                                                color='primary.txt'
+                                                _hover={{bg: 'primary.save', color: 'primary.txt'}}
+                                                type='submit' 
+                                                onClick={saveRouteHandler}
+                                                mt={2}
+                                            >
+                                                Save Hike Route
+                                            </Button>
+                                            :
+                                            <Button 
+                                            bg='primary.main' 
+                                            color='primary.txt'
+                                            _hover={{bg: 'primary.save', color: 'primary.txt'}}
+                                            type='submit' 
+                                            onClick={() => saveHikeHandler(mapCenter, locationName)}
+                                            ml={2}
+                                        >
+                                            Save Destination
+                                        </Button>
+                                        }
+                                    </Flex>
                                 </ButtonGroup>
                                 </HStack>
                                 <HStack justifyContent='space-between'>
-                                <Text mt={4} ml={1}>
-                                    Current Location:
-                                    <Text  as='i'> {locationName}</Text>
-                                </Text>
+                                    {directions ? 
+                                        <Text mt={4} ml={1}>
+                                            Distance:
+                                        <Text  as='i'> {distance}</Text>
+                                        </Text>
+                                    :
+                                        <Text mt={4} ml={1}>
+                                            Current Location:
+                                            <Text  as='i'> {locationName}</Text>
+                                        </Text>
+                                    }
+                                {directions && 
+                                    <Text mt={4} ml={1}>
+                                        Duration:
+                                        <Text  as='i'> {duration}</Text>
+                                    </Text>
+                                }
                                     <HStack spacing={4} mt={4} justifyContent='right'>
                                     <IconButton
                                         aria-label='center back'
@@ -247,7 +399,7 @@ function Map() {
                                                         }
                                             />
                                         }
-                                        onClick={clearRoute}
+                                        onClick={directions ? clearDirectionsRoute : clearRoute}
                                         />
                                         
                                     </HStack>
@@ -257,6 +409,12 @@ function Map() {
                                         Unable to save hike, please search your destination first.
                                     </Text>
                                 }
+                                {resultDirectionsService === 'Not found' &&
+                                    <Text mt={4} ml={1} color='#cc0000'>
+                                        Unable to find route between provided destinations.
+                                    </Text>
+                                }
+                                
                             </Box>
                         </Flex>   
                     </div>
