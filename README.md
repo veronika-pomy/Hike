@@ -2,6 +2,21 @@
 
 [![License][license-shield]][license-url]
 
+![Static Badge](https://img.shields.io/badge/GoogleMaps-API-green?style=for-the-badge&logo=Google%20Maps&logoColor=green)
+![Static Badge](https://img.shields.io/badge/OpenWeather-API-orange?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/YouTube-API-red?style=for-the-badge&logo=YouTube)
+
+![Static Badge](https://img.shields.io/badge/React-JS-%2361DAFB?style=for-the-badge&logo=React&logoColor=%2361DAFB)
+![Static Badge](https://img.shields.io/badge/Mongo-DB-%2347A248?style=for-the-badge&logo=MongoDB&logoColor=%2347A248)
+![Static Badge](https://img.shields.io/badge/Express-JS-%23000000?style=for-the-badge&logo=Express&logoColor=%23000000)
+![Static Badge](https://img.shields.io/badge/Node-JS-%23339933?style=for-the-badge&logo=Node.js&logoColor=%23339933)
+![Static Badge](https://img.shields.io/badge/Chakra-UI-%23319795?style=for-the-badge&logo=Chakra%20UI&logoColor=%23319795)
+![Static Badge](https://img.shields.io/badge/React-HookForm-%23EC5990?style=for-the-badge&logo=React%20Hook%20Form&logoColor=%23EC5990)
+![Static Badge](https://img.shields.io/badge/Graph-QL-%23E10098?style=for-the-badge&logo=GraphQL&logoColor=%23E10098)
+![Static Badge](https://img.shields.io/badge/Mongoose-ODM-%23880000?style=for-the-badge&logo=Mongoose&logoColor=%23880000)
+![Static Badge](https://img.shields.io/badge/JW-Token-%23000000?style=for-the-badge&logo=Json%20Web%20Tokens&logoColor=%23000000)
+![Static Badge](https://img.shields.io/badge/Font-Awesome-%23528DD7?style=for-the-badge&logo=Font%20Awesome&logoColor=%23528DD7)
+
 ## Table of Contents
 
   <ul>
@@ -120,3 +135,4 @@ Get ready to embark on unforgettable hiking adventures with Hike! Start explorin
 
 [license-shield]: https://img.shields.io/badge/license-MIT-blue?style=for-the-badge
 [license-url]: https://github.com/veronika-pomy/Hike/blob/main/LICENSE
+
