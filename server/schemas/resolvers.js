@@ -63,7 +63,7 @@ const resolvers = {
 
         addRoute: async(parent, { routeName, origin, destination }, context ) => {
             if(context.user) {
-                const route = await Route.create({ nameRoute, origin, destination, hike: context.user.hike[0] });
+                const route = await Route.create({ routeName, origin, destination, hikeName: context.user.hike[0] });
 
                 await Hike.findByIdAndUpdate(
                     { _id: context.user.hike[0]},

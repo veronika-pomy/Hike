@@ -1,9 +1,10 @@
 const db = require('../config/connection');
-const { User, Hike, SubscriberList } = require('../models');
+const { User, Hike, SubscriberList, Route } = require('../models');
 
 const userSeeds = require('./userSeeds.json');
 const hikeSeeds = require('./hikeSeeds.json');
 const subscriberListSeeds = require('./subscriberListSeeds.json');
+const routeSeeds = require('./routeSeeds.json');
 
 db.once('open', async () => {
 
@@ -13,6 +14,7 @@ db.once('open', async () => {
         await User.deleteMany({});
         await Hike.deleteMany({});
         await SubscriberList.deleteMany({});
+        await Route.deleteMany({});
 
         await SubscriberList.create(subscriberListSeeds);
         await User.create(userSeeds);
@@ -25,6 +27,19 @@ db.once('open', async () => {
                 {
                     $push: {
                         hike: _id,
+                    },
+                }
+            );
+        };
+
+        for (routeSeed of routeSeeds) {
+            const { _id, hikeName } = await Route.create(routeSeed);
+
+            const hike = await Hike.findOneAndUpdate(
+                { name: hikeName },
+                {
+                    $push: {
+                        route: _id,
                     },
                 }
             );

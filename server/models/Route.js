@@ -14,7 +14,7 @@ const routeSchema = new Schema(
             type: String,
             required: true,
         },
-        hike: {
+        hikeName: {
             type: String,
             required: false,
         }

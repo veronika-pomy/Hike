@@ -21,7 +21,7 @@ const typeDefs = gql`
         routeName: String!
         origin: String!
         destination: String!
-        hike: String
+        hikeName: String
     }
 
     type subscriberList {
@@ -43,7 +43,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addHike(name: String!, lng: Float!, lat: Float!): Hike
-        addRoute(routeName: String!, origin: String!, destination: String!) Route
+        addRoute(routeName: String!, origin: String!, destination: String!): Route
         addSubscriberList(subscriberEmail: String!): subscriberList
         updateHike(_id: ID!, name: String!): Hike
         updateRoute(_id: ID!, routeName: String!): Route
