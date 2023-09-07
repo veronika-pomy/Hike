@@ -30,6 +30,12 @@
         "hikeName": "Circle Park Trailhead"
     },
     {
+        "routeName": "Red Trail",
+        "origin": "Red Grade Trails, 23 Red Grade Rd, Sheridan, WY 82801",
+        "destination": "Little Goose Campground Forest Rd 314 Buffalo, WY 82834",
+        "hikeName": "Circle Park Trailhead"
+    },
+    {
         "routeName": "Petaca Peak Hike",
         "origin": "Ortega Mountains East, New Mexico 87539",
         "destination": "Petaca Peak, New Mexico 87554",
