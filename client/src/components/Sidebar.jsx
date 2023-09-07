@@ -33,7 +33,7 @@ function Sidebar({setMapCenter, setLocationName}) {
 
   // query user data from server
   const { loading, data } = useQuery(QUERY_USER);
-  // console.log(data);
+  console.log(data);
 
   // reset dashboard componenets on logging out or clicking home
   const { setDash } = useDashContext();
@@ -69,7 +69,6 @@ function Sidebar({setMapCenter, setLocationName}) {
   const { toggleWeather } = useWeatherContext();
 
   // TODO: a scrollable menu when the number of lis overflows the elements under
-  // TODO: sort in alphabetical order
 
   // prevent deconstructing of data obj before it's loaded
   if (loading) {

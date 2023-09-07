@@ -20,7 +20,14 @@ const hikeSchema = new Schema(
       hiker: {
         type:  String,
         required: false,
-      },
+      }, 
+
+      route: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Route',
+        },
+      ],
     },
   );
 

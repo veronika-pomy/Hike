@@ -14,6 +14,15 @@ const typeDefs = gql`
         lng: Float!
         lat: Float!
         hiker: String
+        route: [Route!]
+    }
+
+    type Route {
+        _id: ID!
+        routeName: String!
+        origin: String!
+        destination: String!
+        hikeName: String
     }
 
     type subscriberList {
@@ -35,9 +44,12 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addHike(name: String!, lng: Float!, lat: Float!): Hike
+        addRoute(routeName: String!, origin: String!, destination: String!): Route
         addSubscriberList(subscriberEmail: String!): subscriberList
         updateHike(_id: ID!, name: String!): Hike
+        updateRoute(_id: ID!, routeName: String!): Route
         removeHike(name: String!): Hike
+        removeRoute(routeName: String!): Route
         removeSubscriberList(subscriberEmail: String!): subscriberList
     }
 `;

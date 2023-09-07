@@ -2,7 +2,7 @@
 
 [![License][license-shield]][license-url]
 
-![Static Badge](https://img.shields.io/badge/GoogleMaps-API-green?style=for-the-badge&logo=Google%20Maps&logoColor=green)
+![Static Badge](https://img.shields.io/badge/GoogleMaps-API-%234285F4?style=for-the-badge&logo=Google%20Maps&logoColor=%234285F4)
 ![Static Badge](https://img.shields.io/badge/OpenWeather-API-orange?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/YouTube-API-red?style=for-the-badge&logo=YouTube)
 

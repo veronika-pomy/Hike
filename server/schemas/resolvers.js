@@ -1,4 +1,4 @@
-const { User, Hike, SubscriberList } = require('../models');
+const { User, Hike, SubscriberList, Route } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -10,15 +10,16 @@ const resolvers = {
                 return User.findById(context.user._id)
                 .populate({
                     path: 'hike', 
-                    options: {sort: {name: 1}}
-                });
+                    options: {sort: {name: 1}, populate: { path: 'route' } }
+                })
+                ;
             };
             throw new AuthenticationError('Please log in.');
         },
 
-        hike: async (parent, {_id }) => {
-            return Hike.findById(_id);
-        }
+        // hike: async (parent, {_id }) => {
+        //     return Hike.findById(_id);
+        // }
     },
 
     Mutation: {
@@ -61,6 +62,21 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
+        addRoute: async(parent, { routeName, origin, destination }, context ) => {
+            if(context.user) {
+                const route = await Route.create({ routeName, origin, destination, hikeName: context.user.hike[0] });
+
+                await Hike.findByIdAndUpdate(
+                    { _id: context.user.hike[0]},
+                    { $push: {route: route._id }}
+                );
+    
+                return route;
+            }
+
+            throw new AuthenticationError('Please log in.');
+        },
+
         addSubscriberList: async(parent, { subscriberEmail }) => {
 
                 const newSubscriberEmail = await SubscriberList.create({ subscriberEmail });
@@ -81,6 +97,19 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
+        updateRoute: async (parent, { _id, routeName }, context) => {
+            if (context.user) {
+                const updatedRouteName = await Route.findOneAndUpdate(
+                    {_id: _id},
+                    {routeName: routeName}
+                );
+
+                return updatedRouteName;
+            }
+
+            throw new AuthenticationError('Please log in.');
+        },
+
         removeHike: async (parent, { name }, context) => {
             if (context.user) {
                 const hike = await Hike.findOneAndDelete({
@@ -93,6 +122,23 @@ const resolvers = {
                 );
 
                 return hike;
+            }
+
+            throw new AuthenticationError('Please log in.');
+        },
+
+        removeRoute: async (parent, { routeName }, context) => {
+            if (context.user) {
+                const route = await Route.findOneAndDelete({
+                    routeName: routeName
+                });
+
+                await Hike.findOneAndUpdate(
+                    { _id: context.user.hike[0] },
+                    { $pull: { route: route._id } }
+                );
+
+                return route;
             }
 
             throw new AuthenticationError('Please log in.');
