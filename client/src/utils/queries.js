@@ -10,6 +10,12 @@ export const QUERY_USER = gql`
                 name
                 lng
                 lat
+                route {
+                    _id
+                    routeName
+                    origin
+                    destination
+                }
             }
         }
     }

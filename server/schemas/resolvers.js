@@ -10,8 +10,9 @@ const resolvers = {
                 return User.findById(context.user._id)
                 .populate({
                     path: 'hike', 
-                    options: {sort: {name: 1}}
-                });
+                    options: {sort: {name: 1}, populate: { path: 'route' } }
+                })
+                ;
             };
             throw new AuthenticationError('Please log in.');
         },

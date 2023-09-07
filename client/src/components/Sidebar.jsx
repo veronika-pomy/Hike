@@ -33,7 +33,7 @@ function Sidebar({setMapCenter, setLocationName}) {
 
   // query user data from server
   const { loading, data } = useQuery(QUERY_USER);
-  // console.log(data);
+  console.log(data);
 
   // reset dashboard componenets on logging out or clicking home
   const { setDash } = useDashContext();
@@ -76,8 +76,6 @@ function Sidebar({setMapCenter, setLocationName}) {
   };
   
   const { user } = data;
-
-  console.log(user);
 
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>

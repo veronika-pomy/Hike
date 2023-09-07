@@ -14,6 +14,7 @@ const typeDefs = gql`
         lng: Float!
         lat: Float!
         hiker: String
+        route: [Route!]
     }
 
     type Route {

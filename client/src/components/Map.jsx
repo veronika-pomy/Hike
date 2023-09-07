@@ -34,6 +34,7 @@ import {
   } from 'react-places-autocomplete';
 
 // TODO: InfoWindow is not showing on marker click
+// Calculate route works on second click on the btn but not the first click
 
 function Map() {
     // mutation to save hike to the db for loggedin user
