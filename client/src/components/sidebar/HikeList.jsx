@@ -116,7 +116,7 @@ const handleCancelHikeUpdate = () => {
 
   return (
     <>
-      {hikeArrReMap.map((hikeItem) => (              
+      {hikeArrReMap.map((hikeItem) => (           
           <li
             className='hike-item'
             key={hikeItem._id}
