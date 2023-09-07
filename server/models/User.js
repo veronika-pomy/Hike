@@ -28,7 +28,7 @@ const userSchema = new Schema(
                 ref: 'Hike',
             },
         ],
-    }
+    },
 );
 
 // hash user pwd

@@ -49,6 +49,25 @@ export const ADD_HIKE = gql`
     }
 `;
 
+export const ADD_ROUTE = gql`
+    mutation addRoue(
+        $routeName: String!
+        $origin: String!
+        $destination: String!
+    ) {
+        addRoute(
+            routeName: $routeName
+            origin: $origin
+            destination: $destination
+        ) {
+            _id
+            routeName
+            origin
+            destination
+        }
+    }
+`;
+
 export const ADD_SUBSCRIBER_LIST = gql`
     mutation addSubscriberList(
         $subscriberEmail: String!
@@ -77,13 +96,39 @@ export const UPDATE_HIKE = gql`
     }
 `;
 
+export const UPDATE_ROUTE = gql`
+    mutation updateRoute(
+        $_id: ID!
+        $routeName: String!
+    ) {
+        updateRoute(
+            _id: $_id
+            routeName: $routeName
+        )
+        {
+            routeName
+        }
+    }
+`;
+
 export const REMOVE_HIKE = gql`
-    mutation removeHike($name: String!) {
-        removeHike(name: $name) {
+    mutation removeHike($routeName: String!) {
+        removeHike(name: $routeName) {
             name
             lng
             lat
             hiker
+        }
+    }
+`;
+
+export const REMOVE_ROUTE = gql`
+    mutation removeRoute($routeName: String!) {
+        removeHike(name: $routeName) {
+            routeName
+            origin
+            destination
+            hike
         }
     }
 `;

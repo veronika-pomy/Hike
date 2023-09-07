@@ -10,16 +10,23 @@ export const QUERY_USER = gql`
                 name
                 lng
                 lat
+                route {
+                    _id
+                    routeName
+                    origin
+                    destination
+                    hike
+                }
             }
         }
     }
 `;
 
-export const QUERY_HIKE = gql`
-    query getHike($_id: ID!) {
-        hike (_id: $_id) {
-            _id
-            name
-        }
-    }
-`;
+// export const QUERY_HIKE = gql`
+//     query getHike($_id: ID!) {
+//         hike (_id: $_id) {
+//             _id
+//             name
+//         }
+//     }
+// `;
