@@ -23,6 +23,7 @@ const typeDefs = gql`
         origin: String!
         destination: String!
         hikeName: String
+        index: String
     }
 
     type subscriberList {
