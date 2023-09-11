@@ -112,8 +112,8 @@ export const UPDATE_ROUTE = gql`
 `;
 
 export const REMOVE_HIKE = gql`
-    mutation removeHike($routeName: String!) {
-        removeHike(name: $routeName) {
+    mutation removeHike($name: String!) {
+        removeHike(name: $name) {
             name
             lng
             lat
@@ -124,11 +124,11 @@ export const REMOVE_HIKE = gql`
 
 export const REMOVE_ROUTE = gql`
     mutation removeRoute($routeName: String!) {
-        removeHike(name: $routeName) {
+        removeRoute(routeName: $routeName) {
             routeName
             origin
             destination
-            hike
+            hikeName
         }
     }
 `;

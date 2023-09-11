@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
 import { REMOVE_HIKE, UPDATE_HIKE } from '../../utils/mutations';
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -21,11 +20,15 @@ const hikeArrReMap = hikeArr.map((item) =>
 );
 
 let hikeNames = [];
-// add index to remapped objs to be able to iterate over in return statement
+
+// add index to remapped objs to iterate over in return statement
 for (let i = 0; i < hikeArr.length; i++) {
   hikeArrReMap[i].index = i;
   hikeNames.push(hikeArrReMap[i].name);
 };
+
+// console.log(hikeArrReMap);
+// console.log(hikeArrReMap[0].route);
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
@@ -75,7 +78,7 @@ const handleCancelHikeUpdate = () => {
     const newHikeName = e.target.value;
     const index = Number(e.target.id);
     setHikeUpdatedName((prevArr) => {
-      const result = [...prevArr]
+      const result = [...prevArr];
       result[index] = newHikeName;
       return result;
     });
@@ -117,10 +120,7 @@ const handleCancelHikeUpdate = () => {
   return (
     <>
       {hikeArrReMap.map((hikeItem) => (           
-          <li
-            className='hike-item'
-            key={hikeItem._id}
-          >
+          <li className='hike-item' key={hikeItem._id}>
             {updateState && updateIndex === hikeItem.index ?
               <div
                 className='text-item'
@@ -140,51 +140,68 @@ const handleCancelHikeUpdate = () => {
                 onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name)}
               >
                 <div className='text-item'>
-                    <p>
+                    <p className='hike-name'>
                       {hikeItem.name}
                     </p>
                 </div>
               </ button>
             }
-          <div
-            className='hike-icons'
-          >
-              <button
-                id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName[Number(hikeItem.index)], updateState)}
-              >
-                <FontAwesomeIcon
-                                icon={updateState ? faCheck : faPenToSquare}
-                                className='hike-icon'
-                />
-              </button>
+          <div className='hike-icons'>
+            <button
+              id={updateState ? 'save-btn': 'edit-btn'}
+              onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName[Number(hikeItem.index)], updateState)}
+            >
+              <FontAwesomeIcon
+                              icon={updateState ? faCheck : faPenToSquare}
+                              className='hike-icon'
+              />
+            </button>
             {updateState && updateIndex === hikeItem.index ?
               <button
                 id='cancel-btn'
                 onClick={() => handleCancelHikeUpdate()}
               >
                 <FontAwesomeIcon
-                                icon={
-                                  faTimes
-                                }
+                                icon={faTimes}
                                 className='hike-icon'
                 />
-             </button>
+              </button>
               :
                 <button
                     id='remove-btn'
                     onClick={() => handleRemoveHike(hikeItem.name)}
                   >
                     <FontAwesomeIcon
-                                    icon={
-                                      faTrash
-                                    }
+                                    icon={faTrash}
                                     className='hike-icon'
                     />
                 </button>
             }
             </div>
-        </li>
+            <ul className='route-sublist'>
+              {hikeItem.route.map((hikeRoute) => (
+                <>
+                 <li key={hikeRoute._id} className='route-subitem'>
+                 <button>
+                   <div>
+                     <p>
+                       {hikeRoute.routeName}
+                     </p>
+                   </div>
+                 </button>
+                 <div className='hike-icons'>
+                   <button id='edit-btn'>
+                     <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+                   </button>
+                   <button id='remove-btn'>
+                     <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+                   </button>
+                 </div>
+               </li>
+               </>))
+              }
+             </ul>
+           </li>  
       ))}
     </>
   );

@@ -11,17 +11,17 @@
     margin-left: 1.5em;
     transition-delay: 250ms;
     align-items: center;
-    margin-right: 4vw;
-    height: 45vh;
+    margin-right: 4px;
+    height: 420px;
     overflow-y: scroll;
+    overflow-x: none;
     scrollbar-width: thin;
-    
 }
 
 /* Style the scrollbar background */
 .hike-list::-webkit-scrollbar {
     background: var(--primary-main);
-    width: 1vw;
+    width: 10px;
   }
   
   /* Style the scrollbar handle */
@@ -105,7 +105,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin-left: 1vw;
+    margin-left: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
