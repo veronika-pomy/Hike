@@ -95,6 +95,21 @@
     font-style: italic;
 }
 
+.hike-route-input {
+    color: var(--primary);
+    background-color: var(--primary-main);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 170px;
+    font-size: 12px;
+}
+
+.hike-route-input::placeholder {
+    color: var(--update);
+    font-style: italic;
+}
+
 .route-sublist {
     height: max-content !important;
     transition: 1s;
