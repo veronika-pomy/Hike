@@ -27,6 +27,8 @@ for (let i = 0; i < hikeArr.length; i++) {
   hikeNames.push(hikeArrReMap[i].name);
 };
 
+// console.log(hikeArrReMap);
+
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
 
@@ -115,77 +117,277 @@ const handleCancelHikeUpdate = () => {
   };
 
   return (
-    <>
-      {hikeArrReMap.map((hikeItem) => (           
-          <li
-            className='hike-item'
-            key={hikeItem._id}
-          >
-            {updateState && updateIndex === hikeItem.index ?
-              <div
-                className='text-item'
-              >
-                <input
-                  className='hike-input'
-                  type='text'
-                  required
-                  id={hikeItem.index}
-                  value={hikeUpdatedName[Number(hikeItem.index)]}
-                  onChange={hikeNameUpdateHandler}
-                  placeholder='Enter new hike name'
-                />
+    <>        
+          <li className='hike-item' key='64fa5441dd650054de3cf73a'>
+            <button>
+              <div className='text-item'>
+                  <p className='hike-name'>
+                    Circle Park Trailhead
+                  </p>
               </div>
-            :
-              <button
-                onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name)}
-              >
-                <div className='text-item'>
-                    <p>
-                      {hikeItem.name}
-                    </p>
+            </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+          </div>
+            <ul className='route-sublist'>
+            <li key='64fa5441dd650054de3cf74c' className='route-subitem'>
+              <button>
+                <div>
+                  <p>
+                    Hike High Park to Cloud Peak Skyway
+                  </p>
                 </div>
-              </ button>
-            }
-          <div
-            className='hike-icons'
-          >
-              <button
-                id={updateState ? 'save-btn': 'edit-btn'}
-                onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName[Number(hikeItem.index)], updateState)}
-              >
-                <FontAwesomeIcon
-                                icon={updateState ? faCheck : faPenToSquare}
-                                className='hike-icon'
-                />
               </button>
-            {updateState && updateIndex === hikeItem.index ?
-              <button
-                id='cancel-btn'
-                onClick={() => handleCancelHikeUpdate()}
-              >
-                <FontAwesomeIcon
-                                icon={
-                                  faTimes
-                                }
-                                className='hike-icon'
-                />
-             </button>
-              :
-                <button
-                    id='remove-btn'
-                    onClick={() => handleRemoveHike(hikeItem.name)}
-                  >
-                    <FontAwesomeIcon
-                                    icon={
-                                      faTrash
-                                    }
-                                    className='hike-icon'
-                    />
+              <div className='hike-icons'>
+                <button id='edit-btn'>
+                  <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
                 </button>
-            }
-            </div>
+                <button id='remove-btn'>
+                  <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+                </button>
+              </div>
+            </li>
+            <li key='64fa5441dd650054de3cf74f' className='route-subitem'>
+              <button>
+                <div>
+                  <p>
+                    Red Trail
+                  </p>
+                </div>
+              </button>
+              <div className='hike-icons'>
+                <button id='edit-btn'>
+                  <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+                </button>
+                <button id='remove-btn'>
+                  <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+                </button>
+              </div>
+            </li>
+            
+          </ul>
         </li>
-      ))}
+        <li className='hike-item' key='64fa5441dd650054de3cf73d'>
+          <button>
+            <div className='text-item'>
+              <p className='hike-name'>
+                Rio Grande Gorge Trail South
+              </p>
+            </div>
+          </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+                <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+            </div>
+          <ul className='route-sublist'>
+          <li key='64fa5441dd650054de3cf752' className='route-subitem'>
+            <button>
+              <div>
+                <p>
+                  Petaca Peak Hike
+                </p>
+              </div>
+            </button>
+            <div className='hike-icons'>
+          <button id='edit-btn'>
+            <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+          </button>
+          <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+          </button>
+          </div>
+          </li>
+        </ul>
+      </li>
+      <li className='hike-item' key='64fa5441dd650054de3cf73d'>
+          <button>
+            <div className='text-item'>
+              <p className='hike-name'>
+                Rio Grande Gorge Trail South
+              </p>
+            </div>
+          </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+                <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+            </div>
+          <ul className='route-sublist'>
+          <li key='64fa5441dd650054de3cf752' className='route-subitem'>
+            <button>
+              <div>
+                <p>
+                  Petaca Peak Hike
+                </p>
+              </div>
+            </button>
+            <div className='hike-icons'>
+          <button id='edit-btn'>
+            <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+          </button>
+          <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+          </button>
+          </div>
+          </li>
+        </ul>
+      </li>
+      <li className='hike-item' key='64fa5441dd650054de3cf73d'>
+          <button>
+            <div className='text-item'>
+              <p className='hike-name'>
+                Rio Grande Gorge Trail South
+              </p>
+            </div>
+          </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+                <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+            </div>
+          <ul className='route-sublist'>
+          <li key='64fa5441dd650054de3cf752' className='route-subitem'>
+            <button>
+              <div>
+                <p>
+                  Petaca Peak Hike
+                </p>
+              </div>
+            </button>
+            <div className='hike-icons'>
+          <button id='edit-btn'>
+            <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+          </button>
+          <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+          </button>
+          </div>
+          </li>
+        </ul>
+      </li>
+      <li className='hike-item' key='64fa5441dd650054de3cf73d'>
+          <button>
+            <div className='text-item'>
+              <p className='hike-name'>
+                Rio Grande Gorge Trail South
+              </p>
+            </div>
+          </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+                <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+            </div>
+          <ul className='route-sublist'>
+          <li key='64fa5441dd650054de3cf752' className='route-subitem'>
+            <button>
+              <div>
+                <p>
+                  Petaca Peak Hike
+                </p>
+              </div>
+            </button>
+            <div className='hike-icons'>
+          <button id='edit-btn'>
+            <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+          </button>
+          <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+          </button>
+          </div>
+          </li>
+        </ul>
+      </li>
+      <li className='hike-item' key='64fa5441dd650054de3cf73d'>
+          <button>
+            <div className='text-item'>
+              <p className='hike-name'>
+                Rio Grande Gorge Trail South
+              </p>
+            </div>
+          </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+                <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+            </div>
+          <ul className='route-sublist'>
+          <li key='64fa5441dd650054de3cf752' className='route-subitem'>
+            <button>
+              <div>
+                <p>
+                  Petaca Peak Hike
+                </p>
+              </div>
+            </button>
+            <div className='hike-icons'>
+          <button id='edit-btn'>
+            <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+          </button>
+          <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+          </button>
+          </div>
+          </li>
+        </ul>
+      </li>
+      <li className='hike-item' key='64fa5441dd650054de3cf73d'>
+          <button>
+            <div className='text-item'>
+              <p className='hike-name'>
+                Rio Grande Gorge Trail South
+              </p>
+            </div>
+          </ button>
+          <div className='hike-icons'>
+            <button id='edit-btn'>
+              <FontAwesomeIcon icon={faPenToSquare} className='hike-icon' />
+            </button>
+            <button id='remove-btn'>
+                <FontAwesomeIcon icon={faTrash} className='hike-icon' />
+            </button>
+            </div>
+          <ul className='route-sublist'>
+          <li key='64fa5441dd650054de3cf752' className='route-subitem'>
+            <button>
+              <div>
+                <p>
+                  Petaca Peak Hike
+                </p>
+              </div>
+            </button>
+            <div className='hike-icons'>
+          <button id='edit-btn'>
+            <FontAwesomeIcon icon={faPenToSquare} className='hike-icon-sub' />
+          </button>
+          <button id='remove-btn'>
+              <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
+          </button>
+          </div>
+          </li>
+        </ul>
+      </li>
     </>
   );
 };

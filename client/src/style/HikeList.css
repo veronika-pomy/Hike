@@ -11,12 +11,33 @@
     margin-left: 1.5em;
     transition-delay: 250ms;
     align-items: center;
+    margin-right: 4vw;
+    height: 45vh;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    
+}
+
+/* Style the scrollbar background */
+.hike-list::-webkit-scrollbar {
+    background: var(--primary-main);
+    width: 1vw;
+  }
+  
+  /* Style the scrollbar handle */
+  .hike-list::-webkit-scrollbar-thumb {
+    background: var(--hover);
+    border-radius: 20px;
+}
+
+.hike-list ul {
+    height: max-content !important;
 }
 
 .hike-list ul li {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border-bottom: 1px solid #fff;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    /* border-bottom: 1px solid #fff; */
     width: 210px;
 }
 
@@ -30,12 +51,15 @@
     flex-wrap: wrap;
 }
 
+.hike-name {
+    font-size: 14px;
+}
+
 .hike-list ul li p {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 170px;
-    font-size: 14px;
 }
 
 .hike-list ul li p:hover {
@@ -45,6 +69,11 @@
 .hike-icon {
     margin-right: 0.2em;
     font-size: 14px;
+}
+
+.hike-icon-sub {
+    font-size: 12px;
+    margin-right: 0.2em;
 }
 
 .hike-icon:hover {
@@ -64,4 +93,21 @@
 .hike-input::placeholder {
     color: var(--update);
     font-style: italic;
+}
+
+.route-sublist {
+    height: max-content !important;
+    transition: 1s;
+}
+
+.route-subitem {
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: 1s;
 }
