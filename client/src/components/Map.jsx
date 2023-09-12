@@ -34,7 +34,7 @@ import {
   } from 'react-places-autocomplete';
 
 // TODO: InfoWindow is not showing on marker click
-// Calculate route works on second click on the btn but not the first click
+// TODO: fix - "Calculate Route" works on second click on the btn but not the first click???
 
 function Map() {
     // save hike location
@@ -65,7 +65,7 @@ function Map() {
         try {
             await addRoute ({
                 variables: {
-                    routeName: `Route from ${originRef.current.value} to ${destinationRef.current.value}`,
+                    routeName: `Trail from ${originRef.current.value} to ${destinationRef.current.value}`,
                     origin: originRef.current.value,
                     destination: destinationRef.current.value,
                     hikeName: locationName,
@@ -112,6 +112,9 @@ function Map() {
     const [ distance, setDistance ] = useState('');
     const [ duration, setDuration ] = useState('');
 
+    // hold hike name when seleted from db
+    const [savedHike, setSavedHike ] = useState('');
+
     // refs for origin and destination for directions functionality
     /** @type React.MutableObject<HTMLInputElement> */
     const originRef = useRef();
@@ -146,6 +149,11 @@ function Map() {
         setMapCenter(result);
         setLocationName(formattedAddress);
 
+        // control input field view
+        setDirections(false);
+        // set hike name from db
+        setSavedHike('');
+
         } catch (err) {
             console.log(err);
         };   
@@ -162,6 +170,8 @@ function Map() {
     function clearRoute() {
         searchRef.current.value = '';
         setLocationName('');
+        // reset hike name from db
+        setSavedHike('');
     };
 
     // clear directions route
@@ -171,41 +181,82 @@ function Map() {
         setDuration('');
         originRef.current.value = '';
         destinationRef.current.value = '';
+        // control input field view
         setDirections(false);
+        // reset hike name from db
+        setSavedHike('');
     };
 
-    // function to calculate rroute for directions functionality
-    async function calculateRoute () {
-        // do not proceed to calculate if either origin or destination are not specified
-        if (originRef.current.value === '' || destinationRef.current.value === '') {
-            return;
-        };
+    // calculate route for directions functionality
+    async function calculateRoute (origin, destination, routeName) {
 
-        // eslint-disable-next-line no-undef
-        const directionsService = new google.maps.DirectionsService();
-        
-        try {
-            const newRoute = await directionsService.route({
-                origin: originRef.current.value,
-                destination: destinationRef.current.value,
-                // 'walking' mode suits best for hiking
-                travelMode: google.maps.TravelMode.WALKING
-            });
-            setResultDirectionsService(newRoute);
-        } catch (err) {
-            setResultDirectionsService(null);
-            setDirectionsResponse(null);
-            console.error(err);
-        }
+        // check originRef and destinationRef
+        if (!originRef === undefined && !destinationRef === undefined) {
 
-        // console.log(resultDirectionsService);
-        if(resultDirectionsService){
-            setDirectionsResponse(resultDirectionsService);
-            setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
-            setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
+            // do not proceed to calculate if either origin or destination are not specified
+            if (originRef.current.value === '' || destinationRef.current.value === '') {
+                return;
+            };
+
+            // eslint-disable-next-line no-undef
+            const directionsService = new google.maps.DirectionsService();
+            
+            try {
+                const newRoute = await directionsService.route({
+                    origin: originRef.current.value,
+                    destination: destinationRef.current.value,
+                    // 'walking' mode suits best for hiking
+                    travelMode: google.maps.TravelMode.WALKING
+                });
+                setResultDirectionsService(newRoute);
+            } catch (err) {
+                setResultDirectionsService(null);
+                setDirectionsResponse(null);
+                console.error(err);
+            }
+
+            // console.log(resultDirectionsService);
+            if(resultDirectionsService){
+                setDirectionsResponse(resultDirectionsService);
+                setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
+                setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
+            } else {
+                return;
+            };
+
         } else {
-            return;
+
+             // eslint-disable-next-line no-undef
+             const directionsService = new google.maps.DirectionsService();
+
+             try {
+                const newRoute = await directionsService.route({
+                    origin: origin,
+                    destination: destination,
+                    // 'walking' mode suits best for hiking
+                    travelMode: google.maps.TravelMode.WALKING
+                });
+                setResultDirectionsService(newRoute);
+            } catch (err) {
+                setResultDirectionsService(null);
+                setDirectionsResponse(null);
+                console.error(err);
+            }
+
+            // console.log(resultDirectionsService);
+            if(resultDirectionsService){
+                setDirectionsResponse(resultDirectionsService);
+                setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
+                setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
+                // control input field view
+                setDirections(true);
+                // set hike name from db
+                setSavedHike(routeName);
+            } else {
+                return;
+            };
         };
+
     };
 
     return (
@@ -215,6 +266,9 @@ function Map() {
                         setMapCenter={setMapCenter} 
                         setLocationName={setLocationName}
                         setHikeId={setHikeId}
+                        calculateRoute={calculateRoute}
+                        setDirections={setDirections}
+                        setSavedHike={setSavedHike}
                     />  
                 </div>
                 <div className='map-weather-wrapper'>
@@ -368,6 +422,17 @@ function Map() {
                                     </Flex>
                                 </ButtonGroup>
                                 </HStack>
+                                
+                                {/* HIKE TITLE ADDED WHEN HIKE ROUTE SEARCHED FROM SAVED HIKE NOT INPUT */}
+                                <HStack>
+                                    {savedHike && 
+                                        <Text mt={4} ml={1}>
+                                            Current Hike:
+                                                <Text  as='i'> {savedHike}</Text>
+                                        </Text>
+                                    }
+                                </HStack>
+                                
                                 <HStack justifyContent='space-between'>
                                     {directions ? 
                                         <Text mt={4} ml={1}>

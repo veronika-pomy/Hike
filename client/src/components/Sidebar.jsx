@@ -29,7 +29,7 @@ const sidebarClosed = `
   60px
 `;
 
-function Sidebar({ setMapCenter, setLocationName, setHikeId }) {
+function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike }) {
 
   // query user data from server
   const { loading, data } = useQuery(QUERY_USER);
@@ -111,9 +111,21 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId }) {
               </div>
                 <div className='hike-list'>
                   <ul>
-                    {
-                      loading ? <h2>Loading your hikes...</h2> :
-                      hikeList && sidebarView === sidebarOpen ? <HikeList hike={user.hike} setMapCenter={setMapCenter} setLocationName={setLocationName} setHikeId={setHikeId}/> : ''
+                    {loading ? <h2>Loading your hikes...</h2> 
+                    :
+                    hikeList && sidebarView === sidebarOpen 
+                    ? 
+                      <HikeList 
+                        hike={user.hike} 
+                        setMapCenter={setMapCenter} 
+                        setLocationName={setLocationName} 
+                        setHikeId={setHikeId}
+                        calculateRoute={calculateRoute}
+                        setDirections={setDirections}
+                        setSavedHike={setSavedHike}
+                      /> 
+                      : 
+                        ''
                     }
                   </ul>
                 </div>

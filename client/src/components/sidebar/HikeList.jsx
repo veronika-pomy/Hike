@@ -10,7 +10,7 @@ import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
 
-function HikeList({ hike, setMapCenter, setLocationName, setHikeId }) {
+function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike }) {
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
@@ -158,7 +158,7 @@ const handleRemoveHikeRoute = async (routeName, index) => {
 
     console.log(data.removeRoute);
 
-    // TODO: update hike list
+    // update hike list
     await updateHikeRouteList({
       variables:{ _id: index, index: data.removeRoute._id},
     });
@@ -168,10 +168,11 @@ const handleRemoveHikeRoute = async (routeName, index) => {
   };
 };
 
-// handle onClick even to display saved hike in google maps
+// handle onClick event to display saved hike in google maps
 const googleMapHandler = (lat,lng, name, id) => {
   //resets hikeId in the Map component to save a new route for hike and update the db
   setHikeId(id);
+
   const chosenMapCoordinates = {
     lat: lat,
     lng: lng
@@ -183,9 +184,17 @@ const googleMapHandler = (lat,lng, name, id) => {
   setMapCenter(chosenMapCoordinates);
   // reset current location name to the name of the saved hike
   setLocationName(chosenHikeName);
+  // control input field view from Map component
+  setDirections(false);
+  // reset hike name from db
+  setSavedHike('');
 };
 
-// TODO: handle onClick even to display saved hike route in google maps
+// handle onClick event to display saved hike route in google maps
+
+const googleMapRouteHandler = (origin, destination, routeName) => {
+   calculateRoute(origin, destination, routeName);
+};
 
 return (
     <>
@@ -269,7 +278,7 @@ return (
                   :
                     <button
                       className='map-handler'
-                      // onClick google maps handler will go here
+                      onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName)}
                     >
                       <div>
                         <p id={hikeRoute._id}>
