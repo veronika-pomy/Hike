@@ -10,7 +10,7 @@ import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
 
-function HikeList({ hike, setMapCenter, setLocationName }) {
+function HikeList({ hike, setMapCenter, setLocationName, setHikeId }) {
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
@@ -169,7 +169,9 @@ const handleRemoveHikeRoute = async (routeName, index) => {
 };
 
 // handle onClick even to display saved hike in google maps
-const googleMapHandler = (lat,lng, name) => {
+const googleMapHandler = (lat,lng, name, id) => {
+  //resets hikeId in the Map component to save a new route for hike and update the db
+  setHikeId(id);
   const chosenMapCoordinates = {
     lat: lat,
     lng: lng
@@ -206,7 +208,7 @@ return (
             :
               <button
                 className='map-handler'
-                onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name)}
+                onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name, hikeItem._id)}
               >
                 <div className='text-item'>
                     <p className='hike-name'>

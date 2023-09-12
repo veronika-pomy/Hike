@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import Weather from '../components/Weather';
 import { useMutation } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
-import { ADD_HIKE } from '../utils/mutations';
+import { ADD_HIKE, ADD_ROUTE } from '../utils/mutations';
 
 import {
     Box,
@@ -37,13 +37,11 @@ import {
 // Calculate route works on second click on the btn but not the first click
 
 function Map() {
-    // mutation to save hike to the db for loggedin user
+    // save hike location
     const [ addHike, { error } ] = useMutation(ADD_HIKE);
 
     const saveHikeHandler = async (mapCenter, locationName) => {
-
         try {
-    
             await addHike({
                 variables: {
                     name: locationName,
@@ -57,11 +55,31 @@ function Map() {
             console.error(err);
         };
     };  
-                 
+
+    // save hike route
+    const [ addRoute ] = useMutation(ADD_ROUTE);
+
+    const [ hikeId, setHikeId ]= useState('');
+
+    const saveRouteHandler = async () => {
+        try {
+            await addRoute ({
+                variables: {
+                    routeName: `Route from ${originRef.current.value} to ${destinationRef.current.value}`,
+                    origin: originRef.current.value,
+                    destination: destinationRef.current.value,
+                    hikeName: locationName,
+                    index: hikeId
+                },
+                refetchQueries: [{ query: QUERY_USER }],
+            });
+        } catch (err) {
+            console.error(err);
+        };
+    };
+            
     // TODO: Satellite and terrain view need to move because they are blocked by the aidebar right now
 
-    // TODO: display info view over a marker on click
-    
     const defaultLocationName = 'Lost Twin Lakes Hiking Trail Head, MI';
     const defaultLocation = {
         lat: 44.21623,
@@ -156,17 +174,6 @@ function Map() {
         setDirections(false);
     };
 
-    // detect address location of marker after it was dragged 
-    // const detectLocation = (e) => {
-
-    //     // convert event to string and then parse to json obj
-    //     const locationObject = JSON.parse(JSON.stringify(e));
-
-    //     // reset map center to the location dragged
-    //     setMapCenter(locationObject.latLng);
-    //     setLocationName(`lat: ${locationObject.latLng.lat}, lon: ${locationObject.latLng.lng}`)
-    // };
-
     // function to calculate rroute for directions functionality
     async function calculateRoute () {
         // do not proceed to calculate if either origin or destination are not specified
@@ -191,7 +198,7 @@ function Map() {
             console.error(err);
         }
 
-        console.log(resultDirectionsService);
+        // console.log(resultDirectionsService);
         if(resultDirectionsService){
             setDirectionsResponse(resultDirectionsService);
             setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
@@ -201,15 +208,14 @@ function Map() {
         };
     };
 
-    // save hike route to db
-    function saveRouteHandler() {
-        console.log('Hike Route Saved');
-    };
-
     return (
             <div className='map-wrapper-main'>
                 <div className='sidebar-wrapper'>
-                    <Sidebar setMapCenter={setMapCenter} setLocationName={setLocationName}/>  
+                    <Sidebar 
+                        setMapCenter={setMapCenter} 
+                        setLocationName={setLocationName}
+                        setHikeId={setHikeId}
+                    />  
                 </div>
                 <div className='map-weather-wrapper'>
                     <div className='map-container'>

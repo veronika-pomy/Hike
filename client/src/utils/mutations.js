@@ -50,20 +50,25 @@ export const ADD_HIKE = gql`
 `;
 
 export const ADD_ROUTE = gql`
-    mutation addRoue(
+    mutation addRoute(
         $routeName: String!
         $origin: String!
         $destination: String!
+        $hikeName: String!
+        $index: String
     ) {
         addRoute(
             routeName: $routeName
             origin: $origin
             destination: $destination
+            hikeName: $hikeName
+            index: $index
         ) {
             _id
             routeName
             origin
             destination
+            hikeName
         }
     }
 `;
