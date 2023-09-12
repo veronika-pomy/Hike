@@ -20,12 +20,3 @@ export const QUERY_USER = gql`
         }
     }
 `;
-
-// export const QUERY_HIKE = gql`
-//     query getHike($_id: ID!) {
-//         hike (_id: $_id) {
-//             _id
-//             name
-//         }
-//     }
-// `;

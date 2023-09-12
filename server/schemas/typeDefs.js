@@ -22,8 +22,7 @@ const typeDefs = gql`
         routeName: String!
         origin: String!
         destination: String!
-        hikeName: String
-        index: String
+        hikeName: String!
     }
 
     type subscriberList {
@@ -38,16 +37,16 @@ const typeDefs = gql`
 
     type Query {
         user: User
-        hike (_id: ID!): Hike
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addHike(name: String!, lng: Float!, lat: Float!): Hike
-        addRoute(routeName: String!, origin: String!, destination: String!): Route
+        addRoute(routeName: String!, origin: String!, destination: String!, hikeName: String!, index: String): Route
         addSubscriberList(subscriberEmail: String!): subscriberList
         updateHike(_id: ID!, name: String!): Hike
+        updateHikeRouteList(_id: ID!, index: String): Hike
         updateRoute(_id: ID!, routeName: String!): Route
         removeHike(name: String!): Hike
         removeRoute(routeName: String!): Route

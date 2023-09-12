@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
-import { REMOVE_HIKE, UPDATE_HIKE, UPDATE_ROUTE, REMOVE_ROUTE } from '../../utils/mutations';
+import { REMOVE_HIKE, UPDATE_HIKE, UPDATE_HIKE_ROUTE_LIST, UPDATE_ROUTE, REMOVE_ROUTE } from '../../utils/mutations';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
 
-function HikeList({ hike, setMapCenter, setLocationName }) {
+function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike }) {
 
 // convert hike obj to array to iterate
 const hikeArr = Array.from(hike);
@@ -33,6 +33,9 @@ for (let i = 0; i < hikeArrReMap.length; i++) {
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
+
+// update hike name
+const [ updateHikeRouteList ] = useMutation(UPDATE_HIKE_ROUTE_LIST);
 
 const handleUpdateHikeMutation = async (_id, name) => {
   try {
@@ -104,12 +107,12 @@ const [ updateIndexHikeRoute, setUpdateIndexHikeRoute ] = useState('');
 
 const handleUpdateHikeRoute = (_id, index, routeName, updateStateHikeRoute) => {
   setUpdateIndexHikeRoute(index);
-  // console.log(index);
-  // console.log('hike route name updated');
   if (updateStateHikeRoute === true) {
     handleUpdateHikeRouteMutation(_id, routeName);
     setUpdateStateHikeRoute((prev)=> !prev);
   } else {
+    const valueToUpdate = document.getElementById(index).textContent;
+    setHikeRouteUpdatedName(valueToUpdate);
     setUpdateStateHikeRoute((prev)=> !prev);
   };
 };
@@ -120,13 +123,12 @@ const handleCancelHikeRouteUpdate = () => {
 };
 
 // state for controlled input value for hike route name
-const [ hikeRouteUpdatedName, setHikeRouteUpdatedName ] = useState('NEW HIKE NAME');
+const [ hikeRouteUpdatedName, setHikeRouteUpdatedName ] = useState('');
 
 // controlled state handler for hike route name
 const hikeRouteNameUpdateHandler = (e) => {
   const newHikeRouteName = e.target.value;
-  console.log(newHikeRouteName);
-  // const index = Number(e.target.id);
+  // console.log(newHikeRouteName);
    setHikeRouteUpdatedName(newHikeRouteName);
 };
 
@@ -147,19 +149,30 @@ const handleRemoveHike = async (name) => {
 // remove hike route 
 const [ removeRoute ] = useMutation(REMOVE_ROUTE);
 
-const handleRemoveHikeRoute = async (routeName) => {
+const handleRemoveHikeRoute = async (routeName, index) => {
   try {
     const { data } = await removeRoute({
       variables: { routeName },
       refetchQueries: [{ query: QUERY_USER }],
     });
+
+    console.log(data.removeRoute);
+
+    // update hike list
+    await updateHikeRouteList({
+      variables:{ _id: index, index: data.removeRoute._id},
+    });
+
   } catch (err) {
     console.error(err);
   };
 };
 
-// handle onClick even to display saved hike in google maps
-const googleMapHandler = (lat,lng, name) => {
+// handle onClick event to display saved hike in google maps
+const googleMapHandler = (lat,lng, name, id) => {
+  //resets hikeId in the Map component to save a new route for hike and update the db
+  setHikeId(id);
+
   const chosenMapCoordinates = {
     lat: lat,
     lng: lng
@@ -171,9 +184,17 @@ const googleMapHandler = (lat,lng, name) => {
   setMapCenter(chosenMapCoordinates);
   // reset current location name to the name of the saved hike
   setLocationName(chosenHikeName);
+  // control input field view from Map component
+  setDirections(false);
+  // reset hike name from db
+  setSavedHike('');
 };
 
-// TODO: handle onClick even to display saved hike route in google maps
+// handle onClick event to display saved hike route in google maps
+
+const googleMapRouteHandler = (origin, destination, routeName) => {
+   calculateRoute(origin, destination, routeName);
+};
 
 return (
     <>
@@ -195,7 +216,8 @@ return (
               </div>
             :
               <button
-                onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name)}
+                className='map-handler'
+                onClick={()=> googleMapHandler(hikeItem.lat, hikeItem.lng, hikeItem.name, hikeItem._id)}
               >
                 <div className='text-item'>
                     <p className='hike-name'>
@@ -206,17 +228,17 @@ return (
             }
           <div className='hike-icons'>
             <button
-              id={updateState ? 'save-btn': 'edit-btn'}
+              className={updateState && updateIndex === hikeItem.index ? 'save-btn': 'edit-btn'}
               onClick={() => handleHikeUpdate(hikeItem._id, hikeItem.index, hikeUpdatedName[Number(hikeItem.index)], updateState)}
             >
               <FontAwesomeIcon
-                              icon={updateState ? faCheck : faPenToSquare}
+                              icon={updateState && updateIndex === hikeItem.index ? faCheck : faPenToSquare}
                               className='hike-icon'
               />
             </button>
             {updateState && updateIndex === hikeItem.index ?
               <button
-                id='cancel-btn'
+                className='cancel-btn'
                 onClick={() => handleCancelHikeUpdate()}
               >
                 <FontAwesomeIcon
@@ -239,7 +261,7 @@ return (
             <ul className='route-sublist' key={hikeItem._id}>
               {hikeItem.route.map((hikeRoute) => (
               <>
-                <li id={hikeRoute._id} className='route-subitem'>
+                <li key={hikeRoute._id} className='route-subitem'>
                   {updateStateHikeRoute && updateIndexHikeRoute === hikeRoute._id ?
                   <div
                     className='text-item'
@@ -248,7 +270,6 @@ return (
                       className='hike-route-input'
                       type='text'
                       required
-                      id={hikeRoute._id}
                       value={hikeRouteUpdatedName}
                       onChange={hikeRouteNameUpdateHandler}
                       placeholder='Enter new hike route name'
@@ -256,10 +277,11 @@ return (
                   </div>
                   :
                     <button
-                      // onClick google maps handler will go here
+                      className='map-handler'
+                      onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName)}
                     >
                       <div>
-                        <p>
+                        <p id={hikeRoute._id}>
                           {hikeRoute.routeName}
                         </p>
                       </div>
@@ -267,17 +289,17 @@ return (
                   }
                   <div className='hike-icons'>
                     <button 
-                      id={updateStateHikeRoute ? 'save-btn': 'edit-btn'}
+                      className={updateStateHikeRoute && updateIndexHikeRoute === hikeRoute._id ? 'save-btn' : 'edit-btn'}
                       onClick={() => (handleUpdateHikeRoute(hikeRoute._id, hikeRoute._id, hikeRouteUpdatedName, updateStateHikeRoute))}
                     >
                       <FontAwesomeIcon
-                                      icon={updateStateHikeRoute ? faCheck : faPenToSquare}
+                                      icon={updateStateHikeRoute && updateIndexHikeRoute === hikeRoute._id ? faCheck : faPenToSquare}
                                       className='hike-icon-sub' 
                       />
                     </button>
                     {updateStateHikeRoute && updateIndexHikeRoute === hikeRoute._id ?
                       <button
-                        id='cancel-btn'
+                        className='cancel-btn'
                         onClick={() => (handleCancelHikeRouteUpdate())}
                       >
                         <FontAwesomeIcon icon={faTimes} className='hike-icon-sub' />
@@ -285,7 +307,7 @@ return (
                     :
                       <button 
                         className='remove-btn' 
-                        onClick={() => (handleRemoveHikeRoute(hikeRoute.routeName))}
+                        onClick={() => (handleRemoveHikeRoute(hikeRoute.routeName, hikeItem._id))}
                       >
                         <FontAwesomeIcon icon={faTrash} className='hike-icon-sub' />
                       </button>
