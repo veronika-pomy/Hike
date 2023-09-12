@@ -97,6 +97,19 @@ const resolvers = {
             throw new AuthenticationError('Please log in.');
         },
 
+        updateHikeRouteList: async (parent, { _id, index }, context) => {
+            if (context.user) {
+                const updatedHikeList = await Hike.findOneAndUpdate(
+                    { _id: _id },
+                    { $pull: { route: index } }
+                );
+
+                return updatedHikeList;
+            }
+
+            throw new AuthenticationError('Please log in.');
+        },
+
         updateRoute: async (parent, { _id, routeName }, context) => {
             if (context.user) {
                 const updatedRouteName = await Route.findOneAndUpdate(
@@ -133,10 +146,10 @@ const resolvers = {
                     routeName: routeName
                 });
 
-                await Hike.findOneAndUpdate(
-                    { _id: context.user.hike[0] },
-                    { $pull: { route: route._id } }
-                );
+                // await Hike.findOneAndUpdate(
+                //     { _id: index },
+                //     { $pull: { route: route._id } }
+                // );
 
                 return route;
             }

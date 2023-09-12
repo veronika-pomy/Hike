@@ -96,6 +96,21 @@ export const UPDATE_HIKE = gql`
     }
 `;
 
+export const UPDATE_HIKE_ROUTE_LIST = gql`
+    mutation updateHikeRouteList(
+        $_id: ID!
+        $index: String
+    ) {
+        updateHikeRouteList(
+            _id: $_id
+            index: $index
+        )
+        {
+            _id
+        }
+    }
+`;
+
 export const UPDATE_ROUTE = gql`
     mutation updateRoute(
         $_id: ID!
@@ -125,6 +140,7 @@ export const REMOVE_HIKE = gql`
 export const REMOVE_ROUTE = gql`
     mutation removeRoute($routeName: String!) {
         removeRoute(routeName: $routeName) {
+            _id
             routeName
             origin
             destination
