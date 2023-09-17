@@ -1,4 +1,30 @@
+.video-carousel {
+    width: 940px; 
+    height: 515px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.carousel-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
 .carousel-list {
     display: flex;
     flex-direction: row;
+}
+
+.carousel-item {
+    list-style-type: none;
+    position: absolute;
+    object-fit: cover;
+}
+
+.carousel-arrow {
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
