@@ -1,30 +1,33 @@
-.video-carousel {
+.carousel-container {
     width: 940px; 
     height: 515px;
-    display: flex;
-    flex-direction: row;
-    position: relative;
+    margin: 0 auto;
 }
 
-.carousel-container {
+.video-container {
     height: 100%;
-    width: 100%;
     position: relative;
 }
 
-.carousel-list {
-    display: flex;
-    flex-direction: row;
+.video-item {
+    width: 100%;
+    height: 100%;
 }
 
-.carousel-item {
-    list-style-type: none;
+.left-arrow {
     position: absolute;
-    object-fit: cover;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 20px;
 }
 
-.carousel-arrow {
+.right-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 20px;
+}
+
+.chevron {
     font-size: 3rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
 }
