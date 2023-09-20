@@ -101,6 +101,8 @@ The Hike application is built using modern technologies to ensure a seamless use
 
 - [concurrently](https://www.npmjs.com/package/concurrently): Simplify the development process by running both the front-end and back-end servers concurrently, ensuring a seamless integration of all app components.
 
+- [moment](https://www.npmjs.com/package/moment): A JavaScript date library for parsing, validating, manipulating, and formatting dates.
+
 ## Video Demo
 
 Video demo here
