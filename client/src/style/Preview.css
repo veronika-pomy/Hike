@@ -31,3 +31,37 @@
 .chevron {
     font-size: 3rem;
 }
+
+@media screen and (max-width: 768px) {
+    .video-container {
+        width: 90%; 
+        height: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .carousel-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-container {
+        width: 400px; 
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    .left-arrow {
+        top: 43%;
+    }
+    
+    .right-arrow {
+        top: 43%;
+    }
+
+    .chevron {
+        font-size: 2rem;
+    }
+}

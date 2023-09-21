@@ -17,8 +17,6 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
-// TODO: add terms of service page
-// TODO: add testimonials page
 // TODO: make the links scroll to the top when opening a new page
 
 function Footer() {
