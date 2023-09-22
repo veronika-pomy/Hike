@@ -51,6 +51,13 @@
     text-align: center;
 }
 
+@media screen and (max-width: 900px) {
+    .sign-in-container {
+        padding: 10rem 10rem;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .sign-in-container {
         padding: 6rem 4rem;

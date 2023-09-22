@@ -152,7 +152,7 @@ function Footer() {
                     <h2 className='footer-link-header'>Content</h2>   
                     <Link to='/'>Featured Brands</Link> 
                     <Link to='/'>Submit Your Video</Link> 
-                    <Link to='/'>Brand Ambassadors</Link> 
+                    <Link to='/'>Ambassadors</Link> 
                     <Link to='/'>Sponsorships</Link>
                     <Link to='/'>Explore</Link> 
                 </div>
