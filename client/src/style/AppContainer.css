@@ -10,8 +10,8 @@
 .services,
 .sign-up,
 .sign-in,
-.terms,
-.testimonials,
+/* .terms,
+.testimonials, */
 .preview,
 .error {
     display: flex;
