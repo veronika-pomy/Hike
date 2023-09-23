@@ -119,6 +119,7 @@
         opacity: 1;
         transition: all 0.5s ease;
         z-index: 1;
+        height: 100vh;
     }
 
     .nav-links {
@@ -188,3 +189,28 @@
     }
 }
 
+/* small monbile screens */
+@media screen and (max-width: 320px) {
+    .nav-item {
+        height: 12vh;
+    }
+}
+
+@media screen and (max-width: 240px) {
+    .nav-item, 
+    .nav-links {
+        height: 8vh;
+    }
+
+    .nav-links {
+        padding: 0;
+    }
+
+    .nav-links-mobile {
+        padding: 0;
+    }
+
+    .nav-menu.active {
+        padding-top: 4vh;
+    }
+}

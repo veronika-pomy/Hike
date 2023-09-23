@@ -65,3 +65,15 @@
         font-size: 2rem;
     }
 }
+
+@media screen and (max-width: 395px) {
+    .video-container {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-height: 350px) {
+    .video-container {
+        height: 100vh;
+    }
+}

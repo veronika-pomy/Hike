@@ -69,3 +69,20 @@
         padding: 5rem 3.5rem;
     }
 }
+
+@media screen and (max-width: 410px) {
+    .sign-in-container {
+        width: 100vw;
+        padding: 2rem;
+    }
+    .sign-in-email,
+    .sign-in-password {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-height: 400px) {
+    .sign-in-container {
+        height: 100vh;
+    }
+}
