@@ -213,7 +213,6 @@
     }
 }
 
-
 @media screen and (max-width: 480px) {
     .footer-link-item {
         padding: 2vw;
@@ -229,6 +228,18 @@
     }
 }
 
+@media screen and (max-width: 385px) {
+    .footer-links {
+        flex-direction: column;
+        justify-content: center;
+    }
 
+    .footer-links-wrapper {
+        flex-wrap: wrap;
+        align-content: center
+    }
 
-
+    .footer-link-item {
+        margin-left: 15vw;
+    }
+}

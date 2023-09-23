@@ -66,3 +66,38 @@
         padding: 5rem 3.5rem;
     }
 }
+
+@media screen and (max-width: 420px) {
+    .sign-up-container {
+        width: 100vw;
+        height: 85vh;
+        padding: 0.5rem;
+    }
+
+    .sign-up-username,
+    .sign-up-email,
+    .sign-up-password,
+    .sign-up-confirmpwd {
+        font-size: 14px;
+        margin: 2px;
+    }
+    
+    button {
+        margin-top: 2rem;
+    }
+}
+
+/* @media screen and (min-height: 730px) {
+    .sign-up-container {
+        padding-top: 1rem;
+        height: 85vh;
+    }
+} */
+
+@media screen and (min-height: 568px) {
+    .sign-up-container {
+        padding-top: 1rem;
+        height: 55vh;
+    }
+}
+

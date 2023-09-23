@@ -89,3 +89,17 @@ video {
         width: 100%;
     }
 }
+
+@media screen and (max-width: 380px) {
+    .media-container > h1 {
+        font-size: 32px;
+        margin-top: -10px;
+    }
+}
+
+@media screen and (max-width: 310px) {
+    .media-container > p {
+        font-size: 22px;
+    }
+}
+
