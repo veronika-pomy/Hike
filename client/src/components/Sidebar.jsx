@@ -67,8 +67,6 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
   // render weather componenet on clicking weather report link
   const { toggleWeather } = useWeatherContext();
 
-  // TODO: a scrollable menu when the number of lis overflows the elements under
-
   // prevent deconstructing of data obj before it's loaded
   if (loading) {
     return <></>;

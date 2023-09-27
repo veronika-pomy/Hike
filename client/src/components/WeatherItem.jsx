@@ -9,8 +9,14 @@ function WeatherItem({ date, icon, temp, wind, humidity }) {
   return (
     <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
         <CardHeader>
-        <Heading size='md' color='primary.txt'>
+        <Heading size='sm' align='center' color='primary.txt'>
             {moment(date*1000).format('ddd, D MMM')}
+            {/* Wed
+            <Text
+                align='center'
+            >
+                27 Sep
+            </Text> */}
         </Heading>
         </CardHeader>
         <CardBody color='primary.txt'>
@@ -19,7 +25,7 @@ function WeatherItem({ date, icon, temp, wind, humidity }) {
             <FontAwesomeIcon icon={icon} />
             </Icon>
             </Container>
-            <Container fontSize='lg'>
+            <Container fontSize='sm'>
             <Text>
                 Temp: {temp} °F
             </Text>
