@@ -191,7 +191,6 @@ const googleMapHandler = (lat,lng, name, id) => {
 };
 
 // handle onClick event to display saved hike route in google maps
-
 const googleMapRouteHandler = (origin, destination, routeName) => {
    calculateRoute(origin, destination, routeName);
 };

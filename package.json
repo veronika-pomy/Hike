@@ -28,6 +28,7 @@
     "dependencies": {
         "@babel/plugin-transform-classes": "^7.21.0",
         "css-loader": "^6.7.3",
+        "dotenv": "^16.3.1",
         "moment": "^2.29.4",
         "postcss-preset-env": "^8.3.2",
         "postcss-pseudo-class-any-link": "^8.0.2",

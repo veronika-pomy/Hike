@@ -18,17 +18,16 @@
 .map-wrapper-main {
     display: flex;
     height: 100vh;
-    width: 100vw;
-    z-index: 0;
+    width: 100%;
+    z-index: 0; 
 }
 
 .sidebar-wrapper {
     z-index: 9;
-    position: absolute;
 }
 
 .map-weather-wrapper {
-    position: relative;
+    position: relative; 
     height: 100vh;
     width: 100vw;
 }

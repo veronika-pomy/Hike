@@ -33,7 +33,6 @@ import {
     geocodeByAddress,
   } from 'react-places-autocomplete';
 
-// TODO: InfoWindow is not showing on marker click
 // TODO: fix - "Calculate Route" works on second click on the btn but not the first click???
 
 function Map() {
@@ -260,17 +259,18 @@ function Map() {
     };
 
     return (
+        <>
+            <div className='sidebar-wrapper'>
+                <Sidebar 
+                    setMapCenter={setMapCenter} 
+                    setLocationName={setLocationName}
+                    setHikeId={setHikeId}
+                    calculateRoute={calculateRoute}
+                    setDirections={setDirections}
+                    setSavedHike={setSavedHike}
+                />  
+            </div>
             <div className='map-wrapper-main'>
-                <div className='sidebar-wrapper'>
-                    <Sidebar 
-                        setMapCenter={setMapCenter} 
-                        setLocationName={setLocationName}
-                        setHikeId={setHikeId}
-                        calculateRoute={calculateRoute}
-                        setDirections={setDirections}
-                        setSavedHike={setSavedHike}
-                    />  
-                </div>
                 <div className='map-weather-wrapper'>
                     <div className='map-container'>
                         {/* GOOGLE MAP */}
@@ -285,7 +285,7 @@ function Map() {
                         >
                             <Box position='absolute' left={0} top={0} h='100%' w='100%'>
                                 <GoogleMap
-                                    zoom={10}
+                                    zoom={7}
                                     center={mapCenter}
                                     mapContainerStyle={{ width:'100%', height:'100%'}}
                                     onLoad={(map) => setMap(map)}
@@ -493,6 +493,7 @@ function Map() {
                     {/* <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} /> */}
                 </div>
             </div>
+        </>
     );
 }
 

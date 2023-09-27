@@ -12,9 +12,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../components/Button';
 
-// TODO: Need to find better logic for not showing sign up button, it's noticable when re-rendering before it goes away
-// TODO: work with loggedin style to space the links to the other pages a bit more in the desktop view
-
 function NavBar() {
 
   const { dash } = useDashContext();

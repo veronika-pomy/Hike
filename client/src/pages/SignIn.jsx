@@ -21,8 +21,6 @@ const SignIn = () => {
 
   const [ login, { error } ] = useMutation(LOG_IN);
 
-  // TODO: When user is signed up, redirect to the Dashboard page
-
    // callback to get the values from input boxes, use mutation to auth and login, redirect authenticated user to Dashboard
   const onSubmit = async (userdata, e) => {
     e.preventDefault();

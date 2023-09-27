@@ -4,9 +4,9 @@
 }
 
 .sign-in-container {
-    background: var(--background-transparent);
+    /* background: var(--background-transparent); */
     padding: 8rem 16rem;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 .sign-in-header {
@@ -51,7 +51,7 @@
     text-align: center;
 }
 
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 900px) {
     .sign-in-container {
         padding: 10rem 10rem;
     }
@@ -68,7 +68,7 @@
     .sign-in-container {
         padding: 5rem 3.5rem;
     }
-}
+} */
 
 @media screen and (max-width: 410px) {
     .sign-in-container {
@@ -80,9 +80,9 @@
         font-size: 14px;
     }
 }
-
+/* 
 @media screen and (max-height: 400px) {
     .sign-in-container {
         height: 100vh;
     }
-}
+} */

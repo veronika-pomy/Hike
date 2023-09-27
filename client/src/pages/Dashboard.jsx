@@ -7,9 +7,7 @@ import '../style/Dashboard.css';
 import { useDashContext } from '../context/useDashboardContext';
 
 const Dashboard = () => {
-
-    // TODO: Authentication - look at the router not here
-
+    
     const { setDash } = useDashContext();
 
     useEffect(() => {
