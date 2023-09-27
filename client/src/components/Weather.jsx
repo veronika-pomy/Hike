@@ -7,6 +7,8 @@ import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShower
 
 import { fetchWeather } from '../utils//weatherAPI';
 
+// TODO: add an X component to close the weather popup from the component, not sidebar
+
 function Weather({lat, lng, location}) {
 
   // determine which icon to use based on main weather description 
@@ -37,6 +39,8 @@ function Weather({lat, lng, location}) {
   // state for holding returned api data
   const [ weatherData, setWeatherData ] = useState({});
 
+  console.log(weatherData);
+
   //method to call weather api to render data in the weather component on 
   const getWeatherData = async (lat, lng) => {
     try {
@@ -66,8 +70,6 @@ function Weather({lat, lng, location}) {
     };
     resolveWeatherPromise();
   }, []);
-
-// TODO: add an X component to close the weather popup from the component, not sidebar
 
   return (
     weather ? 

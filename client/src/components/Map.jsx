@@ -26,7 +26,8 @@ import { useJsApiLoader,
         MarkerF, 
         Autocomplete,
         DirectionsRenderer,
-        InfoWindowF
+        InfoWindowF,
+        borderRadius
 } from '@react-google-maps/api';
 
 import {
@@ -283,11 +284,11 @@ function Map() {
                             h='100%'
                             w='100%'
                         >
-                            <Box position='absolute' left={0} top={0} h='100%' w='100%'>
+                            <Box position='absolute' left={450} top={12} h='90%' w='75%'>
                                 <GoogleMap
-                                    zoom={7}
+                                    zoom={8}
                                     center={mapCenter}
-                                    mapContainerStyle={{ width:'100%', height:'100%'}}
+                                    mapContainerStyle={{ width: '100%', height:'100%', borderRadius: '20px' }}
                                     onLoad={(map) => setMap(map)}
                                 >
                                     <MarkerF 
@@ -490,7 +491,7 @@ function Map() {
                             </Box>
                         </Flex>   
                     </div>
-                    {/* <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} /> */}
+                    <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} />
                 </div>
             </div>
         </>
