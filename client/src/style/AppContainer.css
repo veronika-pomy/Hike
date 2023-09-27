@@ -50,7 +50,7 @@
 }
 
 .sign-up {
-    background-image: url(../assets/imgs/image-signup.jpg);
+    background-image: linear-gradient(#000000d0, #000000d0), url(../assets/imgs/image-signup.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -61,7 +61,7 @@
 }
 
 .sign-in {
-    background-image: url(../assets/imgs/image-signin.jpg);
+    background-image: linear-gradient(#000000d0, #000000d0), url(../assets/imgs/image-signin.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -100,7 +100,7 @@
 
 .preview {
     min-height: 100%;
-    background:linear-gradient(#000000d0, #000000d0), url(../assets/imgs/image-preview.jpg);
+    background: linear-gradient(#000000d0, #000000d0), url(../assets/imgs/image-preview.jpg);
     background-size:cover;
     background-position: center;
     background-size: cover;

@@ -4,9 +4,9 @@
 }
 
 .sign-up-container {
-    background: var(--background-transparent);
+    /* background: var(--background-transparent); */
     padding: 5rem 13rem;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 .sign-up-header {

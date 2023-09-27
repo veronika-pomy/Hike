@@ -33,7 +33,6 @@ import {
     geocodeByAddress,
   } from 'react-places-autocomplete';
 
-// TODO: InfoWindow is not showing on marker click
 // TODO: fix - "Calculate Route" works on second click on the btn but not the first click???
 
 function Map() {
