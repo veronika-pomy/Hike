@@ -5,102 +5,372 @@ import { useWeatherContext } from '../context/useWeatherContext';
 
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy, faCloudSun } from '@fortawesome/free-solid-svg-icons';
 
-import { fetchWeather } from '../utils//weatherAPI';
+import { Card, CardBody, CardHeader, Text, Heading, Icon, Container, Flex } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// TODO: add an X component to close the weather popup from the component, not sidebar
+// import { fetchWeather } from '../utils//weatherAPI';
 
 function Weather({lat, lng, location}) {
 
-  // determine which icon to use based on main weather description 
-  const determineIcon = (weatherDescription) => {
-    switch (weatherDescription) {
-      case ('Thunderstorm'):
-        return faBolt;
-      case('Drizzle'): 
-        return faCloudRain;
-      case ('Rain'):
-        return faCloudShowersHeavy;
-      case ('Snow'):
-        return faSnowflake;
-      case ('Clear'):
-        return faSun;
-      case ('Clouds'):
-        return faCloud;
-      case ('Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Dust' || 'Ash' || 'Squall' || 'Tornado'):
-        return faSmog;
-      default:
-        return faCloudSun;
-    };
+  // control weather popup from component, not side bar
+  const [ close, setClose ] = useState(false);
+
+  // close weather componenet
+  const weatherHandler = () => {
+    setClose(true);
   };
 
-  // change weather based on users choice 
-  const { weather } = useWeatherContext();
+  // // determine which icon to use based on main weather description 
+  // const determineIcon = (weatherDescription) => {
+  //   switch (weatherDescription) {
+  //     case ('Thunderstorm'):
+  //       return faBolt;
+  //     case('Drizzle'): 
+  //       return faCloudRain;
+  //     case ('Rain'):
+  //       return faCloudShowersHeavy;
+  //     case ('Snow'):
+  //       return faSnowflake;
+  //     case ('Clear'):
+  //       return faSun;
+  //     case ('Clouds'):
+  //       return faCloud;
+  //     case ('Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Dust' || 'Ash' || 'Squall' || 'Tornado'):
+  //       return faSmog;
+  //     default:
+  //       return faCloudSun;
+  //   };
+  // };
 
-  // state for holding returned api data
-  const [ weatherData, setWeatherData ] = useState({});
+  // // change weather based on users choice 
+  // const { weather } = useWeatherContext();
 
-  console.log(weatherData);
+  // // state for holding returned api data
+  // const [ weatherData, setWeatherData ] = useState({});
 
-  //method to call weather api to render data in the weather component on 
-  const getWeatherData = async (lat, lng) => {
-    try {
-      const response = await fetchWeather(lat, lng);
-      // console.log(response);
+  // console.log(weatherData);
 
-      if (!response.ok) {
-          throw new Error('Something went wrong with fetching weather data.');
-      };
+  // //method to call weather api to render data in the weather component on 
+  // const getWeatherData = async (lat, lng) => {
+  //   try {
+  //     const response = await fetchWeather(lat, lng);
+  //     // console.log(response);
 
-      const weatherResponse = await response.json();
-      // console.log(weatherResponse.daily[0].weather);
-      return weatherResponse;
-    } catch (err) {
-        console.error(err);
-    };
-  };
+  //     if (!response.ok) {
+  //         throw new Error('Something went wrong with fetching weather data.');
+  //     };
 
-  useEffect(() => {
-    async function resolveWeatherPromise () {
-      try {
-        const weatherSetData = await getWeatherData(lat, lng);
-        setWeatherData(weatherSetData);
-      } catch (err) {
-        console.error(err);
-      };
-    };
-    resolveWeatherPromise();
-  }, []);
+  //     const weatherResponse = await response.json();
+  //     // console.log(weatherResponse.daily[0].weather);
+  //     return weatherResponse;
+  //   } catch (err) {
+  //       console.error(err);
+  //   };
+  // };
+
+  // useEffect(() => {
+  //   async function resolveWeatherPromise () {
+  //     try {
+  //       const weatherSetData = await getWeatherData(lat, lng);
+  //       setWeatherData(weatherSetData);
+  //     } catch (err) {
+  //       console.error(err);
+  //     };
+  //   };
+  //   resolveWeatherPromise();
+  // }, []);
 
   return (
-    weather ? 
+    // weather ? 
+    !close ? 
       <>
         <div className='weather-container'>
           <div className='weather-content-wrapper'>
+          <p className='weather-close-btn'>
+            <button
+              onClick={() => weatherHandler()}
+            >
+              close
+            </button>
+          </p>
             <p className='weather-title'>Weather Forecast for {location} </p>
             <div className='weather-items-wrapper'>
               <div className='weather-items'>
-                  {weatherData.daily.map((item) => {
-                    return (
-                      <WeatherItem
-                        date={item.dt}
-                        icon={
-                          determineIcon(item.weather[0].main)
-                        } 
-                        temp={item.temp.day}
-                        wind={item.wind_speed}
-                        humidity={item.humidity}
-                      />
-                    )
-                  })
-                }
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Wed
+                    <Text
+                      align='center'
+                    >
+                      27 Sep
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Flex
+                      direction='column'
+                    >
+                      <Text
+                    
+                      >
+                        Temp: 
+                      </Text>
+                      <Text
+                    
+                      >
+                       63.16 °F
+                      </Text>
+                    </Flex>
+                    <Text>
+                        Wind: 11.23 mph
+                    </Text>
+                    <Text>
+                        Humidity: 71 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Thu
+                    <Text
+                      align='center'
+                    >
+                      28 Sep
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 58.21 °F
+                    </Text>
+                    <Text>
+                        Wind: 8.95 mph
+                    </Text>
+                    <Text>
+                        Humidity: 75 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Fri
+                    <Text
+                      align='center'
+                    >
+                      29 Sep
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloud} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 68.76 °F
+                    </Text>
+                    <Text>
+                        Wind: 6.73 mph
+                    </Text>
+                    <Text>
+                        Humidity: 65 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Sat 
+                    <Text
+                      align='center'
+                    >
+                      30 Sep
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloud} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 76.82 °F
+                    </Text>
+                    <Text>
+                        Wind: 7.07 mph
+                    </Text>
+                    <Text>
+                        Humidity: 46 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Sun
+                    <Text
+                      align='center'
+                    >
+                      1 Oct
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloudShowersHeavy} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 77.63 °F
+                    </Text>
+                    <Text>
+                        Wind: 6.26 mph
+                    </Text>
+                    <Text>
+                        Humidity: 69 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Mon
+                    <Text
+                      align='center'
+                    >
+                      2 Oct
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloud} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 84.47 °F
+                    </Text>
+                    <Text>
+                        Wind: 9.6 mph
+                    </Text>
+                    <Text>
+                        Humidity: 41 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Tue
+                    <Text
+                      align='center'
+                    >
+                      3 Oct
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloud} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 88.56 °F
+                    </Text>
+                    <Text>
+                        Wind: 10.74 mph
+                    </Text>
+                    <Text>
+                        Humidity: 29 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
+              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+                <CardHeader>
+                <Heading size='sm' align='center' color='primary.txt'>
+                    Wed
+                    <Text
+                      align='center'
+                    >
+                      4 Oct
+                    </Text>
+                </Heading>
+                </CardHeader>
+                <CardBody color='primary.txt'>
+                    <Container align='center' pb={5}>
+                    <Icon boxSize='30px'>
+                    <FontAwesomeIcon icon={faCloud} />
+                    </Icon>
+                    </Container>
+                    <Container fontSize='sm'>
+                    <Text>
+                        Temp: 86.7 °F
+                    </Text>
+                    <Text>
+                        Wind: 13.27 mph
+                    </Text>
+                    <Text>
+                        Humidity: 28 %
+                    </Text>
+                    </Container>
+                </CardBody>
+              </Card>
               </div>
             </div>
         </div>
       </div>
-      </> : 
+      </>
+       : 
       <> 
       </>
     );
 };
 
 export default Weather;
+
+// {weatherData.daily.map((item) => {
+//   return (
+//     <WeatherItem
+//       date={item.dt}
+//       icon={
+//         determineIcon(item.weather[0].main)
+//       } 
+//       temp={item.temp.day}
+//       wind={item.wind_speed}
+//       humidity={item.humidity}
+//     />
+//   )
+// })
+// }

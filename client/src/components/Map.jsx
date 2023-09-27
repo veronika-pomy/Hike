@@ -491,8 +491,8 @@ function Map() {
                             </Box>
                         </Flex>   
                     </div>
-                    <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} />
                 </div>
+                <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} />
             </div>
         </>
     );
