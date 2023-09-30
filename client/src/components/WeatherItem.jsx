@@ -19,8 +19,8 @@ function WeatherItem({ date, icon, temp, wind, humidity }) {
             </Text> */}
         </Heading>
         </CardHeader>
-        <CardBody color='primary.txt'>
-            <Container align='center' pb={5}>
+        <CardBody color='primary.txt' className='weather-info-card'>
+            <Container align='center' pb={5} className='weather-icon'>
             <Icon boxSize='30px'>
             <FontAwesomeIcon icon={icon} />
             </Icon>

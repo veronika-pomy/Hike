@@ -124,6 +124,12 @@
     width: 100vw;
 }
 
+/* .input-box {
+    background-color: aqua !important;
+    display: flex !important;; 
+    flex-direction: column !important;;
+} */
+
 .map-container {
     height: 100vh;
     width: 100vw;
@@ -181,3 +187,128 @@
     margin-left: 1em;
 }
 
+
+@media screen and (max-width: 480px) {
+    .dashboard {
+        flex-direction: column;
+        height: 185vh;
+        width: 100vw;
+        background-color: #242424;
+    }
+
+    .map-wrapper-main {
+        width: 27%;
+    }
+
+    .map-container {
+        width: 110vw;
+    }
+
+    .sidebar-container,
+    .sidebar-wrapper {
+        height: 40vh;
+        width: 100vw !important;
+    }
+
+    .sidebar-container ul {
+        display: flex;
+        height: 7vh;
+    }
+
+    .text {
+        display: none !important;
+    }
+
+    .hike-list-container {
+        height: 38vh;
+    }
+
+    .hike-list {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+
+    .hike-list ul {
+        flex-direction: column;
+    }
+
+    .search-box {
+        margin-bottom: 7vw !important;
+        width: 82vw !important;
+    }
+
+    .input-box {
+        font-size: small !important;
+        
+    }
+
+    .input-destination {
+        width: 77vw !important;
+    }
+
+    .input-stack {
+        flex-direction: column !important;
+        width: 75vw !important;
+    }
+
+    .info-stack {
+        flex-direction: column !important;
+        width: 75vw !important;
+    }
+
+    .bottom {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        left: 0;
+        margin-left: 150px;
+    }
+
+    .weather-container {
+        height: 145vh !important;
+    }
+
+    .weather-content-wrapper {
+        padding-left: 7vw;
+    }
+
+    .weather-items-wrapper {
+        width: 60vw;
+    }
+
+    .weather-title {
+        font-size: 1rem;
+        padding-left: 0;
+        padding-right: 6vw;
+    }
+
+    .weather-items {
+        flex-direction: column;
+    }
+
+    .weather-item {
+        width: 60vw;
+        height: 15vh;
+        margin-left: 0;
+        flex-wrap: wrap;
+        margin: 0.5vh 0;
+        justify-content: center;
+    }
+
+    .weather-info-card {
+        display: flex;
+        padding: 0 !important;
+    }
+    
+    .weather-icon {
+        padding: 0 !important;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    /* .weather-info-container {
+        padding: 0;
+    } */
+}

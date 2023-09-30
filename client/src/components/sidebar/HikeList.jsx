@@ -280,7 +280,7 @@ return (
                       onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName)}
                     >
                       <div>
-                        <p id={hikeRoute._id}>
+                        <p id={hikeRoute._id} className='hike-route-name'>
                           {hikeRoute.routeName}
                         </p>
                       </div>
