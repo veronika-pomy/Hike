@@ -274,7 +274,7 @@ function Map() {
                 <div className='map-weather-wrapper'>
                     <div className='map-container'>
                         {/* GOOGLE MAP */}
-                        <Flex
+                        {/* <Flex
                             position='relative'
                             flexDirection='column'
                             alignItems='center'
@@ -282,10 +282,10 @@ function Map() {
                             // bgPos='bottom'
                             h='100%'
                             w='100%'
-                        >
-                            <Box position='absolute' left={450} top={10} h='70%' w='75%'>
+                        > */}
+                            {/* <Box position='absolute' left={450} top={10} h='70%' w='75%'>
                                 {/* SEARCH BAR */}
-                                    <Box
+                                    {/* <Box
                                     p={4}
                                     borderRadius='lg'
                                     mt={0}
@@ -299,7 +299,7 @@ function Map() {
 
                                     <HStack spacing={2} justifyContent='space-between'>
                                     {/* Get google suggestions when entering location */}
-                                    <Box flexGrow={1}>
+                                    {/* <Box flexGrow={1}>
                                         {!directions &&
                                             <Autocomplete>
                                                 <Input 
@@ -396,20 +396,20 @@ function Map() {
                                             </Button>
                                             }
                                         </Flex>
-                                    </ButtonGroup>
-                                    </HStack>
-                                        
+                                    </ButtonGroup> */}
+                                    {/* </HStack> */}
+                                         
                                     {/* HIKE TITLE ADDED WHEN HIKE ROUTE SEARCHED FROM SAVED HIKE NOT INPUT */}
-                                    <HStack>
+                                    {/* <HStack>
                                         {savedHike && 
                                             <Text mt={4} ml={1}>
                                                 Current Hike:
                                                     <Text  as='i'> {savedHike}</Text>
                                             </Text>
                                         }
-                                    </HStack>
+                                    </HStack> */}
                                     
-                                    <HStack justifyContent='space-between'>
+                                    {/* <HStack justifyContent='space-between'>
                                         {directions ? 
                                             <Text mt={4} ml={1}>
                                                 Distance:
@@ -462,8 +462,8 @@ function Map() {
                                             Unable to find route between provided destinations.
                                         </Text>
                                     }
-                                </Box>
-                                <GoogleMap
+                                </Box>  */}
+                                {/* <GoogleMap
                                     zoom={8}
                                     center={mapCenter}
                                     mapContainerStyle={{ width: '100%', height:'100%', borderRadius: '20px' }}
@@ -482,14 +482,14 @@ function Map() {
                                         </InfoWindowF>
                                     </MarkerF>
                                     {/* display directions results */}
-                                    {directionsResponse && 
+                                    {/* {directionsResponse && 
                                         <DirectionsRenderer 
                                             directions={directionsResponse}
                                         />
                                     }
-                                </GoogleMap>
-                            </Box>
-                        </Flex>   
+                                // // </GoogleMap> */} */
+                            {/* </Box>
+                        </Flex>    */}
                     </div>
                 </div>
                 <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} />

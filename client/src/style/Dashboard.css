@@ -181,3 +181,50 @@
     margin-left: 1em;
 }
 
+
+@media screen and (max-width: 480px) {
+    .dashboard {
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .sidebar-container,
+    .sidebar-wrapper {
+        height: 7vh;
+        width: 100vw !important;
+    }
+
+    .sidebar-container ul {
+        display: flex;
+        height: 7vh;
+    }
+
+    .text {
+        display: none !important;
+    }
+
+    .bottom {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        left: 0;
+        margin-left: 150px;
+    }
+
+    .hike-list-container {
+        background-color: aquamarine;
+    }
+
+    .hike-list {
+        background-color: aquamarine !important;
+        z-index: 9;
+    }
+
+    /* .map-wrapper-main,
+    .map-weather-wrapper,
+    .map-container {
+        width: 100%;   
+    } */
+
+}
