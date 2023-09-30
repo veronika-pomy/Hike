@@ -126,3 +126,31 @@
     justify-content: space-between;
     transition: 1s;
 }
+
+@media screen and (max-width: 480px) {
+    .hike-list ul {
+        width: 100vw;
+    }
+
+    .hike-list ul {
+        width: 62vw;
+        margin-left: 3vw;
+    }
+
+    .hike-list ul li {
+        width: 240px;
+    }
+
+    .map-handler {
+        width: fit-content;
+    }
+
+    .hike-name {
+        font-size: 16px;
+        width: 300px;
+    }
+
+    .hike-route-name {
+        font-size: 14px;
+    }
+}
