@@ -79,8 +79,6 @@ function Map() {
         };
     };
             
-    // TODO: Satellite and terrain view need to move because they are blocked by the aidebar right now
-
     const defaultLocationName = 'Lost Twin Lakes Hiking Trail Head, MI';
     const defaultLocation = {
         lat: 44.21623,
@@ -255,7 +253,7 @@ function Map() {
                 return;
             };
         };
-
+        
     };
 
     return (
@@ -274,7 +272,7 @@ function Map() {
                 <div className='map-weather-wrapper'>
                     <div className='map-container'>
                         {/* GOOGLE MAP */}
-                        {/* <Flex
+                        <Flex
                             position='relative'
                             flexDirection='column'
                             alignItems='center'
@@ -282,10 +280,10 @@ function Map() {
                             // bgPos='bottom'
                             h='100%'
                             w='100%'
-                        > */}
-                            {/* <Box position='absolute' left={450} top={10} h='70%' w='75%'>
+                        > 
+                            <Box position='absolute' left={450} top={10} h='70%' w='75%'>
                                 {/* SEARCH BAR */}
-                                    {/* <Box
+                                <Box
                                     p={4}
                                     borderRadius='lg'
                                     mt={0}
@@ -293,13 +291,19 @@ function Map() {
                                     mb={5}
                                     bgColor='white'
                                     shadow='base'
-                                    minW='container.sm'
+                                    // minW='container.sm'
                                     zIndex='9'
+                                    className='input-box search-box'
                                 >
 
-                                    <HStack spacing={2} justifyContent='space-between'>
+                                    <HStack 
+                                        spacing={2} justifyContent='space-between'
+                                        className='input-stack'
+                                    >
                                     {/* Get google suggestions when entering location */}
-                                    {/* <Box flexGrow={1}>
+                                    <Box 
+                                        flexGrow={1}
+                                    >
                                         {!directions &&
                                             <Autocomplete>
                                                 <Input 
@@ -307,6 +311,7 @@ function Map() {
                                                     placeholder='Search Your Destination'
                                                     ref={searchRef}
                                                     onKeyUp={keyPress}
+                                                    className='input-box input-destination'
                                                 />
                                             </Autocomplete>
                                         }
@@ -318,6 +323,7 @@ function Map() {
                                                 ref={originRef}
                                                 onKeyUp={keyPress}
                                                 mt={2}
+                                                className='input-box input-destination'
                                             />
                                         </Autocomplete>
                                         }
@@ -329,6 +335,7 @@ function Map() {
                                                 ref={destinationRef}
                                                 onKeyUp={keyPress}
                                                 mt={2}
+                                                className='input-box input-destination'
                                             />
                                         </Autocomplete>
                                         }
@@ -336,7 +343,6 @@ function Map() {
                                     <ButtonGroup>
                                         <Flex
                                             flexDirection={directions ? 'column' : 'row'}
-
                                         >
                                             {directions ? 
                                                 <Button 
@@ -345,6 +351,7 @@ function Map() {
                                                     _hover={{bg: 'primary.save', color: 'primary.txt'}}
                                                     type='submit' 
                                                     onClick={calculateRoute}
+                                                    className='input-box'
                                                 >
                                                     Calculate Route
                                                 </Button>
@@ -355,6 +362,7 @@ function Map() {
                                                     _hover={{bg: 'primary.save', color: 'primary.txt'}}
                                                     type='submit' 
                                                     onClick={searchLocation}
+                                                    className='input-box'
                                                 >
                                                     Search
                                                 </Button>
@@ -367,6 +375,7 @@ function Map() {
                                                     type='submit' 
                                                     onClick={() => setDirections(true)}
                                                     ml={2}
+                                                    className='input-box'
                                                 >
                                                     Get Directions
                                                 </Button>
@@ -380,6 +389,7 @@ function Map() {
                                                     type='submit' 
                                                     onClick={saveRouteHandler}
                                                     mt={2}
+                                                    className='input-box'
                                                 >
                                                     Save Hike Route
                                                 </Button>
@@ -391,25 +401,29 @@ function Map() {
                                                 type='submit' 
                                                 onClick={() => saveHikeHandler(mapCenter, locationName)}
                                                 ml={2}
+                                                className='input-box'
                                             >
                                                 Save Destination
                                             </Button>
                                             }
                                         </Flex>
-                                    </ButtonGroup> */}
-                                    {/* </HStack> */}
+                                    </ButtonGroup> 
+                                    </HStack>
                                          
                                     {/* HIKE TITLE ADDED WHEN HIKE ROUTE SEARCHED FROM SAVED HIKE NOT INPUT */}
-                                    {/* <HStack>
+                                    <HStack>
                                         {savedHike && 
                                             <Text mt={4} ml={1}>
                                                 Current Hike:
                                                     <Text  as='i'> {savedHike}</Text>
                                             </Text>
                                         }
-                                    </HStack> */}
+                                    </HStack>
                                     
-                                    {/* <HStack justifyContent='space-between'>
+                                    <HStack 
+                                        justifyContent='space-between'
+                                        className='info-stack'
+                                    >
                                         {directions ? 
                                             <Text mt={4} ml={1}>
                                                 Distance:
@@ -462,8 +476,8 @@ function Map() {
                                             Unable to find route between provided destinations.
                                         </Text>
                                     }
-                                </Box>  */}
-                                {/* <GoogleMap
+                                </Box>
+                                <GoogleMap
                                     zoom={8}
                                     center={mapCenter}
                                     mapContainerStyle={{ width: '100%', height:'100%', borderRadius: '20px' }}
@@ -482,14 +496,14 @@ function Map() {
                                         </InfoWindowF>
                                     </MarkerF>
                                     {/* display directions results */}
-                                    {/* {directionsResponse && 
+                                    {directionsResponse && 
                                         <DirectionsRenderer 
                                             directions={directionsResponse}
                                         />
                                     }
-                                // // </GoogleMap> */} */
-                            {/* </Box>
-                        </Flex>    */}
+                                </GoogleMap>
+                            </Box>
+                        </Flex> 
                     </div>
                 </div>
                 <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} />

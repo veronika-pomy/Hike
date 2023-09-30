@@ -128,13 +128,17 @@
 }
 
 @media screen and (max-width: 480px) {
+    .hike-list {
+        margin-top: 2vw;
+    }
+
     .hike-list ul {
         width: 100vw;
     }
 
     .hike-list ul {
-        width: 62vw;
-        margin-left: 3vw;
+        width: 65vw;
+        margin-left: 0.5vw;
     }
 
     .hike-list ul li {

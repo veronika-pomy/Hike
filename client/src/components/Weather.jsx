@@ -96,7 +96,15 @@ function Weather({lat, lng, location}) {
             <p className='weather-title'>Weather Forecast for {location} </p>
             <div className='weather-items-wrapper'>
               <div className='weather-items'>
-              <Card className='weather-item' align='center' size='sm' bg='none' border='1px' borderColor='primary.txt' borderRadius='md'>
+              <Card 
+                className='weather-item' 
+                align='center' 
+                size='sm' 
+                bg='none' 
+                border='1px' 
+                borderColor='primary.txt' 
+                borderRadius='md'
+              >
                 <CardHeader>
                 <Heading size='sm' align='center' color='primary.txt'>
                     Wed
@@ -107,8 +115,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloudShowersHeavy} />
                     </Icon>
@@ -116,15 +124,12 @@ function Weather({lat, lng, location}) {
                     <Container fontSize='sm'>
                     <Flex
                       direction='column'
+                      className='weather-info-container'
                     >
-                      <Text
-                    
-                      >
+                      <Text>
                         Temp: 
                       </Text>
-                      <Text
-                    
-                      >
+                      <Text>
                        63.16 °F
                       </Text>
                     </Flex>
@@ -148,8 +153,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloudShowersHeavy} />
                     </Icon>
@@ -178,8 +183,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
@@ -208,8 +213,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
@@ -238,8 +243,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloudShowersHeavy} />
                     </Icon>
@@ -268,8 +273,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
@@ -298,8 +303,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
@@ -328,8 +333,8 @@ function Weather({lat, lng, location}) {
                     </Text>
                 </Heading>
                 </CardHeader>
-                <CardBody color='primary.txt'>
-                    <Container align='center' pb={5}>
+                <CardBody color='primary.txt' className='weather-info-card'>
+                    <Container align='center' pb={5} className='weather-icon'>
                     <Icon boxSize='30px'>
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
