@@ -25,14 +25,14 @@ function WeatherItem({ date, icon, temp, wind, humidity }) {
             <FontAwesomeIcon icon={icon} />
             </Icon>
             </Container>
-            <Container fontSize='sm'>
-            <Text>
+            <Container fontSize='sm' className='weather-info-box'>
+            <Text className='weather-text'>
                 Temp: {temp} °F
             </Text>
-            <Text>
+            <Text className='weather-text'>
                 Wind: {wind} mph
             </Text>
-            <Text>
+            <Text className='weather-text'>
                 Humidity: {humidity} %
             </Text>
             </Container>

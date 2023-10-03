@@ -121,22 +121,23 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloudShowersHeavy} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
+                    <Container fontSize='sm' className='weather-info-box'>
                     <Flex
                       direction='column'
                       className='weather-info-container'
+        
                     >
-                      <Text>
+                      <Text className='weather-text'>
                         Temp: 
                       </Text>
-                      <Text>
+                      <Text className='weather-text'>
                        63.16 °F
                       </Text>
                     </Flex>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 11.23 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 71 %
                     </Text>
                     </Container>
@@ -159,14 +160,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloudShowersHeavy} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 58.21 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 8.95 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 75 %
                     </Text>
                     </Container>
@@ -189,14 +190,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 68.76 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 6.73 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 65 %
                     </Text>
                     </Container>
@@ -219,14 +220,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 76.82 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 7.07 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 46 %
                     </Text>
                     </Container>
@@ -249,14 +250,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloudShowersHeavy} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 77.63 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 6.26 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 69 %
                     </Text>
                     </Container>
@@ -279,14 +280,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 84.47 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 9.6 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 41 %
                     </Text>
                     </Container>
@@ -309,14 +310,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 88.56 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 10.74 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 29 %
                     </Text>
                     </Container>
@@ -339,14 +340,14 @@ function Weather({lat, lng, location}) {
                     <FontAwesomeIcon icon={faCloud} />
                     </Icon>
                     </Container>
-                    <Container fontSize='sm'>
-                    <Text>
+                    <Container fontSize='sm' className='weather-info-box'>
+                    <Text className='weather-text'>
                         Temp: 86.7 °F
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Wind: 13.27 mph
                     </Text>
-                    <Text>
+                    <Text className='weather-text'>
                         Humidity: 28 %
                     </Text>
                     </Container>

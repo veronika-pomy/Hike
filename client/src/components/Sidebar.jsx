@@ -123,7 +123,14 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
                         setSavedHike={setSavedHike}
                       /> 
                       : 
-                        ''
+                        <>
+                          <div 
+                            className='hikes-mobile' 
+                            onClick={showList}
+                          >
+                            MY HIKES
+                          </div>
+                        </>
                     }
                   </ul>
                 </div>
