@@ -123,7 +123,14 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
                         setSavedHike={setSavedHike}
                       /> 
                       : 
-                        ''
+                        <>
+                          <div 
+                            className='hikes-mobile' 
+                            onClick={showList}
+                          >
+                            MY HIKES
+                          </div>
+                        </>
                     }
                   </ul>
                 </div>
@@ -131,12 +138,12 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
             </div>
         </li>
         <div className='bottom'>
-        <li>
+        <li className='bottom-link-weather-mobile'>
             <Link
               onClick={toggleWeather}
             >
               <span className="icon">
-                <FontAwesomeIcon icon={faCloudSun} className='user-icon-sidebar'/>
+                <FontAwesomeIcon icon={faCloudSun} className='user-icon-sidebar icon-moble'/>
               </span>
               <span
                 className='text'
@@ -145,7 +152,7 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
               </span>
             </Link>
           </li>
-          <li>
+          <li className='bottom-link-mobile'>
             <Link
               to='#'
             >
@@ -161,7 +168,7 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
               </span>
             </Link>
           </li>
-          <li>
+          <li className='bottom-link-mobile'>
             <Link
               to='/'
               onClick={() => dashHandler()}
@@ -176,7 +183,7 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
               </span>
             </Link>
           </li>
-          <li>
+          <li className='bottom-link-mobile'>
             <Link
               to='#'
             >
@@ -190,7 +197,7 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
               </span>
             </Link>
           </li>
-          <li>
+          <li className='bottom-link-mobile'>
             <Link
               to='/'
               onClick={logOut}

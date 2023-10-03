@@ -3,7 +3,7 @@
     --hover: #d2cfcf;
     --primary-main: #242424;
     --placeholder: #898888;
-    --background-transparent: #000000d0;
+    --background-transparent: #000000e3;
 }
 
 .dashboard {
@@ -187,6 +187,10 @@
     margin-left: 1em;
 }
 
+.hikes-mobile {
+    display: none;
+}
+
 
 @media screen and (max-width: 480px) {
     .dashboard {
@@ -200,8 +204,12 @@
         width: 27%;
     }
 
+    .map-weather-wrapper {
+        width: 95%;
+    }
+
     .map-container {
-        width: 110vw;
+        width: 113vw;
     }
 
     .sidebar-container,
@@ -306,9 +314,132 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        margin-right: 5vw !important;
+    
     }
 
-    /* .weather-info-container {
-        padding: 0;
-    } */
+    .weather-text {
+        font-size: smaller;
+    }
+
+    .weather-info-box {
+     padding: 2vh 1vw!important; 
+    }
+
+    .hikes-mobile {
+        font-size: xx-large;
+        text-align: center;
+        margin-top: 10vh;
+        font-weight: 900;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .dashboard {
+        flex-direction: column;
+        height: 280vh;
+        width: 100vw;
+    }
+
+    .hike-list-container {
+        height: 2vh;
+    }
+
+    .icon {
+        font-size: xx-small;
+        height: 48px !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .map-box-mobile {
+        margin-left: -225px !important;
+    }
+
+    .button-group-mobile {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .sidebar-container ul {
+        flex-direction: column;
+    }
+
+    .icon {
+        font-size: 1em !important;
+        padding: fit-content;
+    }
+
+    .bottom-link-weather-mobile {
+        max-width: 10vw;
+    }
+
+    .bottom-link-mobile {
+        max-width: 10vw;
+        padding-right: 2vw;
+    }
+
+    .logo {
+        margin-bottom: 20px !important;
+    }
+
+    .icon {
+        min-width: 28px !important;
+    }
+
+    .search-box {
+        width: 86vw !important;
+    }
+
+    .hike-list {
+        font-size: x-small;
+        margin-top: 0;
+    }
+
+   .hike-list-container {
+        height: 25vh;
+    }
+
+    .hikes-mobile {
+        display: none;
+    }
+
+
+}
+
+@media screen and (max-height: 320px) {
+    .sidebar-container {
+        width: 100vw !important;
+        padding-top: 7vh;
+        padding-left: 8vw;
+    }
+
+    .icon {
+        height: 22px !important;
+    }
+
+    .bottom {
+        margin-left: 70px;
+    }
+}
+
+@media screen and (max-height: 240px) {
+    .sidebar-container {
+        width: 100vw !important;
+        padding-top: 9vh;
+        padding-left: 2vw;
+    }
+
+    .hike-list {
+        margin-top: -0.5px;
+    }
+
+    .bottom {
+        margin-top: 1vh;
+    }
+
+    .icon {
+        height: 22px !important;
+    }
 }

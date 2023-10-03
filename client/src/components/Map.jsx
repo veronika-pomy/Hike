@@ -281,7 +281,7 @@ function Map() {
                             h='100%'
                             w='100%'
                         > 
-                            <Box position='absolute' left={450} top={10} h='70%' w='75%'>
+                            <Box position='absolute' left={450} top={10} h='70%' w='75%' className='map-box-mobile'>
                                 {/* SEARCH BAR */}
                                 <Box
                                     p={4}
@@ -343,6 +343,7 @@ function Map() {
                                     <ButtonGroup>
                                         <Flex
                                             flexDirection={directions ? 'column' : 'row'}
+                                            className='button-group-mobile'
                                         >
                                             {directions ? 
                                                 <Button 

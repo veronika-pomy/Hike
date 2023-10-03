@@ -158,3 +158,36 @@
         font-size: 14px;
     }
 }
+
+@media screen and (max-width: 350px) {
+    .map-handler {
+        margin: 0;
+    }
+
+    .hike-name {
+        background-color: 12px;
+    }
+
+    .edit-btn,
+    .remove-btn,
+    .save-btn,
+    .cancel-btn {
+        margin-top: 2px;
+    }
+
+    .hike-list ul li {
+        width: 202px;
+    }
+
+    .hike-item {
+        justify-content: flex-start;
+    }
+
+    .hike-route-name {
+        padding-right: 5vw;
+    }
+
+    .route-subitem {
+        justify-content: flex-start;
+    }
+}
