@@ -53,6 +53,7 @@
 
 .hike-name {
     font-size: 14px;
+    text-align: start;
 }
 
 .hike-list ul li p {
