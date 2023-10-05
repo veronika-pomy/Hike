@@ -281,11 +281,17 @@ function Map() {
                             h='100%'
                             w='100%'
                         > 
-                            <Box position='absolute' left={450} top={10} h='70%' w='75%' className='map-box-mobile'>
+                            <Box 
+                                position='absolute' 
+                                top={10} 
+                                h='70%' 
+                                w='75%' className='map-box-mobile'
+                            >
                                 {/* SEARCH BAR */}
                                 <Box
                                     p={4}
                                     borderRadius='lg'
+                                    className='flex-map-mobile'
                                     mt={0}
                                     ml={0}
                                     mb={5}
@@ -293,7 +299,6 @@ function Map() {
                                     shadow='base'
                                     // minW='container.sm'
                                     zIndex='9'
-                                    className='input-box search-box'
                                 >
 
                                     <HStack 
@@ -340,7 +345,9 @@ function Map() {
                                         </Autocomplete>
                                         }
                                     </Box> 
-                                    <ButtonGroup>
+                                    <ButtonGroup
+                                        className='btn-group-mobile'
+                                    >
                                         <Flex
                                             flexDirection={directions ? 'column' : 'row'}
                                             className='button-group-mobile'
@@ -481,7 +488,7 @@ function Map() {
                                 <GoogleMap
                                     zoom={8}
                                     center={mapCenter}
-                                    mapContainerStyle={{ width: '100%', height:'100%', borderRadius: '20px' }}
+                                    mapContainerStyle={{ width: '110%', height:'100%', borderRadius: '20px'}}
                                     onLoad={(map) => setMap(map)}
                                 >
                                     <MarkerF 

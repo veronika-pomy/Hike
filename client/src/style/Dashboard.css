@@ -191,33 +191,119 @@
     display: none;
 }
 
-/* 745 bp */
-
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 950px) {
     .dashboard {
         flex-direction: column;
-        height: 220vh;
+        height: 240vh;
         width: 100vw;
         background-color: #242424;
     }
 
-    .map-wrapper-main {
-        width: 43%;
+    .sidebar-container,
+    .sidebar-wrapper {
+        height: 75vh;
+        width: 100vw !important;
     }
 
-    .map-weather-wrapper {
-        width: 95%;
+    .sidebar-container ul {
+        display: flex;
+        flex-direction: column;
+        height: 7vh;
+    }
+
+    .hike-list-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .hike-list-container {
+        height: 38vh;
+    }
+
+    .hike-list {
+        display: flex;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+
+    .hike-list ul {
+        flex-direction: column;
+    }
+
+    .flex-map-mobile {
+        width: 110%;
+    }
+
+    .map-wrapper-main {
+        width: 100%;
     }
 
     .map-container {
-        width: 113vw;
+        height: 103vh;
     }
 
-    .sidebar-container,
-    .sidebar-wrapper {
-        height: 40vh;
-        width: 100vw !important;
+    .map-weather-wrapper {
+        width: 97%;
     }
+
+    .input-stack {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .btn-group-mobile {
+        justify-content: space-around !important;
+    }
+
+    .logo {
+        margin-bottom: 35px;
+    }
+
+    .bottom {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-left: 150px;
+        margin-left: 55vw;
+    }
+
+    .text {
+        display: none !important;
+    }
+
+    .hikes-mobile {
+        margin-top: 2vh;
+    }
+
+    google-map-mobile {
+        width: 10% !important;
+    }
+
+}
+
+@media screen and (max-width: 680px) {
+    /* .dashboard {
+        flex-direction: column;
+        height: 220vh;
+        width: 100vw;
+        background-color: #242424;
+    } */
+
+    .map-wrapper-main {
+        /* width: 43%; */
+    }
+
+    /* .map-container {
+        width: 113vw;
+    } */
+
+    /* .sidebar-container,
+    .sidebar-wrapper {
+        height: 75vh;
+        width: 100vw !important;
+    } */
 
     .sidebar-container ul {
         display: flex;
@@ -271,7 +357,8 @@
         flex-direction: row;
         position: absolute;
         left: 0;
-        margin-left: 150px;
+        margin-left: 115px;
+        /* margin-left: 150px; */
     }
 
     .weather-container {
@@ -330,7 +417,7 @@
     .hikes-mobile {
         font-size: xx-large;
         text-align: center;
-        margin-top: 10vh;
+        /* margin-top: 10vh; */
         font-weight: 900;
         display: block;
     }
@@ -495,6 +582,12 @@
         height: 48px !important;
     }
 }
+
+@media screen and (max-width: 420px) {
+    .button-group-mobile {
+        flex-direction: column !important;
+    }
+}   
 
 @media screen and (max-width: 400px) {
     .map-box-mobile {
