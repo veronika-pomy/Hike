@@ -281,6 +281,21 @@
         width: 10% !important;
     }
 
+    .weather-container {
+        height: 165vh !important;
+    }
+
+    .weather-items {
+        flex-direction: column !important;
+    }
+
+    .weather-content-wrapper {
+        padding-left: 0;
+    }
+
+    .weather-item {
+        flex-direction: row !important;
+    }
 }
 
 @media screen and (max-width: 680px) {
@@ -362,7 +377,7 @@
     }
 
     .weather-container {
-        height: 145vh !important;
+        height: 165vh !important;
     }
 
     .weather-content-wrapper {
@@ -565,6 +580,11 @@
         display: block;
     }
 } */
+@media screen and (max-width: 479px) {
+    .weather-container {
+        height: 205vh !important;
+    }
+}
 
 @media screen and (max-width: 460px) {
     .dashboard {
@@ -641,6 +661,18 @@
     .hikes-mobile {
         display: none;
     }
+
+
+
+    .weather-item {
+        flex-direction: row !important;
+    }
+}
+
+@media screen and (max-height: 375px) {    
+    .weather-text {
+        display: none;
+    }
 }
 
 @media screen and (max-height: 320px) {
@@ -690,6 +722,15 @@
 
     .map-wrapper-main {
         width: 39%;
+    }
+}
+
+@media screen and (max-width: 240px) {
+    .dashboard {
+        height: 320vh !important;
+    }
+    .weather-container {
+        height: 240vh !important;
     }
 }
 
