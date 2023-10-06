@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Weather({lat, lng, location}) {
 
   // control weather popup from component, not side bar
-  const [ close, setClose ] = useState(true);
+  const [ close, setClose ] = useState(false);
 
   // close weather componenet
   const weatherHandler = () => {

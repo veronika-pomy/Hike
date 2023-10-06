@@ -280,6 +280,7 @@ function Map() {
                             // bgPos='bottom'
                             h='100%'
                             w='100%'
+                            className='flex-container-mobile'
                         > 
                             <Box 
                                 position='absolute' 
@@ -488,7 +489,7 @@ function Map() {
                                 <GoogleMap
                                     zoom={8}
                                     center={mapCenter}
-                                    mapContainerStyle={{ width: '110%', height:'100%', borderRadius: '20px'}}
+                                    mapContainerStyle={{ width: '100%', height:'100%', borderRadius: '20px' }}
                                     onLoad={(map) => setMap(map)}
                                 >
                                     <MarkerF 
