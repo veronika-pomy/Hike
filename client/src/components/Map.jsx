@@ -311,7 +311,9 @@ function Map() {
                                         flexGrow={1}
                                     >
                                         {!directions &&
-                                            <Autocomplete>
+                                            <Autocomplete
+                                                className='autocomplete-mobile'
+                                            >
                                                 <Input 
                                                     type='text' 
                                                     placeholder='Search Your Destination'
