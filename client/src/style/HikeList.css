@@ -37,7 +37,6 @@
 .hike-list ul li {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    /* border-bottom: 1px solid #fff; */
     width: 210px;
 }
 
@@ -129,21 +128,10 @@
 }
 
 @media screen and (max-width: 480px) {
-    .hike-list {
-        margin-top: 2vw;
-    }
-
-    .hike-list ul {
-        width: 100vw;
-    }
 
     .hike-list ul {
         width: 65vw;
         margin-left: 0.5vw;
-    }
-
-    .hike-list ul li {
-        width: 240px;
     }
 
     .map-handler {

@@ -31,6 +31,7 @@
     position: relative; 
     height: 100vh;
     width: 90%;
+    margin-left: 10%;
 }
 
 .map-container,
@@ -117,18 +118,11 @@
     flex-direction: row;
 }
 
-
 .bottom {
     position: absolute;
     bottom: 0;
     width: 100vw;
 }
-
-/* .input-box {
-    background-color: aqua !important;
-    display: flex !important;; 
-    flex-direction: column !important;;
-} */
 
 .map-container {
     height: 100vh;
@@ -191,17 +185,51 @@
     display: none;
 }
 
+.map-box-mobile {
+    margin-left: 10%;
+}
+
+.button-group-mobile {
+    margin-left: 0 !important;
+}
+
+@media screen and (max-width: 1800px) {
+    .map-box-mobile {
+        margin-left: 18%;
+    }
+}  
+
+@media screen and (max-width: 1500px) {
+    .map-box-mobile {
+        margin-left: 20%;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .map-box-mobile {
+        margin-left: 22%;
+        width: 65% !important;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .map-box-mobile {
+        margin-left: 25%;
+        width: 60% !important;
+    }
+}
+
 @media screen and (max-width: 950px) {
     .dashboard {
         flex-direction: column;
-        height: 240vh;
+        height: 245vh;
         width: 100vw;
         background-color: #242424;
     }
 
     .sidebar-container,
     .sidebar-wrapper {
-        height: 75vh;
+        height: 60vh;
         width: 100vw !important;
     }
 
@@ -224,6 +252,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: stretch;
+        width: 300px !important;
     }
 
     .hike-list ul {
@@ -231,7 +260,7 @@
     }
 
     .flex-map-mobile {
-        width: 110%;
+        width: 100%;
     }
 
     .map-wrapper-main {
@@ -244,6 +273,11 @@
 
     .map-weather-wrapper {
         width: 97%;
+    }
+
+    .map-box-mobile {
+        margin-left: 0;
+        width: 75% !important;
     }
 
     .input-stack {
@@ -282,7 +316,7 @@
     }
 
     .weather-container {
-        height: 165vh !important;
+        height: 185vh !important;
     }
 
     .weather-items {
@@ -299,27 +333,6 @@
 }
 
 @media screen and (max-width: 680px) {
-    /* .dashboard {
-        flex-direction: column;
-        height: 220vh;
-        width: 100vw;
-        background-color: #242424;
-    } */
-
-    .map-wrapper-main {
-        /* width: 43%; */
-    }
-
-    /* .map-container {
-        width: 113vw;
-    } */
-
-    /* .sidebar-container,
-    .sidebar-wrapper {
-        height: 75vh;
-        width: 100vw !important;
-    } */
-
     .sidebar-container ul {
         display: flex;
         height: 7vh;
@@ -350,11 +363,10 @@
 
     .input-box {
         font-size: small !important;
-        
     }
 
-    .input-destination {
-        width: 77vw !important;
+    .autocomplete-mobile {
+        width: 92%;
     }
 
     .input-stack {
@@ -364,7 +376,8 @@
 
     .info-stack {
         flex-direction: column !important;
-        width: 75vw !important;
+        width: 70vw !important;
+        font-size: 0.9rem;
     }
 
     .bottom {
@@ -373,11 +386,10 @@
         position: absolute;
         left: 0;
         margin-left: 115px;
-        /* margin-left: 150px; */
     }
 
     .weather-container {
-        height: 165vh !important;
+        height: 185vh !important;
     }
 
     .weather-content-wrapper {
@@ -427,169 +439,55 @@
 
     .weather-info-box {
      padding: 2vh 1vw!important; 
-    }
-
-    .hikes-mobile {
-        font-size: xx-large;
-        text-align: center;
-        /* margin-top: 10vh; */
-        font-weight: 900;
-        display: block;
-    }
+    }    
 } 
 
-/* @media screen and (max-width: 480px) {
-    .dashboard {
-        flex-direction: column;
-        height: 185vh;
-        width: 100vw;
-        background-color: #242424;
+@media screen and (max-width: 600px) {
+    .btn-group-mobile {
+        justify-content: space-between !important;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .btn-group-mobile {
+        justify-content: space-between !important;
     }
 
-    .map-wrapper-main {
-        width: 27%;
+    .autocomplete-mobile {
+        width: 80%;
     }
 
-    .map-weather-wrapper {
-        width: 95%;
-    }
-
-    .map-container {
-        width: 113vw;
-    }
-
-    .sidebar-container,
-    .sidebar-wrapper {
-        height: 40vh;
-        width: 100vw !important;
-    }
-
-    .sidebar-container ul {
-        display: flex;
-        height: 7vh;
-    }
-
-    .text {
-        display: none !important;
-    }
-
-    .hike-list-container {
-        height: 38vh;
-    }
-
-    .hike-list {
-        display: flex;
-        justify-content: flex-start;
-        align-items: stretch;
-    }
-
-    .hike-list ul {
-        flex-direction: column;
-    }
-
-    .search-box {
-        margin-bottom: 7vw !important;
-        width: 82vw !important;
+    .button-group-mobile {
+        display: flex !important;
+        flex-direction: column !important;
+        margin-left: 27% !important;
     }
 
     .input-box {
         font-size: small !important;
-        
+        margin: 1vh 0 !important;
     }
 
-    .input-destination {
-        width: 77vw !important;
+    .hike-list {
+        height: 280px;
     }
 
-    .input-stack {
-        flex-direction: column !important;
-        width: 75vw !important;
-    }
+}
 
-    .info-stack {
-        flex-direction: column !important;
-        width: 75vw !important;
-    }
-
-    .bottom {
-        display: flex;
-        flex-direction: row;
-        position: absolute;
-        left: 0;
-        margin-left: 150px;
-    }
-
-    .weather-container {
-        height: 145vh !important;
-    }
-
-    .weather-content-wrapper {
-        padding-left: 7vw;
-    }
-
-    .weather-items-wrapper {
-        width: 60vw;
-    }
-
-    .weather-title {
-        font-size: 1rem;
-        padding-left: 0;
-        padding-right: 6vw;
-    }
-
-    .weather-items {
-        flex-direction: column;
-    }
-
-    .weather-item {
-        width: 60vw;
-        height: 15vh;
-        margin-left: 0;
-        flex-wrap: wrap;
-        margin: 0.5vh 0;
-        justify-content: center;
-    }
-
-    .weather-info-card {
-        display: flex;
-        padding: 0 !important;
-    }
-    
-    .weather-icon {
-        padding: 0 !important;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-right: 5vw !important;
-    
-    }
-
-    .weather-text {
-        font-size: smaller;
-    }
-
-    .weather-info-box {
-     padding: 2vh 1vw!important; 
-    }
-
-    .hikes-mobile {
-        font-size: xx-large;
-        text-align: center;
-        margin-top: 10vh;
-        font-weight: 900;
-        display: block;
-    }
-} */
 @media screen and (max-width: 479px) {
+    .dashboard {
+        height: 280vh !important;
+    }
+
     .weather-container {
-        height: 205vh !important;
+        height: 220vh !important;
     }
 }
 
 @media screen and (max-width: 460px) {
     .dashboard {
         flex-direction: column;
-        height: 280vh;
+        height: 200vh;
         width: 100vw;
     }
 
@@ -610,9 +508,6 @@
 }   
 
 @media screen and (max-width: 400px) {
-    .map-box-mobile {
-        margin-left: -225px !important;
-    }
 
     .button-group-mobile {
         display: flex !important;
@@ -652,6 +547,7 @@
     .hike-list {
         font-size: x-small;
         margin-top: 0;
+        height: 280px;
     }
 
    .hike-list-container {
@@ -662,14 +558,22 @@
         display: none;
     }
 
-
-
     .weather-item {
         flex-direction: row !important;
     }
 }
 
+@media screen and (max-width: 375px) {
+    .button-group-mobile {
+        margin-left: 20% !important;
+    }
+}   
+
 @media screen and (max-height: 375px) {    
+    .dashboard {
+        height: 250vh !important;
+    }
+
     .weather-text {
         display: none;
     }
@@ -677,11 +581,7 @@
 
 @media screen and (max-height: 320px) {
     .dashboard {
-        width: 110vw !important;
-    }
-
-    .map-container {
-        /* width: 90vw; */
+        width: 100vw !important;
     }
 
     .sidebar-container {
@@ -699,6 +599,12 @@
     }
 }
 
+@media screen and (max-width: 330px) {
+    .weather-info-box {
+        display: none;
+    }   
+}
+
 @media screen and (max-width: 280px) {
     .dashboard {
         height: 280vh !important;
@@ -713,24 +619,24 @@
     }
 
     .map-container {
-        width: 117vw; 
+        width: 105vw; 
     }
 
     .map-box-mobile {
         width: 80% !important;
     }
-
-    .map-wrapper-main {
-        width: 39%;
-    }
+    .weather-info-box {
+        display: none;
+    }   
 }
 
 @media screen and (max-width: 240px) {
     .dashboard {
-        height: 320vh !important;
+        height: 340vh !important;
     }
+
     .weather-container {
-        height: 240vh !important;
+        height: 280vh !important;
     }
 }
 
