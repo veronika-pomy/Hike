@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Sidebar from '../components/Sidebar';
 import Weather from '../components/Weather';
 import { useMutation } from '@apollo/client';
@@ -26,16 +26,16 @@ import { useJsApiLoader,
         MarkerF, 
         Autocomplete,
         DirectionsRenderer,
-        InfoWindowF,
-        borderRadius
+        InfoWindowF
 } from '@react-google-maps/api';
 
 import {
     geocodeByAddress,
+    getLatLng
   } from 'react-places-autocomplete';
 
 
-// TODO: fix - "Calculate Route" works on second click on the btn but not the first click???
+const libraries = ['places'];
 
 function Map() {
     // save hike location
@@ -90,8 +90,6 @@ function Map() {
 
     // center map 
     const [ mapCenter, setMapCenter ] = useState(defaultLocation);
-
-    const libraries = ['places'];
 
     // load map
     const { isLoaded } = useJsApiLoader({
@@ -185,12 +183,34 @@ function Map() {
     };
 
     // calculate route for directions functionality
-    async function calculateRoute (origin, destination, routeName) {
+    async function calculateRoute (calcOrigin, calcDestination) {
 
-        // check originRef and destinationRef
-        if (!originRef === undefined && !destinationRef === undefined) {
+        // console.log('calculate route clicked');
 
-            // do not proceed to calculate if either origin or destination are not specified
+        // check calcOrigin and calcDestination are provided 
+            //if not proceed to calculate a new route
+            //if yes proceed to calculate route for a saved hike route
+        if (calcOrigin && calcDestination) {
+            // eslint-disable-next-line no-undef
+            const directionsService = new google.maps.DirectionsService();
+
+             try {
+                const newRoute = await directionsService.route({
+                    origin: calcOrigin,
+                    destination: calcDestination,
+                    // 'walking' mode suits best for hiking
+                    travelMode: google.maps.TravelMode.WALKING
+                });
+                console.log(newRoute);
+                routeResults(newRoute);
+            } catch (err) {
+                setResultDirectionsService(null);
+                setDirectionsResponse(null);
+                console.error(err);
+            };
+
+        } else {
+            // do not proceed to calculate if either originRef or destinationRef are not specified
             if (originRef.current.value === '' || destinationRef.current.value === '') {
                 return;
             };
@@ -205,56 +225,35 @@ function Map() {
                     // 'walking' mode suits best for hiking
                     travelMode: google.maps.TravelMode.WALKING
                 });
-                setResultDirectionsService(newRoute);
+                // console.log(newRoute);
+                routeResults(newRoute);
             } catch (err) {
                 setResultDirectionsService(null);
                 setDirectionsResponse(null);
                 console.error(err);
-            }
-
-            // console.log(resultDirectionsService);
-            if(resultDirectionsService){
-                setDirectionsResponse(resultDirectionsService);
-                setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
-                setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
-            } else {
-                return;
-            };
-
-        } else {
-
-             // eslint-disable-next-line no-undef
-             const directionsService = new google.maps.DirectionsService();
-
-             try {
-                const newRoute = await directionsService.route({
-                    origin: origin,
-                    destination: destination,
-                    // 'walking' mode suits best for hiking
-                    travelMode: google.maps.TravelMode.WALKING
-                });
-                setResultDirectionsService(newRoute);
-            } catch (err) {
-                setResultDirectionsService(null);
-                setDirectionsResponse(null);
-                console.error(err);
-            }
-
-            // console.log(resultDirectionsService);
-            if(resultDirectionsService){
-                setDirectionsResponse(resultDirectionsService);
-                setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
-                setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
-                // control input field view
-                setDirections(true);
-                // set hike name from db
-                setSavedHike(routeName);
-            } else {
-                return;
             };
         };
-        
     };
+
+// helper to display and save results of calculateRoute function 
+function routeResults (newRoute) {
+    // console.log('route results displayed');
+    // console.log(newRoute);
+
+    // display hike route
+    setDirectionsResponse(newRoute);
+    setDistance(newRoute.routes[0].legs[0].distance.text);
+    setDuration(newRoute.routes[0].legs[0].duration.text);
+
+    // save hike route
+    if(resultDirectionsService){
+        setDirectionsResponse(resultDirectionsService);
+        setDistance(resultDirectionsService.routes[0].legs[0].distance.text);
+        setDuration(resultDirectionsService.routes[0].legs[0].duration.text);
+    } else {
+        return;
+    };
+};
 
     return (
         <>
