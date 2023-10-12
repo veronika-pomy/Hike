@@ -15,8 +15,6 @@ import Error from './Error';
 import Preview from './Preview';
 import Dashboard from '../pages/Dashboard';
 
-// TODO: scroll to the top
-
 const AppContainer = () => {
   return (
     <>
