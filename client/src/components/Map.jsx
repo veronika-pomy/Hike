@@ -201,7 +201,7 @@ function Map() {
                     // 'walking' mode suits best for hiking
                     travelMode: google.maps.TravelMode.WALKING
                 });
-                console.log(newRoute);
+                // console.log(newRoute);
                 routeResults(newRoute);
             } catch (err) {
                 setResultDirectionsService(null);
@@ -253,6 +253,13 @@ function routeResults (newRoute) {
     } else {
         return;
     };
+};
+
+// handler opens directions input component 
+const getDirections = () => {
+    setDistance('');
+    setDuration('');
+    setDirections(true);
 };
 
     return (
@@ -383,7 +390,7 @@ function routeResults (newRoute) {
                                                     color='primary.txt'
                                                     _hover={{bg: 'primary.save', color: 'primary.txt'}}
                                                     type='submit' 
-                                                    onClick={() => setDirections(true)}
+                                                    onClick={() => getDirections()}
                                                     ml={2}
                                                     className='input-box'
                                                 >
