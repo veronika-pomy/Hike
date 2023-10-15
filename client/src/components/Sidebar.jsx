@@ -4,7 +4,6 @@ import AuthService from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 
-import { useWeatherContext } from '../context/useWeatherContext';
 import { useDashContext } from '../context/useDashboardContext';
 
 import HikeList from './sidebar/HikeList';
@@ -29,7 +28,7 @@ const sidebarClosed = `
   60px
 `;
 
-function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike }) {
+function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike, close, setClose }) {
 
   // query user data from server
   const { loading, data } = useQuery(QUERY_USER);
@@ -64,15 +63,18 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
     return setHikeList((prev)=> !prev);
   };
 
-  // render weather componenet on clicking weather report link
-  const { toggleWeather } = useWeatherContext();
-
   // prevent deconstructing of data obj before it's loaded
   if (loading) {
     return <></>;
   };
   
   const { user } = data;
+
+    // close weather componenet
+    const weatherHandler = () => {
+      setClose((prev) => !prev);
+    };
+    
 
   return (
     <div className='sidebar-container' style={{width: `${sidebarView}`}}>
@@ -140,7 +142,7 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
         <div className='bottom'>
         <li className='bottom-link-weather-mobile'>
             <Link
-              onClick={toggleWeather}
+              onClick={() => weatherHandler()}
             >
               <span className="icon">
                 <FontAwesomeIcon icon={faCloudSun} className='user-icon-sidebar icon-moble'/>

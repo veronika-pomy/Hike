@@ -38,6 +38,10 @@ import {
 const libraries = ['places'];
 
 function Map() {
+
+    // control weather popup from component from sidebar or weather
+    const [ close, setClose ] = useState(true);
+
     // save hike location
     const [ addHike, { error } ] = useMutation(ADD_HIKE);
 
@@ -272,6 +276,8 @@ const getDirections = () => {
                     calculateRoute={calculateRoute}
                     setDirections={setDirections}
                     setSavedHike={setSavedHike}
+                    close={close}
+                    setClose={setClose}
                 />  
             </div>
             <div className='map-wrapper-main'>
@@ -523,7 +529,13 @@ const getDirections = () => {
                         </Flex> 
                     </div>
                 </div>
-                <Weather lat={mapCenter.lat} lng={mapCenter.lng} location={locationName} />
+                <Weather 
+                    lat={mapCenter.lat} 
+                    lng={mapCenter.lng} 
+                    location={locationName} 
+                    close={close} 
+                    setClose={setClose}
+                />
             </div>
         </>
     );

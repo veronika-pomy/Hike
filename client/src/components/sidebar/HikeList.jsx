@@ -12,8 +12,6 @@ import '../../style/HikeList.css';
 
 function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike }) {
 
-// console.log(hike);
-
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
 
@@ -40,11 +38,6 @@ const [ updateIndex, setUpdateIndex ] = useState('');
 // handle update and edit mode to input and save update for hike name
 const handleHikeUpdate = (_id, index, name, updateState) => {
 
-  console.log(_id);
-  console.log(index);
-  // console.log(name);
-  // console.log(updateState);
-
   setUpdateIndex(_id);
   if (updateState === true && updateIndex === index) {
     handleUpdateHikeMutation(_id, name);
@@ -69,12 +62,6 @@ const [ hikeUpdatedName, setHikeUpdatedName ] = useState('');
 const hikeNameUpdateHandler = (e) => {
   const newHikeName = e.target.value;
   setHikeUpdatedName(newHikeName);
-  // const index = Number(e.target.id);
-  // setHikeUpdatedName((prevArr) => {
-  //   const result = [...prevArr];
-  //   result[index] = newHikeName;
-  //   return result;
-  // });
 };
 
 // update hike route name
@@ -100,19 +87,12 @@ const [ updateIndexHikeRoute, setUpdateIndexHikeRoute ] = useState('');
 
 const handleUpdateHikeRoute = (_id, index, routeName, updateStateHikeRoute) => {
 
-
-  console.log(_id);
-  console.log(index);
-  // console.log();
-  // console.log();
-
   setUpdateIndexHikeRoute(index);
   if (updateStateHikeRoute === true && updateIndexHikeRoute === index) {
     handleUpdateHikeRouteMutation(_id, routeName);
     setUpdateStateHikeRoute((prev)=> !prev);
   } else {
     const routeValueToUpdate = document.getElementById(index).textContent;
-    console.log(routeValueToUpdate);
     setHikeRouteUpdatedName(routeValueToUpdate);
     setUpdateStateHikeRoute((prev)=> !prev);
   };
@@ -129,7 +109,6 @@ const [ hikeRouteUpdatedName, setHikeRouteUpdatedName ] = useState('');
 // controlled state handler for hike route name
 const hikeRouteNameUpdateHandler = (e) => {
   const newHikeRouteName = e.target.value;
-  // console.log(newHikeRouteName);
    setHikeRouteUpdatedName(newHikeRouteName);
 };
 
@@ -156,8 +135,6 @@ const handleRemoveHikeRoute = async (routeName, index) => {
       variables: { routeName },
       refetchQueries: [{ query: QUERY_USER }],
     });
-
-    // console.log(data.removeRoute);
 
     // update hike list
     await updateHikeRouteList({
@@ -192,10 +169,11 @@ const googleMapHandler = (lat,lng, name, id) => {
 };
 
 // handle onClick event to display saved hike route in google maps
-const googleMapRouteHandler = (origin, destination, routeName) => {
-  // console.log('google map route handler clicked');
-   calculateRoute(origin, destination, routeName);
-   setDirections(true);
+const googleMapRouteHandler = (origin, destination, routeName, hikeName) => {
+    calculateRoute(origin, destination, routeName);
+    // reset current location name to the name of the saved hike
+    setLocationName(hikeName);
+    setDirections(true);
 };
 
 return (
@@ -282,7 +260,7 @@ return (
                   :
                     <button
                       className='map-handler'
-                      onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName)}
+                      onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName, hikeItem.name)}
                     >
                       <div>
                         <p 

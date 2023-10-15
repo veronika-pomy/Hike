@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import WeatherItem from '../components/WeatherItem';
 
-import { useWeatherContext } from '../context/useWeatherContext';
-
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy, faCloudSun } from '@fortawesome/free-solid-svg-icons';
 
 import { Card, CardBody, CardHeader, Text, Heading, Icon, Container, Flex } from '@chakra-ui/react';
@@ -10,13 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // import { fetchWeather } from '../utils//weatherAPI';
 
-function Weather({lat, lng, location}) {
-
-  // control weather popup from component, not side bar
-  const [ close, setClose ] = useState(false);
+function Weather({lat, lng, location, close, setClose}) {
 
   // close weather componenet
-  const weatherHandler = () => {
+  const weatherHandlerClose = () => {
     setClose(true);
   };
 
@@ -88,7 +83,7 @@ function Weather({lat, lng, location}) {
           <div className='weather-content-wrapper'>
           <p className='weather-close-btn'>
             <button
-              onClick={() => weatherHandler()}
+              onClick={() => weatherHandlerClose()}
             >
               close
             </button>
