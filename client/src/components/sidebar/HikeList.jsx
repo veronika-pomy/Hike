@@ -37,14 +37,12 @@ const [ updateIndex, setUpdateIndex ] = useState('');
 
 // handle update and edit mode to input and save update for hike name
 const handleHikeUpdate = (_id, index, name, updateState) => {
-
   setUpdateIndex(_id);
   if (updateState === true && updateIndex === index) {
     handleUpdateHikeMutation(_id, name);
     setUpdateState((prev)=> !prev);
   } else {
     const hikeValueToUpdate = document.getElementById(index).textContent;
-    console.log(hikeValueToUpdate);
     setHikeUpdatedName(hikeValueToUpdate);
     setUpdateState((prev)=> !prev);
   };
@@ -86,7 +84,6 @@ const [ updateStateHikeRoute, setUpdateStateHikeRoute ] = useState(false);
 const [ updateIndexHikeRoute, setUpdateIndexHikeRoute ] = useState('');
 
 const handleUpdateHikeRoute = (_id, index, routeName, updateStateHikeRoute) => {
-
   setUpdateIndexHikeRoute(index);
   if (updateStateHikeRoute === true && updateIndexHikeRoute === index) {
     handleUpdateHikeRouteMutation(_id, routeName);

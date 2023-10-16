@@ -189,8 +189,6 @@ function Map() {
     // calculate route for directions functionality
     async function calculateRoute (calcOrigin, calcDestination) {
 
-        // console.log('calculate route clicked');
-
         // check calcOrigin and calcDestination are provided 
             //if not proceed to calculate a new route
             //if yes proceed to calculate route for a saved hike route
@@ -205,7 +203,6 @@ function Map() {
                     // 'walking' mode suits best for hiking
                     travelMode: google.maps.TravelMode.WALKING
                 });
-                // console.log(newRoute);
                 routeResults(newRoute);
             } catch (err) {
                 setResultDirectionsService(null);
@@ -229,7 +226,6 @@ function Map() {
                     // 'walking' mode suits best for hiking
                     travelMode: google.maps.TravelMode.WALKING
                 });
-                // console.log(newRoute);
                 routeResults(newRoute);
             } catch (err) {
                 setResultDirectionsService(null);
@@ -241,8 +237,6 @@ function Map() {
 
 // helper to display and save results of calculateRoute function 
 function routeResults (newRoute) {
-    // console.log('route results displayed');
-    // console.log(newRoute);
 
     // display hike route
     setDirectionsResponse(newRoute);

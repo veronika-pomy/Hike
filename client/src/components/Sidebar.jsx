@@ -59,7 +59,6 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
   const [ hikeList, setHikeList ] = useState(true);
 
   const showList = () => {
-    // console.log(hikeList);
     return setHikeList((prev)=> !prev);
   };
 
