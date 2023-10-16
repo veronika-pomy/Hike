@@ -442,6 +442,12 @@
     }    
 } 
 
+@media screen and (max-width: 680px) {
+    .input-box {
+        width: 86% !important;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .btn-group-mobile {
         justify-content: space-between !important;
@@ -567,7 +573,13 @@
     .button-group-mobile {
         margin-left: 20% !important;
     }
-}   
+}  
+
+@media screen and (max-height: 880px) {    
+    .flex-container-mobile {
+        height: 90% !important;
+    }
+}
 
 @media screen and (max-height: 375px) {    
     .dashboard {

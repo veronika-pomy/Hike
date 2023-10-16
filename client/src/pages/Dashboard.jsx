@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Map from '../components/Map';
-import WeatherContext from '../context/useWeatherContext';
 
 import '../style/Dashboard.css';
 
@@ -15,11 +14,9 @@ const Dashboard = () => {
     },[]);
 
     return (
-        <WeatherContext>
-            <div className='dashboard'>
-                <Map />
-            </div>
-        </WeatherContext>
+        <div className='dashboard'>
+            <Map />
+        </div>
     );
 };
 
