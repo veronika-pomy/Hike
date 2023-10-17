@@ -219,10 +219,10 @@
     }
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1250px) {
     .dashboard {
         flex-direction: column;
-        height: 245vh;
+        height: 255vh;
         width: 100vw;
         background-color: #242424;
     }
@@ -316,7 +316,7 @@
     }
 
     .weather-container {
-        height: 185vh !important;
+        height: 195vh !important;
     }
 
     .weather-items {
