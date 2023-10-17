@@ -5,6 +5,7 @@ import Weather from '../components/Weather';
 import { useMutation } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 import { ADD_HIKE, ADD_ROUTE } from '../utils/mutations';
+import { fetchWeather } from '../utils//weatherAPI';
 
 import {
     Box,
@@ -115,6 +116,9 @@ function Map() {
 
     // hold hike name when seleted from db
     const [savedHike, setSavedHike ] = useState('');
+
+    // state for holding returned api data
+    const [ weatherData, setWeatherData ] = useState({});
 
     // refs for origin and destination for directions functionality
     /** @type React.MutableObject<HTMLInputElement> */
@@ -260,6 +264,22 @@ const getDirections = () => {
     setDirections(true);
 };
 
+//method to call weather api to render data in the weather component on 
+const getWeatherData = async (lat, lng) => {
+try {
+    const response = await fetchWeather(lat, lng);
+
+    if (!response.ok) {
+        throw new Error('Something went wrong with fetching weather data.');
+    };
+
+    const weatherResponse = await response.json();
+    return weatherResponse;
+} catch (err) {
+    console.error(err);
+};
+};
+
     return (
         <>
             <div className='sidebar-wrapper'>
@@ -272,6 +292,10 @@ const getDirections = () => {
                     setSavedHike={setSavedHike}
                     close={close}
                     setClose={setClose}
+                    getWeatherData={getWeatherData}
+                    lat={mapCenter.lat} 
+                    lng={mapCenter.lng}
+                    setWeatherData={setWeatherData}
                 />  
             </div>
             <div className='map-wrapper-main'>
@@ -529,6 +553,9 @@ const getDirections = () => {
                     location={locationName} 
                     close={close} 
                     setClose={setClose}
+                    getWeatherData={getWeatherData}
+                    weatherData={weatherData}
+                    setWeatherData={setWeatherData}
                 />
             </div>
         </>

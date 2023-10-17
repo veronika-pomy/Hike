@@ -10,7 +10,7 @@ import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
 
-function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike }) {
+function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike, lat, lng, getWeatherData, setWeatherData }) {
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
@@ -159,6 +159,8 @@ const googleMapHandler = (lat,lng, name, id) => {
   setMapCenter(chosenMapCoordinates);
   // reset current location name to the name of the saved hike
   setLocationName(chosenHikeName);
+  // get weather for chosen hike destination
+  getWeatherForHike(lat, lng);
   // control input field view from Map component
   setDirections(false);
   // reset hike name from db
@@ -166,11 +168,23 @@ const googleMapHandler = (lat,lng, name, id) => {
 };
 
 // handle onClick event to display saved hike route in google maps
-const googleMapRouteHandler = (origin, destination, routeName, hikeName) => {
-    calculateRoute(origin, destination, routeName);
+const googleMapRouteHandler = (origin, destination, routeName, hikeName, lat, lng) => {
+
+  calculateRoute(origin, destination, routeName);
     // reset current location name to the name of the saved hike
     setLocationName(hikeName);
+    // get weather for hike destination for the chosen route
+    getWeatherForHike(lat, lng);
     setDirections(true);
+};
+
+const getWeatherForHike = async (lat, lng) => {
+  try {
+    const weatherSetData = await getWeatherData(lat, lng);
+    setWeatherData(weatherSetData);
+  } catch (err) {
+    console.error(err);
+  };
 };
 
 return (
@@ -257,7 +271,7 @@ return (
                   :
                     <button
                       className='map-handler'
-                      onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName, hikeItem.name)}
+                      onClick={() => googleMapRouteHandler(hikeRoute.origin, hikeRoute.destination, hikeRoute.routeName, hikeItem.name, hikeItem.lat, hikeItem.lng)}
                     >
                       <div>
                         <p 
