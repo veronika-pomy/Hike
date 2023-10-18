@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+// in case api key expires or other retrieval errors
 const backUpVideoUrlIds = [ 'WfxxyNoAxRU', 'wwm37AmD7j0', 'O8MvC9KDHWI', 'einJJ-MWweA', 'gX3KEBvNh_4' ];
 
 // get api data
 const youTubeData = await searchVideoYT();
+// remove the last item containing channel info, not video info if yt data retrieved without errors
+if (!youTubeData.error) youTubeData.items.pop();
 
 const Preview = () => {
 
@@ -23,11 +26,9 @@ const Preview = () => {
   // check if data was returned
   useEffect(() => {
     if (youTubeData.error) {
-      // console.log('backup will be used');
+      // console.log('backup used');
       return;
     } else {
-      // remove the last item containing 
-      youTubeData.items.pop();
       let youTubeApiIds = [];
       // get needed video ids from YT api data
       for (const youTubeApiVideoId of youTubeApiVideoIds) {
