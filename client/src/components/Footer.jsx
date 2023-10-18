@@ -40,31 +40,30 @@ function Footer() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            
+
             await addSubscriber({ variables: { subscriberEmail } });
 
-            // clear input state afer email is added
+            // clear input state after email is added
             setSubscriberEmail('');
 
             // set email sub success to true
             setEmailSubSuccess(true);
 
-            
             // config obj to send confirmation email to newsletter subscriber
             const config = {
-                Username: process.env.REACT_APP_SMTP_USERNAME,
-                Password: process.env.REACT_APP_SMTP_PASSWORD,
-                Host: process.env.REACT_APP_SMTP_HOST,
-                Port: process.env.REACT_APP_SMTP_PORT,
+                Username: process.env.REACT_APP_USERNAME,
+                Password: process.env.REACT_APP_PASSWORD,
+                Host: process.env.REACT_APP_HOST,
+                Port: process.env.REACT_APP_PORT,
                 To: subscriberEmail,
-                From: process.env.REACT_APP_SMTP_FROM,
+                From: process.env.REACT_APP_FROM,
                 Subject: "Welcome to HIKE - Your Trail to Adventure Begins Here!",
-                Body: "Welcome to HIKE! We're thrilled to have you join our hiking community. Get ready to explore breathtaking trails, discover hidden gems, and connect with fellow nature enthusiasts. Happy hiking!"
+                Body: "We're thrilled to have you join our hiking community. Get ready to explore breathtaking trails, discover hidden gems, and connect with fellow nature enthusiasts. Happy hiking!"
             };
             
             // send a welcome email to new sub
             if (window.Email) {
-                window.Email.send(config).then(console.log('Welcome email successfully sent!'));
+                window.Email.send(config).then((res) => console.log(res));
             };
 
         } catch (err) {
@@ -95,7 +94,7 @@ function Footer() {
                 <p
                     className='footer-sub-text'
                 >
-                    Something went wrong. Please try again.
+                    Something went wrong. Please check you are already subscribed and try again.
                 </p>
             :
                 <p
@@ -103,6 +102,7 @@ function Footer() {
                 >
                     You can unsubscribe at any time.
                  </p>
+                 
             }
             <div
                 className='sub-input-form'
