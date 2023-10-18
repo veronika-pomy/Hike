@@ -15,7 +15,7 @@ const youTubeData = await searchVideoYT();
 if (!youTubeData.error) youTubeData.items.pop();
 
 const Preview = () => {
-
+  
   // state to hold video ids array
   const [ videoIds, setVideoIds ] = useState(backUpVideoUrlIds);
   // state to chnage index of the video url to display
