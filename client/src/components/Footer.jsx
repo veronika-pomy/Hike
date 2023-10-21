@@ -10,12 +10,7 @@ import { ADD_SUBSCRIBER_LIST } from '../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faTiktok } from '@fortawesome/free-brands-svg-icons';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faTwitter, faTiktok, faYoutube, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
 
@@ -94,7 +89,7 @@ function Footer() {
                 <p
                     className='footer-sub-text'
                 >
-                    Something went wrong. Please check you are already subscribed and try again.
+                    Something went wrong. Please check if you are already subscribed and try again.
                 </p>
             :
                 <p

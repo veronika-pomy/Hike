@@ -158,7 +158,7 @@ function Map() {
         setSavedHike('');
 
         } catch (err) {
-            console.log(err);
+            console.error(err);
         };   
     };
 
@@ -266,18 +266,18 @@ const getDirections = () => {
 
 //method to call weather api to render data in the weather component on 
 const getWeatherData = async (lat, lng) => {
-try {
-    const response = await fetchWeather(lat, lng);
+    try {
+        const response = await fetchWeather(lat, lng);
 
-    if (!response.ok) {
-        throw new Error('Something went wrong with fetching weather data.');
+        if (!response.ok) {
+            throw new Error('Something went wrong with fetching weather data.');
+        };
+
+        const weatherResponse = await response.json();
+        return weatherResponse;
+    } catch (err) {
+        console.error(err);
     };
-
-    const weatherResponse = await response.json();
-    return weatherResponse;
-} catch (err) {
-    console.error(err);
-};
 };
 
     return (
@@ -293,8 +293,6 @@ try {
                     close={close}
                     setClose={setClose}
                     getWeatherData={getWeatherData}
-                    lat={mapCenter.lat} 
-                    lng={mapCenter.lng}
                     setWeatherData={setWeatherData}
                 />  
             </div>

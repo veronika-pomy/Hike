@@ -10,7 +10,7 @@ import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import '../../style/HikeList.css';
 
-function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike, lat, lng, getWeatherData, setWeatherData }) {
+function HikeList({ hike, setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike, getWeatherData, setWeatherData }) {
 
 // update hike name
 const [ updateHike ] = useMutation(UPDATE_HIKE);
@@ -169,7 +169,6 @@ const googleMapHandler = (lat,lng, name, id) => {
 
 // handle onClick event to display saved hike route in google maps
 const googleMapRouteHandler = (origin, destination, routeName, hikeName, lat, lng) => {
-
   calculateRoute(origin, destination, routeName);
     // reset current location name to the name of the saved hike
     setLocationName(hikeName);
