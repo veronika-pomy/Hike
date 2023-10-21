@@ -1,12 +1,12 @@
-const db = require('../config/connection');
+const collection = require('../config/connection');
 const { User, Hike, SubscriberList, Route } = require('../models');
 
 const userSeeds = require('./userSeeds.json');
 const hikeSeeds = require('./hikeSeeds.json');
 const subscriberListSeeds = require('./subscriberListSeeds.json');
 const routeSeeds = require('./routeSeeds.json');
-
-db.once('open', async () => {
+ 
+collection.once('open', async () => {
 
     try {
 
