@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Card, CardBody, CardHeader, Text, Heading, Icon, Container, Flex } from '@chakra-ui/react';
+import { Card, CardBody, CardHeader, Text, Heading, Icon, Container } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -47,13 +47,12 @@ function WeatherItem({ date, icon, temp, wind, humidity }) {
                 fontSize='sm' 
                 className='weather-info-box'
             >
-
-                    <Text className='weather-text'>
-                        Temp: 
-                    </Text>
-                    <Text className='weather-text'>
-                        {temp} °F
-                    </Text>
+                <Text className='weather-text'>
+                    Temp: {temp} °F
+                </Text>
+                {/* <Text className='weather-text'>
+                    {temp} °F
+                </Text> */}
                 <Text className='weather-text'>
                     Wind: {wind} mph
                 </Text>

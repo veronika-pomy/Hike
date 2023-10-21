@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import WeatherItem from '../components/WeatherItem';
 
 import { faSun, faCloud, faSnowflake, faCloudRain, faBolt, faSmog, faCloudShowersHeavy, faCloudSun } from '@fortawesome/free-solid-svg-icons';
 
 function Weather({lat, lng, location, close, setClose, getWeatherData, weatherData, setWeatherData}) {
 
-  // close weather componenet
+  // close weather componenet on click
   const weatherHandlerClose = () => {
     setClose(true);
   };

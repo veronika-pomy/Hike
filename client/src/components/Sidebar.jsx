@@ -28,7 +28,7 @@ const sidebarClosed = `
   60px
 `;
 
-function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike, setClose, lat, lng, getWeatherData, setWeatherData }) {
+function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, setDirections, setSavedHike, setClose, getWeatherData, setWeatherData }) {
 
   // query user data from server
   const { loading, data } = useQuery(QUERY_USER);
@@ -123,8 +123,6 @@ function Sidebar({ setMapCenter, setLocationName, setHikeId, calculateRoute, set
                         setDirections={setDirections}
                         setSavedHike={setSavedHike}
                         getWeatherData={getWeatherData}
-                        lat={lat} 
-                        lng={lng}
                         setWeatherData={setWeatherData}
                       /> 
                       : 

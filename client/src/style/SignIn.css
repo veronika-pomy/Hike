@@ -51,25 +51,6 @@
     text-align: center;
 }
 
-/* @media screen and (max-width: 900px) {
-    .sign-in-container {
-        padding: 10rem 10rem;
-    }
-}
-
-
-@media screen and (max-width: 768px) {
-    .sign-in-container {
-        padding: 6rem 4rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .sign-in-container {
-        padding: 5rem 3.5rem;
-    }
-} */
-
 @media screen and (max-width: 410px) {
     .sign-in-container {
         width: 100vw;
@@ -80,9 +61,3 @@
         font-size: 14px;
     }
 }
-/* 
-@media screen and (max-height: 400px) {
-    .sign-in-container {
-        height: 100vh;
-    }
-} */

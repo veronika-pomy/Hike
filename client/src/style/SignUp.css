@@ -87,13 +87,6 @@
     }
 }
 
-/* @media screen and (min-height: 730px) {
-    .sign-up-container {
-        padding-top: 1rem;
-        height: 85vh;
-    }
-} */
-
 @media screen and (min-height: 568px) {
     .sign-up-container {
         padding-top: 1rem;

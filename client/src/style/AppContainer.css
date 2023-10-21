@@ -74,30 +74,6 @@
     margin-top: -5px;
 }
 
-/* .terms {
-    background-image: url(../assets/imgs/image-terms.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
-    font-weight: bold;
-    padding-bottom: 5px;
-    margin-bottom: -5px;
-} */
-
-/* .testimonials {
-    background-image: url(../assets/imgs/image-testimonials.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
-    font-weight: bold;
-    padding-bottom: 5px;
-    margin-bottom: -5px;
-} */
-
 .preview {
     min-height: 100%;
     background: linear-gradient(#000000d0, #000000d0), url(../assets/imgs/image-preview.jpg);

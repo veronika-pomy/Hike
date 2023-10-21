@@ -79,17 +79,6 @@
     display: none;
 }
 
-/* @media screen and (max-width: 3000px) {
-    .navbar-container {
-        max-width: 3000px;
-        width: 2550px;
-        justify-content: space-around;
-    }
-    .nav-menu {
-        width: 80vw;
-    }
-} */
-
 /* for mobile */
 @media screen and (max-width: 960px) {
     .navbar {

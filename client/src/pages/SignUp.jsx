@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useNavigate } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
@@ -11,12 +10,8 @@ import { useForm } from "react-hook-form";
 
 const SignUp = () => {
 
-  const navigate = useNavigate();
-
   const { register, 
           handleSubmit, 
-          trigger,
-          reset, 
           watch,
           formState: { errors } 
         } = useForm();
@@ -40,30 +35,18 @@ const SignUp = () => {
   
       const token = addUserResponse.data.addUser.token;
       Auth.login(token);
-
-      // reset();
     } catch (err) {
       console.error(err);
     };
   
   };
 
-  
-
   return (
     <>
-      <section className='sign-up'>
-        
+      <section className='sign-up'>     
         <div
           className='sign-up-container'
         >
-          {/* FORM HEADER */}
-          {/* <p
-            className='sign-up-header'
-          >
-            Sign Up
-          </p> */}
-          {/* FORM */}
           <form
             ref={form}
             onSubmit={handleSubmit(onSubmit)}

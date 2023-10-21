@@ -1,4 +1,4 @@
-import React, { useRef, SyntheticEvent } from 'react';
+import React, { useRef } from 'react';
 import { useForm } from "react-hook-form";
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
@@ -10,10 +10,7 @@ import '../style/SignIn.css';
 const SignIn = () => {
 
   const { register, 
-        handleSubmit, 
-        trigger,
-        reset, 
-        watch,
+        handleSubmit,
         formState: { errors } 
       } = useForm();
 
@@ -35,7 +32,6 @@ const SignIn = () => {
 
       const token = loginUserResponse.data.login.token;
       Auth.login(token);
-      // reset();
     } catch (err) {
       console.error(err);
     };
@@ -48,13 +44,6 @@ const SignIn = () => {
         <div
           className='sign-in-container'
         >
-          {/* FORM HEADER */}
-          {/* <p
-            className='sign-in-header'
-          >
-            Sign In
-          </p> */}
-          {/* FORM */}
           <form
             ref={form}
             onSubmit={handleSubmit(onSubmit)}
