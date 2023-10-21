@@ -32,8 +32,6 @@ function Weather({lat, lng, location, close, setClose, getWeatherData, weatherDa
     };
   };
 
-  console.log(weatherData);
-
   // get data from the default location to start, runs once on load
   useEffect(() => {
     async function resolveWeatherPromise () {

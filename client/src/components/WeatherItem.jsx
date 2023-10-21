@@ -48,11 +48,11 @@ function WeatherItem({ date, icon, temp, wind, humidity }) {
                 className='weather-info-box'
             >
                 <Text className='weather-text'>
-                    Temp: {temp} °F
+                    Temp:
                 </Text>
-                {/* <Text className='weather-text'>
+                <Text className='weather-text'>
                     {temp} °F
-                </Text> */}
+                </Text>
                 <Text className='weather-text'>
                     Wind: {wind} mph
                 </Text>
