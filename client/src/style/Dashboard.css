@@ -501,10 +501,10 @@
         height: 2vh;
     }
 
-    .icon {
+    /* .icon {
         font-size: xx-small;
         height: 48px !important;
-    }
+    } */
 }
 
 @media screen and (max-width: 420px) {

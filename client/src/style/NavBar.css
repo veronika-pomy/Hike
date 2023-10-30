@@ -178,6 +178,12 @@
     }
 }
 
+@media  screen and (max-width: 460px) {
+    .icon {
+        height: 38px !important;
+    }
+}
+
 /* small monbile screens */
 @media screen and (max-width: 320px) {
     .nav-item {
