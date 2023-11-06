@@ -109,7 +109,7 @@ Video demo here
 
 ## Website Demo
 
-Check out the deployed version 1.0 [here.]()
+Check out the deployed version 1.0 [here.](https://hike-app-60979479bbde.herokuapp.com/)
 
 Incredibly proud of the MVP concept and design, the app is constantly evolving with a focus on expanding its features. Upcoming enhancements include personalized video integration with YouTube and social media apps, enabling users to share their adventures and businesses to connect with clients, fostering brand growth.
 
