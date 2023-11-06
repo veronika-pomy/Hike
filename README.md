@@ -105,7 +105,7 @@ The Hike application is built using modern technologies to ensure a seamless use
 
 ## Video Demo
 
-Video demo here
+https://github.com/veronika-pomy/Hike/assets/111567114/8058ceae-d774-42c4-bd76-4222a8ad86a0
 
 ## Website Demo
 
