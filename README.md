@@ -53,9 +53,9 @@ Hike is your ultimate companion for all things hiking! This application allows y
 
 Check out the deployed version 1.0 [here.](https://hike-app-60979479bbde.herokuapp.com/)
 
+https://github.com/veronika-pomy/Hike/assets/111567114/427f20d3-4b58-4279-aeac-de58ea9583a7
 
-
-Incredibly proud of the MVP concept and design, the app is constantly evolving with a focus on expanding its features. Upcoming enhancements include personalized video integration with YouTube and social media apps, enabling users to share their adventures and businesses to connect with clients, fostering brand growth.
+Incredibly proud of the MVP concept and design, the app is constantly evolving with a focus on expanding its features. Upcoming enhancements include personalized video integration with YouTube and social media apps, enabling users to share their adventures and businesses to connect with clients and fostering brand growth.
 
 ## Features
 
