@@ -16,6 +16,7 @@
     overflow-y: scroll;
     overflow-x: none;
     scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--primary-main);
 }
 
 /* Style the scrollbar background */
@@ -24,8 +25,8 @@
     width: 10px;
   }
   
-  /* Style the scrollbar handle */
-  .hike-list::-webkit-scrollbar-thumb {
+/* Style the scrollbar handle */
+.hike-list::-webkit-scrollbar-thumb {
     background: var(--hover);
     border-radius: 20px;
 }
