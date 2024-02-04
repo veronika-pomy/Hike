@@ -10,18 +10,20 @@
 ![Static Badge](https://img.shields.io/badge/Mongo-DB-%2347A248?style=for-the-badge&logo=MongoDB&logoColor=%2347A248)
 ![Static Badge](https://img.shields.io/badge/Express-JS-%23000000?style=for-the-badge&logo=Express&logoColor=%23000000)
 ![Static Badge](https://img.shields.io/badge/Node-JS-%23339933?style=for-the-badge&logo=Node.js&logoColor=%23339933)
-![Static Badge](https://img.shields.io/badge/Chakra-UI-%23319795?style=for-the-badge&logo=Chakra%20UI&logoColor=%23319795)
-![Static Badge](https://img.shields.io/badge/React-HookForm-%23EC5990?style=for-the-badge&logo=React%20Hook%20Form&logoColor=%23EC5990)
 ![Static Badge](https://img.shields.io/badge/Graph-QL-%23E10098?style=for-the-badge&logo=GraphQL&logoColor=%23E10098)
 ![Static Badge](https://img.shields.io/badge/Mongoose-ODM-%23880000?style=for-the-badge&logo=Mongoose&logoColor=%23880000)
 ![Static Badge](https://img.shields.io/badge/JW-Token-%23000000?style=for-the-badge&logo=Json%20Web%20Tokens&logoColor=%23000000)
-![Static Badge](https://img.shields.io/badge/Font-Awesome-%23528DD7?style=for-the-badge&logo=Font%20Awesome&logoColor=%23528DD7)
+![Static Badge](https://img.shields.io/badge/Chakra-UI-%23319795?style=for-the-badge&logo=Chakra%20UI&logoColor=%23319795)
+
 
 ## Table of Contents
 
   <ul>
     <li>
       <a href="#description">Description</a>
+    </li>
+        <li>
+      <a href="#demo">Demo</a>
     </li>
     <li>
         <a href="#features">Features</a>
@@ -31,12 +33,6 @@
     </li>
     <li>
         <a href="#technologies">Technologies</a>
-    </li>
-    <li>
-      <a href="#video-demo">Video Demo</a>
-    </li>
-    <li>
-      <a href="#website-demo">Website Demo</a>
     </li>
     <li>
         <a href="#get-started">Get Started</a>
@@ -51,7 +47,15 @@
 
 ## Description
 
-The Hike is your ultimate companion for all things hiking! This application allows you to seamlessly explore, save, and plan your hike routes while providing the convenience of checking the weather in your desired destinations.
+Hike is your ultimate companion for all things hiking! This application allows you to seamlessly explore, save, and plan your hike routes while providing the convenience of checking the weather in your desired destinations.
+
+## Demo
+
+Check out the deployed version 1.0 [here.](https://hike-app-60979479bbde.herokuapp.com/)
+
+
+
+Incredibly proud of the MVP concept and design, the app is constantly evolving with a focus on expanding its features. Upcoming enhancements include personalized video integration with YouTube and social media apps, enabling users to share their adventures and businesses to connect with clients, fostering brand growth.
 
 ## Features
 
@@ -75,66 +79,54 @@ The Hike integrates the following APIs to provide enhanced functionality:
 
 The Hike application is built using modern technologies to ensure a seamless user experience:
 
-- [React](https://react.dev/): Powering the front-end, React provides a dynamic and interactive interface for users to explore and save hiking routes effortlessly.
+- [React](https://react.dev/): Dynamic and interactive interface.
 
-- [MongoDB](https://www.mongodb.com/): Storing and managing data, MongoDB ensures that your saved routes are always at your fingertips.
+- [MongoDB](https://www.mongodb.com/): Storing and managing data.
 
-- [Node.js](https://nodejs.org/en) & [Express](https://expressjs.com/): The back-end is built using Node.js and Express, creating a robust foundation for data handling and routing.
+- [Node.js](https://nodejs.org/en) & [Express](https://expressjs.com/): Back-end for creating a robust foundation for data handling and routing.
 
-- [Chakra UI](https://chakra-ui.com/): Styling is done elegantly using Chakra UI, giving the app a visually appealing and user-friendly design.
+- [Chakra UI](https://chakra-ui.com/): Visually appealing and user-friendly design.
 
-- [Elastic Email](https://elasticemail.com/?gclid=Cj0KCQjwl8anBhCFARIsAKbbpyQu4FcQ4FsIWBd7dlOqbQpxgMVMxq07_HMsNX5r5gH0Us4dx4R7TZUaAtX3EALw_wcB): Seamlessly integrate email functionality for notifications, updates, and user communication, enhancing the overall user experience.
+- [Elastic Email](https://elasticemail.com/?gclid=Cj0KCQjwl8anBhCFARIsAKbbpyQu4FcQ4FsIWBd7dlOqbQpxgMVMxq07_HMsNX5r5gH0Us4dx4R7TZUaAtX3EALw_wcB): Notifications, updates, user communication.
 
-- [React Hook Form](https://www.react-hook-form.com/): Simplify managing and validating form input, ensuring a smooth user experience when creating or updating routes.
+- [React Hook Form](https://www.react-hook-form.com/): Managing and validating form input.
 
-- [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api): Visualize hiking routes accurately. Explore trails, view terrains, and plan your journey with ease.
+- [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api): Visualize hiking routes and plan your journey with ease.
 
-- [GraphQL](https://graphql.org/): Optimize data fetching, reducing over-fetching and under-fetching of data, resulting in efficient communication between the front-end and back-end.
+- [GraphQL](https://graphql.org/): Optimized database operations.
 
-- [Font Awesome](https://fontawesome.com/): Enhance the user interface with a vast library of icons, making the app more visually appealing and user-friendly.
+- [Mongoose](https://www.npmjs.com/package/mongoose): A robust Object Data Modeling library for MongoDB.
 
-- [JSON Web Token](https://jwt.io/): Securely manage user authentication and authorization, ensuring data privacy and secure access to user-specific features.
+- [JSON Web Token](https://jwt.io/): Secure user authentication and authorization.
 
-- [Mongoose](https://www.npmjs.com/package/mongoose): A robust ODM (Object Data Modeling) library for MongoDB, simplifying data validation, storage, and retrieval, ensuring your saved routes are always accessible.
+- [Font Awesome](https://fontawesome.com/): Enhanced user interface.
 
-- [Nodemon](https://www.npmjs.com/package/nodemon): Streamline development with Nodemon's automatic server restarts upon code changes, accelerating the development cycle.
+- [Nodemon](https://www.npmjs.com/package/nodemon): Streamlined development server.
 
-- [concurrently](https://www.npmjs.com/package/concurrently): Simplify the development process by running both the front-end and back-end servers concurrently, ensuring a seamless integration of all app components.
+- [concurrently](https://www.npmjs.com/package/concurrently): Concurrent client and server commands.
 
-- [moment](https://www.npmjs.com/package/moment): A JavaScript date library for parsing, validating, manipulating, and formatting dates.
-
-## Video Demo
-
-https://github.com/veronika-pomy/Hike/assets/111567114/8058ceae-d774-42c4-bd76-4222a8ad86a0
-
-## Website Demo
-
-Check out the deployed version 1.0 [here.](https://hike-app-60979479bbde.herokuapp.com/)
-
-Incredibly proud of the MVP concept and design, the app is constantly evolving with a focus on expanding its features. Upcoming enhancements include personalized video integration with YouTube and social media apps, enabling users to share their adventures and businesses to connect with clients, fostering brand growth.
+- [moment](https://www.npmjs.com/package/moment): Date formatting.
 
 ## Get Started
 
 - Clone the repository: `git clone https://github.com/veronika-pomy/Hike`
 - Navigate to the project directory: `cd hike`
 - Install dependencies: `npm install`
-- Start the development server: `npm start`
+- Start the development server: `npm run develop`
 - Set Environment Variables: For security and API access during development, create an .env file and add your API keys and sensitive information as environment variables
 
 ## Contributing
 
-We welcome contributions from the community to enhance the Hike application. If you find any bugs, have suggestions, or want to add new features, please feel free to open an issue or submit a pull request.
 
-If you have any questions regarding this project, please don't hesitate to contact Veronika Pomyateeva at pomyateevav@gmail.com.
+Community contributions are welcome! If you find any bugs, have suggestions, or want to add new features, please open an issue or submit a pull request.
+
+My contact email is pomyateevav@gmail.com.
 
 ## License
 
 This project is licensed under [the MIT License](https://github.com/veronika-pomy/Hike/blob/main/LICENSE), allowing you to modify and distribute the code for personal and commercial purposes.
 
-Get ready to embark on unforgettable hiking adventures with Hike! Start exploring and experiencing the great outdoors like never before!
-
 <p align="right">(<a href="#hike">back to top</a>)</p>
 
 [license-shield]: https://img.shields.io/badge/license-MIT-blue?style=for-the-badge
 [license-url]: https://github.com/veronika-pomy/Hike/blob/main/LICENSE
-
