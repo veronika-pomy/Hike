@@ -51,7 +51,7 @@ Hike is your ultimate companion for all things hiking! This application allows y
 
 ## Demo
 
-Check out the deployed version 1.0 [here.](https://hike-app-60979479bbde.herokuapp.com/)
+Check out the video demo [here.](https://drive.google.com/file/d/1cUsPocsq5STcnjbRN7FEqXQPs6S0MhKG/view?usp=sharing)
 
 https://github.com/veronika-pomy/Hike/assets/111567114/427f20d3-4b58-4279-aeac-de58ea9583a7
 
